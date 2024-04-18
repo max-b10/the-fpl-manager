@@ -46,8 +46,13 @@ const Dashboard = () => {
     favouriteTeam,
     currentSquad,
   } = useManagerData(fplId);
-  const { getPlayerName, getPlayerClub, getPlayerPrice, getPlayerTotalPoints } =
-    usePlayerData();
+  const {
+    getPlayerName,
+    getPlayerClub,
+    getPlayerPrice,
+    getPlayerTotalPoints,
+    getPlayerImage,
+  } = usePlayerData();
 
   const rankDifferenceElement =
     rankDifference > 0 ? (
@@ -140,6 +145,7 @@ const Dashboard = () => {
                         getPlayerClub={getPlayerClub}
                         getPlayerPrice={getPlayerPrice}
                         getPlayerTotalPoints={getPlayerTotalPoints}
+                        getPlayerImage={getPlayerImage}
                       />
                     ))}
                   </TableBody>

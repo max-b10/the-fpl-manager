@@ -1,15 +1,12 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '../UI/organisms/Dialog';
+import { Dialog, DialogContent, DialogTrigger } from '../UI/organisms/Dialog';
 import { TableRow, TableCell } from '../UI/organisms/Table';
-import { User } from 'lucide-react';
 import { IPick } from '../types/squad/squadPicks';
-import { CardContent } from '../UI/organisms/Card';
+import { CardContent, CardHeader, CardTitle } from '../UI/organisms/Card';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '../UI/molecules/Avatar/Avatar';
 
 interface TableRowModalProps {
   player: IPick;
@@ -17,6 +14,7 @@ interface TableRowModalProps {
   getPlayerClub: (id: number) => string;
   getPlayerPrice: (id: number) => string;
   getPlayerTotalPoints: (id: number) => string;
+  getPlayerImage: (id: number) => string;
 }
 
 const TableRowModal: React.FC<TableRowModalProps> = ({
@@ -25,13 +23,18 @@ const TableRowModal: React.FC<TableRowModalProps> = ({
   getPlayerClub,
   getPlayerPrice,
   getPlayerTotalPoints,
+  getPlayerImage,
 }) => {
   return (
     <Dialog key={player.element}>
       <DialogTrigger asChild>
         <TableRow key={player.element} className="cursor-pointer bg-accent">
           <TableCell>
-            <User className="h-8 w-8 text-primary" />
+            <Avatar className="sm:flex">
+              <AvatarImage src={getPlayerImage(player.element)} alt="Avatar" />
+
+              <AvatarFallback>JL</AvatarFallback>
+            </Avatar>
           </TableCell>
           <TableCell>
             <div className="font-medium">{getPlayerName(player.element)}</div>
@@ -51,36 +54,39 @@ const TableRowModal: React.FC<TableRowModalProps> = ({
         </TableRow>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <DialogTitle className="text-sm font-medium">
-            Edit profile
-          </DialogTitle>
-        </DialogHeader>
-        <DialogDescription>
-          Make changes to your profile here. Click save when you're done.
-        </DialogDescription>
+        <div className="flex justify-center">
+          <Avatar className="h-32 w-32 sm:flex">
+            <AvatarImage src={getPlayerImage(player.element)} alt="Avatar" />
 
+            <AvatarFallback>JL</AvatarFallback>
+          </Avatar>
+        </div>
+        <CardHeader className="justify-centeritems-centerspace-y-0 flex pb-2">
+          <CardTitle className=" text-center text-2xl font-bold">
+            {getPlayerName(player.element)}
+          </CardTitle>
+        </CardHeader>
         <CardContent>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <div id="name" className="col-span-3 text-2xl font-bold">
-                {getPlayerName(player.element)}
-              </div>
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <div id="club" className="col-span-3 text-2xl font-bold">
+          <div className="flex flex-col items-center gap-4 py-4">
+            <div className="flex w-full justify-between">
+              <span className="text-xs text-muted-foreground">Club:</span>
+              <span className="text-lg font-medium">
                 {getPlayerClub(player.element)}
-              </div>
+              </span>
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <div id="price" className="col-span-3 text-2xl font-bold">
+            <div className="flex w-full justify-between">
+              <span className="text-xs text-muted-foreground">Price:</span>
+              <span className="text-lg font-medium">
                 {getPlayerPrice(player.element)}
-              </div>
+              </span>
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <div id="points" className="col-span-3 text-2xl font-bold">
+            <div className="flex w-full justify-between">
+              <span className="text-xs text-muted-foreground">
+                Total Points:
+              </span>
+              <span className="text-lg font-medium">
                 {getPlayerTotalPoints(player.element)}
-              </div>
+              </span>
             </div>
           </div>
         </CardContent>

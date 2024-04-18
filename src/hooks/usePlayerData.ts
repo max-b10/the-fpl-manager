@@ -36,11 +36,23 @@ export const usePlayerData = () => {
     );
     return player ? `${player.total_points}` : '0.00';
   };
+  const getPlayerImage = (element: number) => {
+    const player = generalData?.elements.find(
+      (el: IPlayer) => el.id === element
+    );
+    return player
+      ? `https://resources.premierleague.com/premierleague/photos/players/250x250/p${player.photo}`.replace(
+          '.jpg',
+          '.png'
+        )
+      : '0.00';
+  };
 
   return {
     getPlayerName,
     getPlayerClub,
     getPlayerPrice,
     getPlayerTotalPoints,
+    getPlayerImage,
   };
 };
