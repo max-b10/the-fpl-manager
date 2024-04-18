@@ -10,7 +10,7 @@ The src folder is a React application built with Vite and TypeScript. It uses a 
 - HTTP requests: axios
 - Form handling: react-hook-form with @hookform/resolvers and Zod for validation
 - Routing: react-router-dom
-- UI libraries: Headless UI, Heroicons, PrimeReact, Radix UI, react-icons, and Embla Carousel for React
+- UI libraries: Heroicons, Radix UI and Embla Carousel for React
 - CSS-in-JS: Tailwind CSS with tailwind-merge and tailwindcss-animate
 - Data fetching: SWR
 - Testing: Jest with @testing-library/react and @testing-library/jest-dom
