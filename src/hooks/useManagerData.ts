@@ -64,6 +64,7 @@ export const useManagerData = (fplId: number) => {
   );
   const totalPlayers = overallLeague?.rank_count;
   const currentSquad = squadPicksData?.picks;
+  const managerClassicLeagues = managerData?.leagues.classic.slice(5);
   return {
     playerName,
     teamName,
@@ -83,5 +84,6 @@ export const useManagerData = (fplId: number) => {
     favouriteTeam,
     totalPlayers,
     currentSquad,
+    managerClassicLeagues,
   };
 };

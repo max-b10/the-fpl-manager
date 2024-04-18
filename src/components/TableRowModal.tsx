@@ -27,7 +27,6 @@ const TableRowModal: React.FC<TableRowModalProps> = ({
   getPlayerTotalPoints,
   getPlayerImage,
 }) => {
-  console.log(getPlayerOwnership(player.element));
   return (
     <Dialog key={player.element}>
       <DialogTrigger asChild>
