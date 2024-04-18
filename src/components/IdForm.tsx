@@ -7,7 +7,7 @@ import {
   FormField,
   FormItem,
   FormMessage,
-} from '../UI/organisms/Form';
+} from '../UI/organisms/Form/Form';
 import { useForm } from 'react-hook-form';
 import { IFormData } from '../types/FormData';
 
