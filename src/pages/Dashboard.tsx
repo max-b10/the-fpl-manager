@@ -50,6 +50,7 @@ const Dashboard = () => {
     getPlayerName,
     getPlayerClub,
     getPlayerPrice,
+    getPlayerOwnership,
     getPlayerTotalPoints,
     getPlayerImage,
   } = usePlayerData();
@@ -144,6 +145,7 @@ const Dashboard = () => {
                         getPlayerName={getPlayerName}
                         getPlayerClub={getPlayerClub}
                         getPlayerPrice={getPlayerPrice}
+                        getPlayerOwnership={getPlayerOwnership}
                         getPlayerTotalPoints={getPlayerTotalPoints}
                         getPlayerImage={getPlayerImage}
                       />

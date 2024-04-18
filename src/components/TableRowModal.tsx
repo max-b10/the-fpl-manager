@@ -13,6 +13,7 @@ interface TableRowModalProps {
   getPlayerName: (id: number) => string;
   getPlayerClub: (id: number) => string;
   getPlayerPrice: (id: number) => string;
+  getPlayerOwnership: (id: number) => string;
   getPlayerTotalPoints: (id: number) => string;
   getPlayerImage: (id: number) => string;
 }
@@ -22,9 +23,11 @@ const TableRowModal: React.FC<TableRowModalProps> = ({
   getPlayerName,
   getPlayerClub,
   getPlayerPrice,
+  getPlayerOwnership,
   getPlayerTotalPoints,
   getPlayerImage,
 }) => {
+  console.log(getPlayerOwnership(player.element));
   return (
     <Dialog key={player.element}>
       <DialogTrigger asChild>
@@ -45,7 +48,9 @@ const TableRowModal: React.FC<TableRowModalProps> = ({
           <TableCell className="font-medium">
             {getPlayerPrice(player.element)}
           </TableCell>
-          <TableCell className="font-medium">ownership %</TableCell>
+          <TableCell className="font-medium">
+            {getPlayerOwnership(player.element)}
+          </TableCell>
           <TableCell>
             <div className="font-medium">
               {getPlayerTotalPoints(player.element)}
@@ -55,13 +60,13 @@ const TableRowModal: React.FC<TableRowModalProps> = ({
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <div className="flex justify-center">
-          <Avatar className="h-32 w-32 sm:flex">
+          <Avatar className="h-32 w-32 border border-primary sm:flex">
             <AvatarImage src={getPlayerImage(player.element)} alt="Avatar" />
 
             <AvatarFallback>JL</AvatarFallback>
           </Avatar>
         </div>
-        <CardHeader className="justify-centeritems-centerspace-y-0 flex pb-2">
+        <CardHeader className="items-centerspace-y-0 flex justify-center pb-2">
           <CardTitle className=" text-center text-2xl font-bold">
             {getPlayerName(player.element)}
           </CardTitle>
@@ -82,7 +87,15 @@ const TableRowModal: React.FC<TableRowModalProps> = ({
             </div>
             <div className="flex w-full justify-between">
               <span className="text-xs text-muted-foreground">
-                Total Points:
+                Ownership (%)
+              </span>
+              <span className="text-lg font-medium">
+                {getPlayerOwnership(player.element)}
+              </span>
+            </div>
+            <div className="flex w-full justify-between">
+              <span className="text-xs text-muted-foreground">
+                Total Points
               </span>
               <span className="text-lg font-medium">
                 {getPlayerTotalPoints(player.element)}

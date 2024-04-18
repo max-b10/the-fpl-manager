@@ -29,13 +29,19 @@ export const usePlayerData = () => {
     );
     return player ? `${player.now_cost / 10.0}` : '0.00';
   };
-
+  const getPlayerOwnership = (element: number) => {
+    const player = generalData?.elements.find(
+      (el: IPlayer) => el.id === element
+    );
+    return player ? `${player.selected_by_percent}` : '0.00';
+  };
   const getPlayerTotalPoints = (element: number) => {
     const player = generalData?.elements.find(
       (el: IPlayer) => el.id === element
     );
     return player ? `${player.total_points}` : '0.00';
   };
+
   const getPlayerImage = (element: number) => {
     const player = generalData?.elements.find(
       (el: IPlayer) => el.id === element
@@ -52,6 +58,7 @@ export const usePlayerData = () => {
     getPlayerName,
     getPlayerClub,
     getPlayerPrice,
+    getPlayerOwnership,
     getPlayerTotalPoints,
     getPlayerImage,
   };
