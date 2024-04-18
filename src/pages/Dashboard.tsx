@@ -11,19 +11,12 @@ import {
 } from 'lucide-react';
 import DashboardCard from '../components/DashboardCard';
 import { useManagerData } from '../hooks/useManagerData';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '../UI/organisms/Card';
+import { Card, CardContent, CardHeader, CardTitle } from '../UI/organisms/Card';
 import {
   Table,
   TableBody,
   TableHead,
   TableHeader,
-  TableRow,
 } from '../UI/organisms/Table';
 import { usePlayerData } from '../hooks/usePlayerData';
 import { useCheckId } from '../hooks/useCheckId';
@@ -123,27 +116,20 @@ const Dashboard = () => {
             </div>
             <Card className="border-primary">
               <CardHeader className="px-7">
-                <CardTitle>Squad</CardTitle>
-                <CardDescription>
-                  Current players in your fpl squad
-                </CardDescription>
+                <CardTitle>Current Squad</CardTitle>
               </CardHeader>
               <CardContent>
                 <Table>
                   <TableHeader>
-                    <TableRow>
-                      <TableHead>Player</TableHead>
-                      <TableHead className="hidden sm:table-cell">
-                        Name
-                      </TableHead>
-                      <TableHead className="hidden sm:table-cell">
-                        Price
-                      </TableHead>
-                      <TableHead className="hidden md:table-cell">
-                        Ownership (%)
-                      </TableHead>
-                      <TableHead>Total Points</TableHead>
-                    </TableRow>
+                    <TableHead>Player</TableHead>
+                    <TableHead className="hidden sm:table-cell">Name</TableHead>
+                    <TableHead className="hidden sm:table-cell">
+                      Price
+                    </TableHead>
+                    <TableHead className="hidden md:table-cell">
+                      Ownership (%)
+                    </TableHead>
+                    <TableHead>Total Points</TableHead>
                   </TableHeader>
                   <TableBody>
                     {currentSquad?.map((player) => (

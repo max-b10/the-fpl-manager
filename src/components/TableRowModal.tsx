@@ -29,7 +29,7 @@ const TableRowModal: React.FC<TableRowModalProps> = ({
   return (
     <Dialog key={player.element}>
       <DialogTrigger asChild>
-        <TableRow key={player.element} className="bg-accent">
+        <TableRow key={player.element} className="cursor-pointer bg-accent">
           <TableCell>
             <User className="h-8 w-8 text-primary" />
           </TableCell>
