@@ -1,5 +1,4 @@
 import Navbar from '../components/Navbar';
-
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
 import { LoaderIcon, Users } from 'lucide-react';
@@ -9,7 +8,6 @@ import IdForm from '../components/IdForm';
 import { setId } from '../state/idSlice';
 import { useDispatch } from 'react-redux';
 import { IFormData } from '../types/FormData';
-// import { ILeague } from '../types/league/leagueData';
 import {
   Card,
   CardContent,
@@ -25,6 +23,11 @@ import {
   TableHeader,
   TableRow,
 } from '../UI/organisms/Table';
+
+import useSWR from 'swr';
+import { ILeagueData } from '../types/league/leagueData';
+import { fetcher } from '../lib/fetcher';
+import { API_ENDPOINTS } from '../../api/endpoints';
 const ManagerComparison = () => {
   const dispatch = useDispatch();
 
@@ -38,9 +41,13 @@ const ManagerComparison = () => {
   const handleSubmit = (data: IFormData) => {
     dispatch(setId(data.id));
   };
-
+  const { data: selectedLeague } = useSWR<ILeagueData>(
+    `http://localhost:3005/${API_ENDPOINTS.league}`,
+    fetcher
+  );
   useCheckId();
-  console.log(managerClassicLeagues);
+  const leagueMembers = selectedLeague?.standings.results;
+  console.log(selectedLeague?.standings.results);
   return (
     <>
       <Navbar />
@@ -55,8 +62,8 @@ const ManagerComparison = () => {
               <h2 className="text-3xl font-bold tracking-tight ">
                 Compare manager history
               </h2>
-              <p className="text-s text-muted-foreground">
-                Who has the best FPL history?
+              <p className="text-s ml-0.5 text-muted-foreground">
+                Pick a league and compare with players
               </p>
             </div>
             <div className="mt-4 sm:mt-0">
@@ -64,36 +71,71 @@ const ManagerComparison = () => {
             </div>
           </div>
 
-          <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-            <Card className="border-primary">
-              <CardHeader className="px-7">
-                <CardTitle>Classic Leagues</CardTitle>
-                <CardDescription>Select a league</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableHead>League</TableHead>
-                    <TableHead className="hidden sm:table-cell">Name</TableHead>
-                  </TableHeader>
-                  <TableBody>
-                    {managerClassicLeagues?.map((league) => (
-                      <TableRow key={league.id}>
-                        <TableCell className="sm:table-cell">
-                          <Users className="h-8 w-8 text-primary" />
-                        </TableCell>
-                        <TableCell className="sm:table-cell">
-                          {league.name}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
-            <div>
-              Display league participants on a card here with their history
-              details.
+          <main className="mb-4 flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8 lg:mb-8">
+            <div className="grid items-stretch gap-4 md:gap-8 lg:grid-cols-3">
+              <Card className="md:min-h-2/3 border-primary lg:col-span-2">
+                <CardHeader className="px-7">
+                  <CardTitle>Classic Leagues</CardTitle>
+                  <CardDescription>Select a league</CardDescription>
+                </CardHeader>
+                <CardContent className="max-h-96 overflow-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableHead>League</TableHead>
+                      <TableHead className="hidden sm:table-cell">
+                        Name
+                      </TableHead>
+                    </TableHeader>
+                    <TableBody>
+                      {managerClassicLeagues?.map((league) => (
+                        <TableRow key={league.id}>
+                          <TableCell className="sm:table-cell">
+                            <Users className="h-8 w-8 text-primary" />
+                          </TableCell>
+                          <TableCell className="sm:table-cell">
+                            {league.name}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+              <Card className="md:min-h-2/3 border-primary lg:col-span-1">
+                <CardHeader>
+                  <CardTitle>League Name</CardTitle>
+                  <CardDescription>League members</CardDescription>
+                </CardHeader>
+                <CardContent className="max-h-96 overflow-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableHead>Team & Manager</TableHead>
+                      <TableHead>TOT</TableHead>
+                    </TableHeader>
+                    <TableBody>
+                      {leagueMembers?.map((member) => (
+                        <TableRow key={member.id}>
+                          <TableCell className="sm:table-cell">
+                            <div className="grid gap-1">
+                              <p className="text-sm font-medium leading-none">
+                                {member.player_name}
+                              </p>
+                              <p className="text-sm text-muted-foreground">
+                                {member.entry_name}
+                              </p>
+                            </div>
+                          </TableCell>
+                          <TableCell className="sm:table-cell">
+                            <div className="grid gap-1">
+                              <p className="text-sm ">{member.total}</p>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
             </div>
           </main>
         </>
