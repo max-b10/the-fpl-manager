@@ -120,40 +120,44 @@ const Dashboard = () => {
                 content={gameweekScore}
               />
             </div>
-            <Card className="border-primary">
-              <CardHeader className="px-7">
-                <CardTitle>Current Squad</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableHead>Player</TableHead>
-                    <TableHead className="hidden sm:table-cell">Name</TableHead>
-                    <TableHead className="hidden sm:table-cell">
-                      Price
-                    </TableHead>
-                    <TableHead className="hidden md:table-cell">
-                      Ownership (%)
-                    </TableHead>
-                    <TableHead>Total Points</TableHead>
-                  </TableHeader>
-                  <TableBody>
-                    {currentSquad?.map((player) => (
-                      <TableRowModal
-                        key={player.element}
-                        player={player}
-                        getPlayerName={getPlayerName}
-                        getPlayerClub={getPlayerClub}
-                        getPlayerPrice={getPlayerPrice}
-                        getPlayerOwnership={getPlayerOwnership}
-                        getPlayerTotalPoints={getPlayerTotalPoints}
-                        getPlayerImage={getPlayerImage}
-                      />
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
+            <div className="flex flex-grow flex-col overflow-auto">
+              <Card className="flex-grow border-primary">
+                <CardHeader className="px-7">
+                  <CardTitle>Current Squad</CardTitle>
+                </CardHeader>
+                <CardContent className="h-[calc(100vh-30rem)] overflow-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableHead />
+                      <TableHead className="hidden sm:table-cell">
+                        Name
+                      </TableHead>
+                      <TableHead className="hidden sm:table-cell">
+                        Price
+                      </TableHead>
+                      <TableHead className="hidden md:table-cell">
+                        Ownership (%)
+                      </TableHead>
+                      <TableHead>Total Points</TableHead>
+                    </TableHeader>
+                    <TableBody>
+                      {currentSquad?.map((player) => (
+                        <TableRowModal
+                          key={player.element}
+                          player={player}
+                          getPlayerName={getPlayerName}
+                          getPlayerClub={getPlayerClub}
+                          getPlayerPrice={getPlayerPrice}
+                          getPlayerOwnership={getPlayerOwnership}
+                          getPlayerTotalPoints={getPlayerTotalPoints}
+                          getPlayerImage={getPlayerImage}
+                        />
+                      ))}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+            </div>
           </main>
         </>
       )}

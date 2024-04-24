@@ -10,8 +10,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../UI/organisms/DropdownMenu';
+import { useSelector } from 'react-redux';
+import { RootState } from '../state/store';
 
 export default function Navbar() {
+  const fplIdString = useSelector((state: RootState) => state.id.value);
   const location = useLocation();
   const navigation = [
     {
@@ -56,6 +59,7 @@ export default function Navbar() {
                   {item.name}
                 </Link>
               ))}
+              <div className="text-primary">{fplIdString}</div>
             </nav>
           )}
           <div className="flex items-center gap-4">

@@ -28,9 +28,9 @@ import useSWR from 'swr';
 import { ILeagueData } from '../types/league/leagueData';
 import { fetcher } from '../lib/fetcher';
 import { API_ENDPOINTS } from '../../api/endpoints';
+import { useState } from 'react';
 const ManagerComparison = () => {
   const dispatch = useDispatch();
-
   const fplIdString = useSelector((state: RootState) => state.id.value);
   const fplId = Number(fplIdString);
   const {
@@ -41,8 +41,15 @@ const ManagerComparison = () => {
   const handleSubmit = (data: IFormData) => {
     dispatch(setId(data.id));
   };
+  const [selectedLeagueId, setSelectedLeagueId] = useState<number | null>(null);
+  // const { data: selectedLeague } = useSWR<ILeagueData>(
+  //   `http://localhost:3005/${API_ENDPOINTS.league}`,
+  //   fetcher
+  // );
   const { data: selectedLeague } = useSWR<ILeagueData>(
-    `http://localhost:3005/${API_ENDPOINTS.league}`,
+    selectedLeagueId
+      ? `http://localhost:3005/${API_ENDPOINTS.league}/${selectedLeagueId}`
+      : null,
     fetcher
   );
   useCheckId();
@@ -88,7 +95,11 @@ const ManagerComparison = () => {
                     </TableHeader>
                     <TableBody>
                       {managerClassicLeagues?.map((league) => (
-                        <TableRow key={league.id}>
+                        <TableRow
+                          onClick={() => setSelectedLeagueId(league.id)}
+                          className="cursor-pointer"
+                          key={league.id}
+                        >
                           <TableCell className="sm:table-cell">
                             <Users className="h-8 w-8 text-primary" />
                           </TableCell>
@@ -102,39 +113,50 @@ const ManagerComparison = () => {
                 </CardContent>
               </Card>
               <Card className="md:min-h-2/3 border-primary lg:col-span-1">
-                <CardHeader>
-                  <CardTitle>League Name</CardTitle>
-                  <CardDescription>League members</CardDescription>
-                </CardHeader>
-                <CardContent className="max-h-96 overflow-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableHead>Team & Manager</TableHead>
-                      <TableHead>TOT</TableHead>
-                    </TableHeader>
-                    <TableBody>
-                      {leagueMembers?.map((member) => (
-                        <TableRow key={member.id}>
-                          <TableCell className="sm:table-cell">
-                            <div className="grid gap-1">
-                              <p className="text-sm font-medium leading-none">
-                                {member.player_name}
-                              </p>
-                              <p className="text-sm text-muted-foreground">
-                                {member.entry_name}
-                              </p>
-                            </div>
-                          </TableCell>
-                          <TableCell className="sm:table-cell">
-                            <div className="grid gap-1">
-                              <p className="text-sm ">{member.total}</p>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
+                {selectedLeagueId ? (
+                  <>
+                    <CardHeader>
+                      <CardTitle>League Name</CardTitle>
+                      <CardDescription>League members</CardDescription>
+                    </CardHeader>
+                    <CardContent className="max-h-96 overflow-auto">
+                      <Table>
+                        <TableHeader>
+                          <TableHead>Team & Manager</TableHead>
+                          <TableHead>TOT</TableHead>
+                        </TableHeader>
+                        <TableBody>
+                          {leagueMembers?.map((member) => (
+                            <TableRow
+                              className="cursor-pointer"
+                              key={member.id}
+                            >
+                              <TableCell className="sm:table-cell">
+                                <div className="grid gap-1">
+                                  <p className="text-sm font-medium leading-none">
+                                    {member.player_name}
+                                  </p>
+                                  <p className="text-sm text-muted-foreground">
+                                    {member.entry_name}
+                                  </p>
+                                </div>
+                              </TableCell>
+                              <TableCell className="sm:table-cell">
+                                <div className="grid gap-1">
+                                  <p className="text-sm ">{member.total}</p>
+                                </div>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </CardContent>
+                  </>
+                ) : (
+                  <div className="flex h-full items-center justify-center text-primary">
+                    <p>Select a league to see its members</p>
+                  </div>
+                )}
               </Card>
             </div>
           </main>
