@@ -1,11 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import axios from 'axios';
-
+// import { fetchData } from './fetchData';
 const app = express();
 app.use(express.json());
 app.use(cors({ origin: 'http://localhost:5173' }));
-app.get('/', (req, res) => {
+app.get('/', (_, res) => {
   res.json({ message: 'server running' });
 });
 app.get('/general', async (req, res) => {
@@ -21,10 +21,10 @@ app.get('/general', async (req, res) => {
   }
 });
 
-app.get('/league', async (req, res) => {
+app.get('/league/:id', async (req, res) => {
   try {
     const response = await axios.get(
-      'https://fantasy.premierleague.com/api/leagues-classic/1626228/standings/'
+      `https://fantasy.premierleague.com/api/leagues-classic/${req.params.id}/standings/`
     );
     const data = response.data;
     res.json(data);
@@ -74,7 +74,7 @@ app.get('/squad-picks/:fplId/:previousGameweek', async (req, res) => {
   }
 });
 
-app.get('/player-summary/', async (req, res) => {
+app.get('/player-summary/', async (_, res) => {
   try {
     const response = await axios.get(
       `https://fantasy.premierleague.com/api/element-summary/308/`
