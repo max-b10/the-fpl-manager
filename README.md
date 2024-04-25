@@ -1,6 +1,6 @@
 # the-fpl-manager
 
-This project consists of a React frontend and a Node.js CORS proxy.
+This project consists of a React frontend and a Node.js/Express CORS proxy.
 
 ## Frontend
 
