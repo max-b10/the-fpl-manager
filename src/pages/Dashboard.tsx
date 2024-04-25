@@ -26,6 +26,7 @@ import { useDispatch } from 'react-redux';
 import { IFormData } from '../types/FormData';
 
 import TableRowModal from '../components/TableRowModal';
+
 const Dashboard = () => {
   const dispatch = useDispatch();
   const fplIdString = useSelector((state: RootState) => state.id.value);
@@ -46,14 +47,7 @@ const Dashboard = () => {
     favouriteTeam,
     currentSquad,
   } = useManagerData(fplId);
-  const {
-    getPlayerName,
-    getPlayerClub,
-    getPlayerPrice,
-    getPlayerOwnership,
-    getPlayerTotalPoints,
-    getPlayerImage,
-  } = usePlayerData();
+  const { getPlayerData } = usePlayerData();
 
   const rankDifferenceElement =
     rankDifference > 0 ? (
@@ -144,13 +138,8 @@ const Dashboard = () => {
                       {currentSquad?.map((player) => (
                         <TableRowModal
                           key={player.element}
+                          playerData={getPlayerData(player.element)}
                           player={player}
-                          getPlayerName={getPlayerName}
-                          getPlayerClub={getPlayerClub}
-                          getPlayerPrice={getPlayerPrice}
-                          getPlayerOwnership={getPlayerOwnership}
-                          getPlayerTotalPoints={getPlayerTotalPoints}
-                          getPlayerImage={getPlayerImage}
                         />
                       ))}
                     </TableBody>
