@@ -1,13 +1,17 @@
-import { Dialog, DialogContent, DialogTrigger } from '../UI/organisms/Dialog';
-import { TableRow, TableCell } from '../UI/organisms/Table';
-import { IPick } from '../types/squad/squadPicks';
-import { CardContent, CardHeader, CardTitle } from '../UI/organisms/Card';
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from '../../../UI/organisms/Dialog';
+import { TableRow, TableCell } from '../../../UI/organisms/Table';
+import { IPick } from '../../../types/squad/squadPicks';
+import { CardContent, CardHeader, CardTitle } from '../../../UI/organisms/Card';
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from '../UI/molecules/Avatar/Avatar';
-import { IPlayerData } from '../types/player/playerData';
+} from '../../../UI/molecules/Avatar/Avatar';
+import { IPlayerData } from '../../../types/player/playerData';
 
 interface TableRowModalProps {
   player: IPick;
@@ -67,7 +71,7 @@ const TableRowModal: React.FC<TableRowModalProps> = ({
             </div>
             <div className="flex w-full justify-between">
               <span className="text-xs text-muted-foreground">
-                Ownership (%)
+                Ownership (%):
               </span>
               <span className="text-lg font-medium">
                 {playerData.ownership}
@@ -75,7 +79,7 @@ const TableRowModal: React.FC<TableRowModalProps> = ({
             </div>
             <div className="flex w-full justify-between">
               <span className="text-xs text-muted-foreground">
-                Total Points
+                Total Points:
               </span>
               <span className="text-lg font-medium">
                 {playerData.totalPoints}
