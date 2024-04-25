@@ -12,20 +12,15 @@ import {
 import DashboardCard from '../components/DashboardCard';
 import { useManagerData } from '../hooks/useManagerData';
 import { Card, CardContent, CardHeader, CardTitle } from '../UI/organisms/Card';
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableHeader,
-} from '../UI/organisms/Table';
 import { usePlayerData } from '../hooks/usePlayerData';
 import { useCheckId } from '../hooks/useCheckId';
 import IdForm from '../components/IdForm';
 import { setId } from '../state/idSlice';
 import { useDispatch } from 'react-redux';
 import { IFormData } from '../types/FormData';
+import { DashboardTable } from '../components/Table/Dashboard/DashboardTable';
+import { columns } from '../components/Table/Dashboard/columns';
 
-import TableRowModal from '../components/TableRowModal';
 const Dashboard = () => {
   const dispatch = useDispatch();
   const fplIdString = useSelector((state: RootState) => state.id.value);
@@ -46,14 +41,7 @@ const Dashboard = () => {
     favouriteTeam,
     currentSquad,
   } = useManagerData(fplId);
-  const {
-    getPlayerName,
-    getPlayerClub,
-    getPlayerPrice,
-    getPlayerOwnership,
-    getPlayerTotalPoints,
-    getPlayerImage,
-  } = usePlayerData();
+  const { getPlayerData } = usePlayerData();
 
   const rankDifferenceElement =
     rankDifference > 0 ? (
@@ -72,7 +60,14 @@ const Dashboard = () => {
     dispatch(setId(data.id));
   };
   useCheckId();
-
+  const playerInformation =
+    currentSquad?.map((player) => {
+      const playerData = getPlayerData(player.element);
+      return {
+        player: player,
+        playerData: playerData,
+      };
+    }) || [];
   return (
     <>
       <Navbar />
@@ -126,35 +121,10 @@ const Dashboard = () => {
                   <CardTitle>Current Squad</CardTitle>
                 </CardHeader>
                 <CardContent className="h-[calc(100vh-30rem)] overflow-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableHead />
-                      <TableHead className="hidden sm:table-cell">
-                        Name
-                      </TableHead>
-                      <TableHead className="hidden sm:table-cell">
-                        Price
-                      </TableHead>
-                      <TableHead className="hidden md:table-cell">
-                        Ownership (%)
-                      </TableHead>
-                      <TableHead>Total Points</TableHead>
-                    </TableHeader>
-                    <TableBody>
-                      {currentSquad?.map((player) => (
-                        <TableRowModal
-                          key={player.element}
-                          player={player}
-                          getPlayerName={getPlayerName}
-                          getPlayerClub={getPlayerClub}
-                          getPlayerPrice={getPlayerPrice}
-                          getPlayerOwnership={getPlayerOwnership}
-                          getPlayerTotalPoints={getPlayerTotalPoints}
-                          getPlayerImage={getPlayerImage}
-                        />
-                      ))}
-                    </TableBody>
-                  </Table>
+                  <DashboardTable
+                    columns={columns}
+                    data={playerInformation}
+                  ></DashboardTable>
                 </CardContent>
               </Card>
             </div>
