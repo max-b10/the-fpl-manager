@@ -1,20 +1,17 @@
 import { ColumnDef } from '@tanstack/react-table';
+import { Star } from 'lucide-react';
+import { IPlayerData } from '../../../types/player/playerData';
+import { IPick } from '../../../types/squad/squadPicks';
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export interface ICol {
-  id: string;
-  playerImage: string;
-  name: string;
-  price: number;
-  ownership: number;
-  totalPoints: number;
-}
+type PlayerData = {
+  player: IPick;
+  playerData: IPlayerData;
+};
 
-export const columns: ColumnDef<ICol>[] = [
+export const columns: ColumnDef<PlayerData>[] = [
   {
     accessorKey: 'playerImage',
-    header: 'playerImage',
+    header: () => <Star />,
   },
   {
     accessorKey: 'name',
@@ -26,7 +23,7 @@ export const columns: ColumnDef<ICol>[] = [
   },
   {
     accessorKey: 'ownership',
-    header: 'Ownership',
+    header: 'Ownership %',
   },
   {
     accessorKey: 'totalPoints',

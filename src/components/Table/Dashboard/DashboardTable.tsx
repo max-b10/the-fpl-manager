@@ -12,16 +12,19 @@ import {
   TableHeader,
   TableRow,
 } from '../../../UI/organisms/Table';
+import TableRowModal from '../../TableRowModal';
+import { IPick } from '../../../types/squad/squadPicks';
+import { IPlayerData } from '../../../types/player/playerData';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-export function DashboardTable<TData, TValue>({
-  columns,
-  data,
-}: DataTableProps<TData, TValue>) {
+export function DashboardTable<
+  TData extends { player: IPick; playerData: IPlayerData },
+  TValue,
+>({ columns, data }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
     columns,
@@ -34,9 +37,12 @@ export function DashboardTable<TData, TValue>({
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
+              {headerGroup.headers.map((header, index) => {
                 return (
-                  <TableHead key={header.id}>
+                  <TableHead
+                    className={index === 0 ? 'pl-6 text-center' : ''}
+                    key={header.id}
+                  >
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -51,18 +57,15 @@ export function DashboardTable<TData, TValue>({
         </TableHeader>
         <TableBody>
           {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && 'selected'}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))
+            table
+              .getRowModel()
+              .rows.map((row) => (
+                <TableRowModal
+                  key={row.id}
+                  player={row.original.player}
+                  playerData={row.original.playerData}
+                />
+              ))
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
