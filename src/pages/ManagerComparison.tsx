@@ -23,12 +23,12 @@ import {
   TableHeader,
   TableRow,
 } from '../UI/organisms/Table';
-
 import useSWR from 'swr';
 import { ILeagueData } from '../types/league/leagueData';
 import { fetcher } from '../lib/fetcher';
 import { API_ENDPOINTS } from '../../api/endpoints';
 import { useState } from 'react';
+
 const ManagerComparison = () => {
   const dispatch = useDispatch();
   const fplIdString = useSelector((state: RootState) => state.id.value);
@@ -54,7 +54,6 @@ const ManagerComparison = () => {
   );
   useCheckId();
   const leagueMembers = selectedLeague?.standings.results;
-  console.log(selectedLeague?.standings.results);
   return (
     <>
       <Navbar />
@@ -116,8 +115,8 @@ const ManagerComparison = () => {
                 {selectedLeagueId ? (
                   <>
                     <CardHeader>
-                      <CardTitle>League Name</CardTitle>
-                      <CardDescription>League members</CardDescription>
+                      <CardTitle>{selectedLeague?.league.name}</CardTitle>
+                      <CardDescription>Select a player</CardDescription>
                     </CardHeader>
                     <CardContent className="max-h-96 overflow-auto">
                       <Table>

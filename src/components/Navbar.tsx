@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Sheet, SheetContent, SheetTrigger } from '../UI/organisms/Sheet';
 import { Button } from '../UI/molecules/Button/Button';
-import { CircleUser, Menu } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -59,7 +59,6 @@ export default function Navbar() {
                   {item.name}
                 </Link>
               ))}
-              <div className="text-primary">{fplIdString}</div>
             </nav>
           )}
           <div className="flex items-center gap-4">
@@ -96,9 +95,12 @@ export default function Navbar() {
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="secondary" size="icon" className="rounded-full">
-                <CircleUser className="h-5 w-5" />
-                <span className="sr-only">Toggle user menu</span>
+              <Button
+                variant="secondary"
+                className="mr-1 rounded-full border border-primary p-1"
+              >
+                {/* <CircleUser className="h-5 w-5" /> */}
+                <p className="p-2 text-xs text-primary">Id: {fplIdString}</p>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
