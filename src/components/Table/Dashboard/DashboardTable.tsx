@@ -12,7 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from '../../../UI/organisms/Table';
-import TableRowModal from '../../TableRowModal';
+import TableRowModal from './TableRowModal';
 import { IPick } from '../../../types/squad/squadPicks';
 import { IPlayerData } from '../../../types/player/playerData';
 
@@ -36,11 +36,11 @@ export function DashboardTable<
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
+            <TableRow hoverEffect={false} key={headerGroup.id}>
               {headerGroup.headers.map((header, index) => {
                 return (
                   <TableHead
-                    className={index === 0 ? 'pl-6 text-center' : ''}
+                    className={`${index === 0 ? 'pl-6 text-center' : ''}`}
                     key={header.id}
                   >
                     {header.isPlaceholder
