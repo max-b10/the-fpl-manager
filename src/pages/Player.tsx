@@ -14,8 +14,6 @@ const Player = () => {
     (player) => player.first_name === 'Erling'
   );
 
-  console.log(generalData ? 'General data loaded' : 'Loading general data');
-
   return (
     <>
       <Navbar />

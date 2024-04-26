@@ -10,7 +10,6 @@ const TableRowLeague: React.FC<TableRowLeagueProps> = ({
   league,
   onRowClick,
 }) => {
-  console.log(league);
   return (
     <TableRow
       key={league.id}

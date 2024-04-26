@@ -15,21 +15,15 @@ import {
   CardHeader,
   CardTitle,
 } from '../UI/organisms/Card';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '../UI/organisms/Table';
 import useSWR from 'swr';
 import { ILeague, ILeagueData } from '../types/league/leagueData';
 import { fetcher } from '../lib/fetcher';
 import { API_ENDPOINTS } from '../../api/endpoints';
 import { useState } from 'react';
-import { ManagerLeaguesTable } from '../components/Table/ManagerCompare/LeaguesTable/ManagerLeaguesTable';
-import { columns } from '../components/Table/ManagerCompare/LeaguesTable/columns';
+import { LeaguesTable } from '../components/Table/ManagerCompare/LeaguesTable/LeaguesTable';
+import { MembersTable } from '../components/Table/ManagerCompare/MembersTable/MembersTable';
+import { leagueColumns } from '../components/Table/ManagerCompare/LeaguesTable/leagueColumns';
+import { memberColumns } from '../components/Table/ManagerCompare/MembersTable/memberColumns';
 
 const ManagerComparison = () => {
   const dispatch = useDispatch();
@@ -84,8 +78,8 @@ const ManagerComparison = () => {
                   <CardDescription>Select a league</CardDescription>
                 </CardHeader>
                 <CardContent className="max-h-96 overflow-auto">
-                  <ManagerLeaguesTable
-                    columns={columns}
+                  <LeaguesTable
+                    columns={leagueColumns}
                     data={(managerClassicLeagues || []).map((league) => ({
                       league,
                     }))}
@@ -103,7 +97,13 @@ const ManagerComparison = () => {
                       <CardDescription>Select a player</CardDescription>
                     </CardHeader>
                     <CardContent className="max-h-96 overflow-auto">
-                      <Table>
+                      <MembersTable
+                        columns={memberColumns}
+                        data={(leagueMembers || []).map((member) => ({
+                          member,
+                        }))}
+                      />
+                      {/* <Table>
                         <TableHeader>
                           <TableHead>Team & Manager</TableHead>
                           <TableHead>TOT</TableHead>
@@ -132,7 +132,7 @@ const ManagerComparison = () => {
                             </TableRow>
                           ))}
                         </TableBody>
-                      </Table>
+                      </Table> */}
                     </CardContent>
                   </>
                 ) : (

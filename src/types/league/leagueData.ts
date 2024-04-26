@@ -9,7 +9,7 @@ interface IStandings {
   page: number;
   results: ITeamEntry[];
 }
-interface ITeamEntry {
+export interface ITeamEntry {
   id: number;
   event_total: number;
   player_name: string;

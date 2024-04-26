@@ -12,19 +12,17 @@ import {
   TableHeader,
   TableRow,
 } from '../../../../UI/organisms/Table';
-import { ILeague } from '../../../../types/league/leagueData';
-import TableRowLeague from './TableRowLeague';
+import { ITeamEntry } from '../../../../types/league/leagueData';
+import TableRowMember from './TableRowMember';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  onRowClick?: (row: TData) => void;
 }
 
-export function ManagerLeaguesTable<TData extends { league: ILeague }, TValue>({
+export function MembersTable<TData extends { member: ITeamEntry }, TValue>({
   columns,
   data,
-  onRowClick,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -61,13 +59,7 @@ export function ManagerLeaguesTable<TData extends { league: ILeague }, TValue>({
             table
               .getRowModel()
               .rows.map((row) => (
-                <TableRowLeague
-                  onRowClick={(league) =>
-                    onRowClick && onRowClick({ league } as TData)
-                  }
-                  key={row.id}
-                  league={row.original.league}
-                />
+                <TableRowMember key={row.id} member={row.original.member} />
               ))
           ) : (
             <TableRow>
