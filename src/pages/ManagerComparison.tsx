@@ -1,7 +1,7 @@
 import Navbar from '../components/Navbar';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
-import { LoaderIcon, Users } from 'lucide-react';
+import { LoaderIcon } from 'lucide-react';
 import { useCheckId } from '../hooks/useCheckId';
 import { useManagerData } from '../hooks/useManagerData';
 import IdForm from '../components/IdForm';
@@ -24,10 +24,12 @@ import {
   TableRow,
 } from '../UI/organisms/Table';
 import useSWR from 'swr';
-import { ILeagueData } from '../types/league/leagueData';
+import { ILeague, ILeagueData } from '../types/league/leagueData';
 import { fetcher } from '../lib/fetcher';
 import { API_ENDPOINTS } from '../../api/endpoints';
 import { useState } from 'react';
+import { ManagerLeaguesTable } from '../components/Table/ManagerCompare/LeaguesTable/ManagerLeaguesTable';
+import { columns } from '../components/Table/ManagerCompare/LeaguesTable/columns';
 
 const ManagerComparison = () => {
   const dispatch = useDispatch();
@@ -42,10 +44,7 @@ const ManagerComparison = () => {
     dispatch(setId(data.id));
   };
   const [selectedLeagueId, setSelectedLeagueId] = useState<number | null>(null);
-  // const { data: selectedLeague } = useSWR<ILeagueData>(
-  //   `http://localhost:3005/${API_ENDPOINTS.league}`,
-  //   fetcher
-  // );
+
   const { data: selectedLeague } = useSWR<ILeagueData>(
     selectedLeagueId
       ? `http://localhost:3005/${API_ENDPOINTS.league}/${selectedLeagueId}`
@@ -85,30 +84,15 @@ const ManagerComparison = () => {
                   <CardDescription>Select a league</CardDescription>
                 </CardHeader>
                 <CardContent className="max-h-96 overflow-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableHead>League</TableHead>
-                      <TableHead className="hidden sm:table-cell">
-                        Name
-                      </TableHead>
-                    </TableHeader>
-                    <TableBody>
-                      {managerClassicLeagues?.map((league) => (
-                        <TableRow
-                          onClick={() => setSelectedLeagueId(league.id)}
-                          className="cursor-pointer"
-                          key={league.id}
-                        >
-                          <TableCell className="sm:table-cell">
-                            <Users className="h-8 w-8 text-primary" />
-                          </TableCell>
-                          <TableCell className="sm:table-cell">
-                            {league.name}
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
+                  <ManagerLeaguesTable
+                    columns={columns}
+                    data={(managerClassicLeagues || []).map((league) => ({
+                      league,
+                    }))}
+                    onRowClick={(data: { league: ILeague }) =>
+                      setSelectedLeagueId(data.league.id)
+                    }
+                  />
                 </CardContent>
               </Card>
               <Card className="md:min-h-2/3 border-primary lg:col-span-1">
