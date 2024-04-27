@@ -2,14 +2,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { Sheet, SheetContent, SheetTrigger } from '../UI/organisms/Sheet';
 import { Button } from '../UI/molecules/Button/Button';
 import { Menu } from 'lucide-react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '../UI/organisms/DropdownMenu';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
 
@@ -93,25 +85,15 @@ export default function Navbar() {
               </SheetContent>
             </Sheet>
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="secondary"
-                className="mr-1 rounded-full border border-primary p-1"
-              >
-                {/* <CircleUser className="h-5 w-5" /> */}
-                <p className="p-2 text-xs text-primary">Id: {fplIdString}</p>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+
+          {fplIdString && (
+            <Button
+              variant="secondary"
+              className="mr-1 rounded-full border border-primary p-1"
+            >
+              <p className="p-2 text-xs text-primary">Id: {fplIdString}</p>
+            </Button>
+          )}
         </header>
       </div>
     </>

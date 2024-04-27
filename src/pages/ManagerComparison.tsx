@@ -103,36 +103,6 @@ const ManagerComparison = () => {
                           member,
                         }))}
                       />
-                      {/* <Table>
-                        <TableHeader>
-                          <TableHead>Team & Manager</TableHead>
-                          <TableHead>TOT</TableHead>
-                        </TableHeader>
-                        <TableBody>
-                          {leagueMembers?.map((member) => (
-                            <TableRow
-                              className="cursor-pointer"
-                              key={member.id}
-                            >
-                              <TableCell className="sm:table-cell">
-                                <div className="grid gap-1">
-                                  <p className="text-sm font-medium leading-none">
-                                    {member.player_name}
-                                  </p>
-                                  <p className="text-sm text-muted-foreground">
-                                    {member.entry_name}
-                                  </p>
-                                </div>
-                              </TableCell>
-                              <TableCell className="sm:table-cell">
-                                <div className="grid gap-1">
-                                  <p className="text-sm ">{member.total}</p>
-                                </div>
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table> */}
                     </CardContent>
                   </>
                 ) : (

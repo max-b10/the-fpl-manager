@@ -1,16 +1,19 @@
 # the-fpl-manager
 
-This project consists of a React frontend and a Node.js/Express CORS proxy.
+The FPL Manager is a web application that gives FPL managers the opportunity to view their historical performance as an FPL manager, and compare againmst their FPL manager friends (or enemies!).
+
+The project consists of a React frontend and a Node.js/Express CORS proxy.
 
 ## Frontend
 
 The src folder is a React application built with Vite and TypeScript. It uses a variety of libraries and tools:
 
-- State management: Redux Toolkit
+- State management: Redux Toolkit with redux-persist for state persistence
 - HTTP requests: axios
 - Form handling: react-hook-form with @hookform/resolvers and Zod for validation
 - Routing: react-router-dom
-- UI libraries: Heroicons, Radix UI and Embla Carousel for React
+- UI libraries: Shadcn/ui, Radix UI, Embla Carousel for React, and lucide-react for icons
+- Table management: @tanstack/react-table
 - CSS-in-JS: Tailwind CSS with tailwind-merge and tailwindcss-animate
 - Data fetching: SWR
 - Testing: Jest with @testing-library/react and @testing-library/jest-dom
@@ -27,7 +30,7 @@ In the root of the project, you can run:
 
 ## CORS Proxy
 
-The api folder holds a server which is a Node.js application built with Express, primarily used as a CORS proxy to handle Cross-Origin Resource Sharing issues when making requests to external APIs from the frontend.
+The api folder holds a server which is a Node.js application built with Express and cors, primarily used as a CORS proxy to handle Cross-Origin Resource Sharing issues when making requests to external APIs from the frontend.
 
 In the api directory, you can run:
 
