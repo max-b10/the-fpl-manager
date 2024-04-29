@@ -12,6 +12,8 @@ import { useManagerData } from '../hooks/useManagerData';
 import Header from '../components/Header';
 import { IFormData } from '../types/FormData';
 import { setId } from '../state/idSlice';
+import { LoaderIcon } from 'lucide-react';
+import ManagerCard from '../components/ManagerCard';
 
 const CompareDetails = () => {
   const dispatch = useDispatch();
@@ -22,31 +24,51 @@ const CompareDetails = () => {
   const fplId = Number(fplIdString);
   const { playerName } = useManagerData(fplId);
   const { pastSeasonsData } = useManagerHistoryData(fplId);
-  const { data: enemyData } = useSWR<IManagerData>(
-    `http://localhost:3005/${API_ENDPOINTS.manager}/${id}`,
-    fetcher
-  );
-  const { data: enemyHistory } = useSWR<IManagerHistory>(
-    `http://localhost:3005/${API_ENDPOINTS.managerHistory}/${id}`,
-    fetcher
-  );
+  const { data: enemyData, isValidating: isLoadingEnemyData } =
+    useSWR<IManagerData>(
+      `http://localhost:3005/${API_ENDPOINTS.manager}/${id}`,
+      fetcher
+    );
+  const { data: enemyHistory, isValidating: isLoadingEnemyHistory } =
+    useSWR<IManagerHistory>(
+      `http://localhost:3005/${API_ENDPOINTS.managerHistory}/${id}`,
+      fetcher
+    );
   const handleSubmit = (data: IFormData) => {
     dispatch(setId(data.id));
     navigate('/dashboard');
   };
   useCheckId();
-  console.log(pastSeasonsData);
+  console.log(enemyHistory, pastSeasonsData);
 
-  console.log(enemyHistory, enemyData?.player_first_name);
+  const enemyName = `${enemyData?.player_first_name} ${enemyData?.player_last_name}`;
   return (
     <>
-      <Header
-        headerText={`${playerName} vs ${enemyData?.player_first_name} ${enemyData?.player_last_name}`}
-        handleSubmit={handleSubmit}
-        showBackIcon={true}
-        showIdForm={false}
-        onBackClick={() => navigate('/managercomparison')}
-      />
+      {isLoadingEnemyData || isLoadingEnemyHistory ? (
+        <div className="flex min-h-screen items-center justify-center">
+          <LoaderIcon className="animate-spin" />
+        </div>
+      ) : (
+        <>
+          <Header
+            headerText={`${playerName} vs ${enemyData?.player_first_name} ${enemyData?.player_last_name}`}
+            handleSubmit={handleSubmit}
+            showBackIcon={true}
+            showIdForm={false}
+            onBackClick={() => navigate('/managercomparison')}
+          />
+          <main>
+            <div className="mt-10 flex flex-col items-center px-4 md:flex-row md:justify-center md:px-0">
+              <div className="flex flex-1 justify-center">
+                <ManagerCard name={playerName} />
+              </div>
+              <div className="mx-auto flex flex-1 justify-center ">
+                <ManagerCard name={enemyName} />
+              </div>
+            </div>
+          </main>
+        </>
+      )}
     </>
   );
 };
