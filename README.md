@@ -1,6 +1,6 @@
 # the-fpl-manager
 
-The FPL Manager is a web application that gives FPL managers the opportunity to view their historical performance as an FPL manager, and compare againmst their FPL manager friends (or enemies!).
+The FPL Manager is a web application that gives FPL managers the opportunity to view their historical performance as an FPL manager, and compare against their FPL manager friends (or enemies!).
 
 The project consists of a React frontend and a Node.js/Express CORS proxy.
 

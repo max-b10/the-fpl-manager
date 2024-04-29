@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import axios from 'axios';
-// import { fetchData } from './fetchData';
 const app = express();
 app.use(express.json());
 app.use(cors({ origin: 'http://localhost:5173' }));

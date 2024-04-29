@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import Navbar from '../components/Navbar';
 import { useCheckId } from '../hooks/useCheckId';
 import { RootState } from '../state/store';
 import { useManagerHistoryData } from '../hooks/useManagerHistoryData';
@@ -41,11 +40,12 @@ const CompareDetails = () => {
   console.log(enemyHistory, enemyData?.player_first_name);
   return (
     <>
-      <Navbar />
       <Header
         headerText={`${playerName} vs ${enemyData?.player_first_name} ${enemyData?.player_last_name}`}
-        // subText={`${enemyData?.player_first_name} ${enemyData?.player_last_name}`}
         handleSubmit={handleSubmit}
+        showBackIcon={true}
+        showIdForm={false}
+        onBackClick={() => navigate('/managercomparison')}
       />
     </>
   );
