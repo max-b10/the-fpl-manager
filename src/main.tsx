@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import ManagerHistory from './pages/ManagerHistory';
 import ManagerComparison from './pages/ManagerComparison';
 import About from './pages/About';
+import CompareDetails from './pages/CompareDetails';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: '/managerComparison',
     element: <ManagerComparison />,
+  },
+  {
+    path: '/compareDetails/:id',
+    element: <CompareDetails />,
   },
   {
     path: '/about',

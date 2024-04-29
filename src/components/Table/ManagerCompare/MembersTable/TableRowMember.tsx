@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { TableRow, TableCell } from '../../../../UI/organisms/Table';
 import { ITeamEntry } from '../../../../types/league/leagueData';
 
@@ -6,8 +7,16 @@ interface TableRowMemberProps {
 }
 
 const TableRowMember: React.FC<TableRowMemberProps> = ({ member }) => {
+  const navigate = useNavigate();
+  const handleRowClick = () => {
+    navigate(`/compareDetails/${member.entry}`);
+  };
   return (
-    <TableRow key={member.id} className="cursor-pointer bg-accent">
+    <TableRow
+      onClick={handleRowClick}
+      key={member.id}
+      className="cursor-pointer bg-accent"
+    >
       <TableCell className="sm:table-cell">
         <div className="grid gap-1">
           <p className="text-sm font-medium leading-none">

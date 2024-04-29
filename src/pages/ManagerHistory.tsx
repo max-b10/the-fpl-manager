@@ -10,18 +10,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../state/store';
 import { useManagerHistoryData } from '../hooks/useManagerHistoryData';
 import CarouselCard from '../components/CarouselCard';
-import {
-  History,
-  LoaderIcon,
-  // , Tally5
-} from 'lucide-react';
+import { History, LoaderIcon } from 'lucide-react';
 import { useCheckId } from '../hooks/useCheckId';
 // import DashboardCard from '../components/DashboardCard';
 import { useManagerData } from '../hooks/useManagerData';
 import { IFormData } from '../types/FormData';
 import { setId } from '../state/idSlice';
-import IdForm from '../components/IdForm';
 import { useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
 
 const ManagerHistory = () => {
   const dispatch = useDispatch();
@@ -51,17 +47,12 @@ const ManagerHistory = () => {
         </div>
       ) : (
         <>
-          <div className="flex flex-col justify-between px-6 py-6 sm:flex-row sm:px-6 lg:px-8">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight ">
-                {totalRankMean}
-              </h1>
-              <p className="text-s text-muted-foreground">Mean overall rank</p>
-            </div>
-            <div className="mt-4 sm:mt-0">
-              <IdForm onSubmit={handleSubmit} />
-            </div>
-          </div>
+          <Header
+            headerText={totalRankMean}
+            subText="Mean overall rank"
+            handleSubmit={handleSubmit}
+          />
+
           <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
             {/* <DashboardCard
               title={'Pts and Rank History'}

@@ -13,7 +13,7 @@ import {
   TableRow,
 } from '../../../../UI/organisms/Table';
 import { ITeamEntry } from '../../../../types/league/leagueData';
-import TableRowMember from './TableRowCompareModal';
+import TableRowMember from './TableRowMember';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
