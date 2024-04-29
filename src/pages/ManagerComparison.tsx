@@ -24,9 +24,12 @@ import { LeaguesTable } from '../components/Table/ManagerCompare/LeaguesTable/Le
 import { MembersTable } from '../components/Table/ManagerCompare/MembersTable/MembersTable';
 import { leagueColumns } from '../components/Table/ManagerCompare/LeaguesTable/leagueColumns';
 import { memberColumns } from '../components/Table/ManagerCompare/MembersTable/memberColumns';
+import { useNavigate } from 'react-router-dom';
 
 const ManagerComparison = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const fplIdString = useSelector((state: RootState) => state.id.value);
   const fplId = Number(fplIdString);
   const {
@@ -36,6 +39,7 @@ const ManagerComparison = () => {
   } = useManagerData(fplId);
   const handleSubmit = (data: IFormData) => {
     dispatch(setId(data.id));
+    navigate('/dashboard');
   };
   const [selectedLeagueId, setSelectedLeagueId] = useState<number | null>(null);
 
@@ -70,9 +74,9 @@ const ManagerComparison = () => {
             </div>
           </div>
 
-          <main className="mb-4 flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8 lg:mb-8">
+          <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
             <div className="grid items-stretch gap-4 md:gap-8 lg:grid-cols-3">
-              <Card className="md:min-h-2/3 border-primary lg:col-span-2">
+              <Card className="border-primary lg:col-span-2">
                 <CardHeader className="px-7">
                   <CardTitle>Classic Leagues</CardTitle>
                   <CardDescription>Select a league</CardDescription>
@@ -89,12 +93,14 @@ const ManagerComparison = () => {
                   />
                 </CardContent>
               </Card>
-              <Card className="md:min-h-2/3 border-primary lg:col-span-1">
+              <Card className="border-primary lg:col-span-1">
                 {selectedLeagueId ? (
                   <>
                     <CardHeader>
                       <CardTitle>{selectedLeague?.league.name}</CardTitle>
-                      <CardDescription>Select a player</CardDescription>
+                      <CardDescription>
+                        Select a player to compare
+                      </CardDescription>
                     </CardHeader>
                     <CardContent className="max-h-96 overflow-auto">
                       <MembersTable

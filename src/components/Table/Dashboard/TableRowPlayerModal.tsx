@@ -46,7 +46,7 @@ const TableRowModal: React.FC<TableRowModalProps> = ({
           </TableCell>
         </TableRow>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="max-w-[90vw] p-4 sm:max-w-[425px]">
         <div className="flex justify-center">
           <Avatar className="h-32 w-32 border border-primary sm:flex">
             <AvatarImage src={playerData.image} alt="Avatar" />

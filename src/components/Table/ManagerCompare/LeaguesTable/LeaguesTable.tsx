@@ -41,7 +41,7 @@ export function LeaguesTable<TData extends { league: ILeague }, TValue>({
               {headerGroup.headers.map((header, index) => {
                 return (
                   <TableHead
-                    className={`${index === 0 ? 'pl-6 text-center' : ''}`}
+                    className={`${index === 0 ? 'pl-6 text-left' : ''}`}
                     key={header.id}
                   >
                     {header.isPlaceholder

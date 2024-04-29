@@ -12,7 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from '../../../UI/organisms/Table';
-import TableRowModal from './TableRowModal';
+import TableRowModal from './TableRowPlayerModal';
 import { IPick } from '../../../types/squad/squadPicks';
 import { IPlayerData } from '../../../types/player/playerData';
 

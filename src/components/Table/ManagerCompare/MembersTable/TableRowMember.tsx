@@ -11,9 +11,9 @@ const TableRowMember: React.FC<TableRowMemberProps> = ({ member }) => {
       <TableCell className="sm:table-cell">
         <div className="grid gap-1">
           <p className="text-sm font-medium leading-none">
-            {member.player_name}
+            {member.entry_name}
           </p>
-          <p className="text-sm text-muted-foreground">{member.entry_name}</p>
+          <p className="text-sm text-muted-foreground">{member.player_name}</p>
         </div>
       </TableCell>
       <TableCell className="sm:table-cell">

@@ -13,7 +13,7 @@ import {
   TableRow,
 } from '../../../../UI/organisms/Table';
 import { ITeamEntry } from '../../../../types/league/leagueData';
-import TableRowMember from './TableRowMember';
+import TableRowMember from './TableRowCompareModal';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -39,7 +39,7 @@ export function MembersTable<TData extends { member: ITeamEntry }, TValue>({
               {headerGroup.headers.map((header, index) => {
                 return (
                   <TableHead
-                    className={`${index === 0 ? 'pl-6 text-center' : ''}`}
+                    className={`${index === 0 ? 'pl-6 text-left' : ''}`}
                     key={header.id}
                   >
                     {header.isPlaceholder

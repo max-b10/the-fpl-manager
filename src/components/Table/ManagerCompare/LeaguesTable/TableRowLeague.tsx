@@ -16,9 +16,14 @@ const TableRowLeague: React.FC<TableRowLeagueProps> = ({
       className="cursor-pointer bg-accent"
       onClick={() => onRowClick(league)}
     >
-      <TableCell></TableCell>
       <TableCell>
         <div className="font-medium">{league.name}</div>
+      </TableCell>
+      <TableCell>
+        <div className="font-medium">{league.entry_rank.toLocaleString()}</div>
+      </TableCell>
+      <TableCell>
+        <div className="font-medium">{league.rank_count.toLocaleString()}</div>
       </TableCell>
     </TableRow>
   );

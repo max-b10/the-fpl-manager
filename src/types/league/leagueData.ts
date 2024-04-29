@@ -35,4 +35,5 @@ export interface ILeague {
   has_cup: boolean;
   cup_league: null | number;
   rank_count: number;
+  entry_rank: number;
 }

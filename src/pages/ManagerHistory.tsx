@@ -21,9 +21,11 @@ import { useManagerData } from '../hooks/useManagerData';
 import { IFormData } from '../types/FormData';
 import { setId } from '../state/idSlice';
 import IdForm from '../components/IdForm';
+import { useNavigate } from 'react-router-dom';
 
 const ManagerHistory = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const fplIdString = useSelector((state: RootState) => state.id.value);
   const fplId = Number(fplIdString);
@@ -36,7 +38,7 @@ const ManagerHistory = () => {
   const { pastSeasonsData } = useManagerHistoryData(fplId);
   const handleSubmit = (data: IFormData) => {
     dispatch(setId(data.id));
-    // navigate('/dashboard');
+    navigate('/dashboard');
   };
   useCheckId();
 
