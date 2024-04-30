@@ -1,18 +1,10 @@
-import { useNavigate } from 'react-router-dom';
 import LandingIdForm from '../components/LandingIdForm';
 import Navbar from '../components/Navbar';
-import { useDispatch } from 'react-redux';
-import { setId } from '../state/idSlice';
-import { IFormData } from '../types/FormData';
+
+import { useNavigationWithId } from '../hooks/useNavigationWithId';
 
 const Landing = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleSubmit = (data: IFormData) => {
-    dispatch(setId(data.id));
-    navigate('/dashboard');
-  };
+  const handleSubmit = useNavigationWithId();
 
   return (
     <>

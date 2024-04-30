@@ -6,36 +6,23 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '../UI/organisms/Carousel';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
 import { useManagerHistoryData } from '../hooks/useManagerHistoryData';
 import CarouselCard from '../components/CarouselCard';
 import { History, LoaderIcon } from 'lucide-react';
 import { useCheckId } from '../hooks/useCheckId';
-// import DashboardCard from '../components/DashboardCard';
 import { useManagerData } from '../hooks/useManagerData';
-import { IFormData } from '../types/FormData';
-import { setId } from '../state/idSlice';
-import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import { useNavigationWithId } from '../hooks/useNavigationWithId';
 
 const ManagerHistory = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const fplIdString = useSelector((state: RootState) => state.id.value);
   const fplId = Number(fplIdString);
-  const {
-    // totalPointsMean,
-    totalRankMean,
-    isLoadingManagerData,
-    isLoadingManagerHistory,
-  } = useManagerData(fplId);
+  const { totalRankMean, isLoadingManagerData, isLoadingManagerHistory } =
+    useManagerData(fplId);
   const { pastSeasonsData } = useManagerHistoryData(fplId);
-  const handleSubmit = (data: IFormData) => {
-    dispatch(setId(data.id));
-    navigate('/dashboard');
-  };
+  const handleSubmit = useNavigationWithId();
   useCheckId();
 
   return (
@@ -52,14 +39,7 @@ const ManagerHistory = () => {
             subText="Mean overall rank"
             handleSubmit={handleSubmit}
           />
-
           <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-            {/* <DashboardCard
-              title={'Pts and Rank History'}
-              icon={<Tally5 className="h-4 w-4 text-muted-foreground" />}
-              content={totalPointsMean}
-              footer={totalRankMean}
-            /> */}
             <div className="flex justify-center">
               <Carousel
                 opts={{

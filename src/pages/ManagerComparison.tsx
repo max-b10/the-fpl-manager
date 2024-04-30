@@ -5,9 +5,6 @@ import { LoaderIcon } from 'lucide-react';
 import { useCheckId } from '../hooks/useCheckId';
 import { useManagerData } from '../hooks/useManagerData';
 import IdForm from '../components/IdForm';
-import { setId } from '../state/idSlice';
-import { useDispatch } from 'react-redux';
-import { IFormData } from '../types/FormData';
 import {
   Card,
   CardContent,
@@ -24,12 +21,9 @@ import { LeaguesTable } from '../components/Table/ManagerCompare/LeaguesTable/Le
 import { MembersTable } from '../components/Table/ManagerCompare/MembersTable/MembersTable';
 import { leagueColumns } from '../components/Table/ManagerCompare/LeaguesTable/leagueColumns';
 import { memberColumns } from '../components/Table/ManagerCompare/MembersTable/memberColumns';
-import { useNavigate } from 'react-router-dom';
+import { useNavigationWithId } from '../hooks/useNavigationWithId';
 
 const ManagerComparison = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const fplIdString = useSelector((state: RootState) => state.id.value);
   const fplId = Number(fplIdString);
   const {
@@ -37,10 +31,7 @@ const ManagerComparison = () => {
     isLoadingManagerHistory,
     managerClassicLeagues,
   } = useManagerData(fplId);
-  const handleSubmit = (data: IFormData) => {
-    dispatch(setId(data.id));
-    navigate('/dashboard');
-  };
+  const handleSubmit = useNavigationWithId();
   const [selectedLeagueId, setSelectedLeagueId] = useState<number | null>(null);
 
   const { data: selectedLeague } = useSWR<ILeagueData>(
