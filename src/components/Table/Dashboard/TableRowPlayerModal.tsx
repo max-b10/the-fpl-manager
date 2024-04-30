@@ -6,11 +6,7 @@ import {
 import { TableRow, TableCell } from '../../../UI/organisms/Table';
 import { IPick } from '../../../types/squad/squadPicks';
 import { CardContent, CardHeader, CardTitle } from '../../../UI/organisms/Card';
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '../../../UI/molecules/Avatar/Avatar';
+import { Avatar, AvatarImage } from '../../../UI/molecules/Avatar/Avatar';
 import { IPlayerData } from '../../../types/player/playerData';
 
 interface TableRowModalProps {
@@ -29,8 +25,6 @@ const TableRowModal: React.FC<TableRowModalProps> = ({
           <TableCell>
             <Avatar className="sm:flex">
               <AvatarImage src={playerData.image} alt="Avatar" />
-
-              <AvatarFallback>JL</AvatarFallback>
             </Avatar>
           </TableCell>
           <TableCell>
@@ -48,10 +42,8 @@ const TableRowModal: React.FC<TableRowModalProps> = ({
       </DialogTrigger>
       <DialogContent className="max-w-[90vw] p-4 sm:max-w-[425px]">
         <div className="flex justify-center">
-          <Avatar className="h-32 w-32 border border-primary sm:flex">
+          <Avatar className="h-32 w-32 border border-secondary-foreground sm:flex">
             <AvatarImage src={playerData.image} alt="Avatar" />
-
-            <AvatarFallback>JL</AvatarFallback>
           </Avatar>
         </div>
         <CardHeader className="items-centerspace-y-0 flex justify-center pb-2">

@@ -1,21 +1,20 @@
 import { Card, CardContent, CardHeader, CardTitle } from '../UI/organisms/Card';
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '../UI/molecules/Avatar/Avatar';
+import { Avatar, AvatarImage } from '../UI/molecules/Avatar/Avatar';
 
 interface DashboardCardProps {
-  name: string;
+  name?: string;
   totalRankMean?: string;
+  src?: string;
 }
-const ManagerCard: React.FC<DashboardCardProps> = ({ name, totalRankMean }) => (
+const ManagerCard: React.FC<DashboardCardProps> = ({
+  name,
+  totalRankMean,
+  src,
+}) => (
   <Card className="w-64 max-w-[90vw] border border-primary p-4 sm:max-w-[425px] md:w-full">
     <div className="flex justify-center">
-      <Avatar className="h-32 w-32 border border-primary sm:flex">
-        <AvatarImage src="" alt="Avatar" />
-
-        <AvatarFallback>JL</AvatarFallback>
+      <Avatar className="h-32 w-32 border border-secondary-foreground sm:flex">
+        <AvatarImage src={src} alt="Avatar" />
       </Avatar>
     </div>
     <CardHeader className="items-centerspace-y-0 flex justify-center pb-2">

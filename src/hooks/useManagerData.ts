@@ -56,9 +56,11 @@ export const useManagerData = (fplId: number) => {
   const totalPointsMean = calculateMeanPoints(managerHistory?.past);
   const totalRankMean = calculateMeanRank(managerHistory?.past);
   const favouriteTeamId = managerData?.favourite_team;
-  const favouriteTeam = teamMapping.find(
+  const favouriteTeamObj = teamMapping.find(
     (team) => team.id === favouriteTeamId
-  )?.name;
+  );
+  const favouriteTeam = favouriteTeamObj?.name;
+  const favouriteTeamSrc = favouriteTeamObj?.src;
   const overallLeague = managerData?.leagues?.classic?.find(
     (league) => league.name === 'Overall'
   );
@@ -82,6 +84,7 @@ export const useManagerData = (fplId: number) => {
     totalPointsMean,
     totalRankMean,
     favouriteTeam,
+    favouriteTeamSrc,
     totalPlayers,
     currentSquad,
     managerClassicLeagues,

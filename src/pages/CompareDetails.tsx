@@ -14,6 +14,7 @@ import { LoaderIcon } from 'lucide-react';
 import ManagerCard from '../components/ManagerCard';
 import { calculateMeanRank } from '../helpers/calculateMean';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
+import teamMapping from '../constants/teamMapping';
 
 const CompareDetails = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const CompareDetails = () => {
 
   const fplIdString = useSelector((state: RootState) => state.id.value);
   const fplId = Number(fplIdString);
-  const { playerName, totalRankMean } = useManagerData(fplId);
+  const { playerName, totalRankMean, favouriteTeamSrc } = useManagerData(fplId);
   const { data: enemyData, isValidating: isLoadingEnemyData } =
     useSWR<IManagerData>(
       `http://localhost:3005/${API_ENDPOINTS.manager}/${id}`,
@@ -39,6 +40,11 @@ const CompareDetails = () => {
   useCheckId();
 
   const enemyName = `${enemyData?.player_first_name} ${enemyData?.player_last_name}`;
+  const enemyFavouriteTeamId = enemyData?.favourite_team;
+  const enemyFavouriteTeamObj = teamMapping.find(
+    (team) => team.id === enemyFavouriteTeamId
+  );
+  const enemyFavouriteTeamSrc = enemyFavouriteTeamObj?.src;
   return (
     <>
       {isLoadingEnemyData || isLoadingEnemyHistory ? (
@@ -57,12 +63,17 @@ const CompareDetails = () => {
           <main>
             <div className="mt-10 flex flex-col items-center px-4 md:flex-row md:justify-center md:px-0">
               <div className="flex flex-1 justify-center">
-                <ManagerCard name={playerName} totalRankMean={totalRankMean} />
+                <ManagerCard
+                  name={playerName}
+                  totalRankMean={totalRankMean}
+                  src={favouriteTeamSrc}
+                />
               </div>
               <div className="mx-auto flex flex-1 justify-center ">
                 <ManagerCard
                   name={enemyName}
                   totalRankMean={enemyTotalRankMean}
+                  src={enemyFavouriteTeamSrc}
                 />
               </div>
             </div>
