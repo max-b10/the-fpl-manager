@@ -2,49 +2,32 @@ import { useSelector } from 'react-redux';
 import { useCheckId } from '../hooks/useCheckId';
 import { RootState } from '../state/store';
 import { useNavigate, useParams } from 'react-router-dom';
-import useSWR from 'swr';
-import { IManagerHistory } from '../types/manager/managerHistory';
-import { fetcher } from '../lib/fetcher';
-import { API_ENDPOINTS } from '../../api/endpoints';
-import { IManagerData } from '../types/manager/managerData';
+
 import { useManagerData } from '../hooks/useManagerData';
 import Header from '../components/Header';
 
 import { LoaderIcon } from 'lucide-react';
 import ManagerCard from '../components/ManagerCard';
-import { calculateMeanRank } from '../helpers/calculateMean';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
-import teamMapping from '../constants/teamMapping';
+import { useEnemyManagerData } from '../hooks/useEnemyManagerData';
 
 const CompareDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-
   const fplIdString = useSelector((state: RootState) => state.id.value);
   const fplId = Number(fplIdString);
   const { playerName, totalRankMean, favouriteTeamSrc } = useManagerData(fplId);
-  const { data: enemyData, isValidating: isLoadingEnemyData } =
-    useSWR<IManagerData>(
-      `http://localhost:3005/${API_ENDPOINTS.manager}/${id}`,
-      fetcher
-    );
-  const { data: enemyHistory, isValidating: isLoadingEnemyHistory } =
-    useSWR<IManagerHistory>(
-      `http://localhost:3005/${API_ENDPOINTS.managerHistory}/${id}`,
-      fetcher
-    );
-  const enemyPastSeasonsData = enemyHistory?.past;
-  const enemyTotalRankMean = calculateMeanRank(enemyPastSeasonsData);
+  const {
+    enemyName,
+    enemyTotalRankMean,
+    enemyFavouriteTeamSrc,
+    isLoadingEnemyData,
+    isLoadingEnemyHistory,
+  } = useEnemyManagerData(Number(id));
 
   const handleSubmit = useNavigationWithId();
   useCheckId();
 
-  const enemyName = `${enemyData?.player_first_name} ${enemyData?.player_last_name}`;
-  const enemyFavouriteTeamId = enemyData?.favourite_team;
-  const enemyFavouriteTeamObj = teamMapping.find(
-    (team) => team.id === enemyFavouriteTeamId
-  );
-  const enemyFavouriteTeamSrc = enemyFavouriteTeamObj?.src;
   return (
     <>
       {isLoadingEnemyData || isLoadingEnemyHistory ? (
@@ -54,7 +37,7 @@ const CompareDetails = () => {
       ) : (
         <>
           <Header
-            headerText={`${playerName} vs ${enemyData?.player_first_name} ${enemyData?.player_last_name}`}
+            headerText={`${playerName} vs ${enemyName}`}
             handleSubmit={handleSubmit}
             showBackIcon={true}
             showIdForm={false}
