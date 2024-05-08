@@ -52,6 +52,7 @@ const CompareDetails = () => {
                   totalRankMean={totalRankMean}
                   src={favouriteTeamSrc}
                   onSubmit={handleSubmit}
+                  showIcon={false}
                 />
               </div>
               <div>vs</div>
@@ -62,6 +63,7 @@ const CompareDetails = () => {
                   totalRankMean={enemyTotalRankMean}
                   src={enemyFavouriteTeamSrc}
                   onSubmit={handleSubmit}
+                  showIcon={true}
                 />
               </div>
             </div>

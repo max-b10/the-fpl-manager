@@ -15,10 +15,10 @@ export const stack = [
   { title: 'TypeScript', icon: SiTypescript },
   { title: 'Vite', icon: SiVite },
   { title: 'Tailwind CSS', icon: RiTailwindCssFill },
-  { title: 'Shadcn', icon: SiShadcnui },
+  { title: 'shadcn/ui', icon: SiShadcnui },
   { title: 'Redux', icon: SiRedux },
   { title: 'Axios', icon: SiAxios },
-  { title: 'Use SWR', icon: SiSwr },
+  { title: 'useSWR', icon: SiSwr },
   { title: 'Cypress', icon: SiCypress },
 
   // Add more technologies as needed

@@ -21,6 +21,7 @@ interface DashboardCardProps {
   id?: string;
   src?: string;
   onSubmit: (data: IFormData) => void;
+  showIcon: boolean;
 }
 
 const ManagerCard: React.FC<DashboardCardProps> = ({
@@ -29,6 +30,7 @@ const ManagerCard: React.FC<DashboardCardProps> = ({
   src,
   id,
   onSubmit,
+  showIcon,
 }) => {
   const { handleSubmit: handleFormSubmit, getValues } = useForm({
     defaultValues: {
@@ -47,18 +49,21 @@ const ManagerCard: React.FC<DashboardCardProps> = ({
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <div
-              onClick={handleClick}
-              className="absolute right-2 top-2 h-6 w-6 cursor-pointer overflow-hidden rounded-full hover:bg-slate-100/50"
-            >
-              <CircleUser />
-            </div>
+            {showIcon && (
+              <div
+                onClick={handleClick}
+                className="absolute right-2 top-2 h-6 w-6 cursor-pointer overflow-hidden rounded-full hover:bg-slate-100/50"
+              >
+                <CircleUser />
+              </div>
+            )}
           </TooltipTrigger>
           <TooltipContent>
             <p>View profile</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
+
       <div className="flex justify-center">
         <Avatar className="h-32 w-32 border border-secondary-foreground sm:flex">
           <AvatarImage src={src} alt="Avatar" />
