@@ -37,7 +37,7 @@ const CompareDetails = () => {
       ) : (
         <>
           <Header
-            headerText={`${playerName} vs ${enemyName}`}
+            headerText={''}
             handleSubmit={handleSubmit}
             showBackIcon={true}
             showIdForm={false}
@@ -47,16 +47,21 @@ const CompareDetails = () => {
             <div className="mt-10 flex flex-col items-center px-4 md:flex-row md:justify-center md:px-0">
               <div className="flex flex-1 justify-center">
                 <ManagerCard
+                  id={id}
                   name={playerName}
                   totalRankMean={totalRankMean}
                   src={favouriteTeamSrc}
+                  onSubmit={handleSubmit}
                 />
               </div>
+              <div>vs</div>
               <div className="mx-auto flex flex-1 justify-center ">
                 <ManagerCard
+                  id={id}
                   name={enemyName}
                   totalRankMean={enemyTotalRankMean}
                   src={enemyFavouriteTeamSrc}
+                  onSubmit={handleSubmit}
                 />
               </div>
             </div>

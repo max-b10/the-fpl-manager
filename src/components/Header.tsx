@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({
       <div className="flex items-center">
         {showBackIcon && (
           <CircleArrowLeft
-            className="mr-3 cursor-pointer text-primary"
+            className="mr-3 h-8 w-8 cursor-pointer"
             onClick={onBackClick}
           />
         )}

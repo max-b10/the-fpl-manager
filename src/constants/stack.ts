@@ -11,15 +11,15 @@ import { FaReact } from 'react-icons/fa';
 import { RiTailwindCssFill } from 'react-icons/ri';
 
 export const stack = [
-  { title: 'React', Icon: FaReact },
-  { title: 'TypeScript', Icon: SiTypescript },
-  { title: 'Vite', Icon: SiVite },
-  { title: 'Tailwind CSS', Icon: RiTailwindCssFill },
-  { title: 'Shadcn', Icon: SiShadcnui },
-  { title: 'Redux', Icon: SiRedux },
-  { title: 'Axios', Icon: SiAxios },
-  { title: 'Use SWR', Icon: SiSwr },
-  { title: 'Cypress', Icon: SiCypress },
+  { title: 'React', icon: FaReact },
+  { title: 'TypeScript', icon: SiTypescript },
+  { title: 'Vite', icon: SiVite },
+  { title: 'Tailwind CSS', icon: RiTailwindCssFill },
+  { title: 'Shadcn', icon: SiShadcnui },
+  { title: 'Redux', icon: SiRedux },
+  { title: 'Axios', icon: SiAxios },
+  { title: 'Use SWR', icon: SiSwr },
+  { title: 'Cypress', icon: SiCypress },
 
   // Add more technologies as needed
 ];
