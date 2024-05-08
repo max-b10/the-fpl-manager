@@ -1,5 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from '../UI/organisms/Card';
-import { Avatar, AvatarImage } from '../UI/molecules/Avatar/Avatar';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '../../UI/organisms/Card';
+import { Avatar, AvatarImage } from '../../UI/molecules/Avatar/Avatar';
 
 interface DashboardCardProps {
   name?: string;

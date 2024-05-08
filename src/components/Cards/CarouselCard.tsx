@@ -1,4 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle } from '../UI/organisms/Card';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '../../UI/organisms/Card';
 import { ReactNode } from 'react';
 
 interface CarouselCardProps {

@@ -9,7 +9,7 @@ import {
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
 import { useManagerHistoryData } from '../hooks/useManagerHistoryData';
-import CarouselCard from '../components/CarouselCard';
+import CarouselCard from '../components/Cards/CarouselCard';
 import { History, LoaderIcon } from 'lucide-react';
 import { useCheckId } from '../hooks/useCheckId';
 import { useManagerData } from '../hooks/useManagerData';

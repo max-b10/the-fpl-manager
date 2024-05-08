@@ -9,7 +9,7 @@ import {
   ShieldHalf,
   Tally5,
 } from 'lucide-react';
-import DashboardCard from '../components/DashboardCard';
+import DashboardCard from '../components/Cards/DashboardCard';
 import { useManagerData } from '../hooks/useManagerData';
 import { Card, CardContent, CardHeader, CardTitle } from '../UI/organisms/Card';
 import { usePlayerData } from '../hooks/usePlayerData';

@@ -7,7 +7,7 @@ import { useManagerData } from '../hooks/useManagerData';
 import Header from '../components/Header';
 
 import { LoaderIcon } from 'lucide-react';
-import ManagerCard from '../components/ManagerCard';
+import ManagerCard from '../components/Cards/ManagerCard';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
 import { useEnemyManagerData } from '../hooks/useEnemyManagerData';
 
