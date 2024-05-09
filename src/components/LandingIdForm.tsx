@@ -57,7 +57,12 @@ const LandingIdForm = ({ onSubmit }: IdFormProps) => {
               render={({ field, fieldState: { error } }) => (
                 <FormItem>
                   <FormControl>
-                    <Input type="number" placeholder="e.g. 123456" {...field} />
+                    <Input
+                      className="no-spinner"
+                      type="number"
+                      placeholder="e.g. 123456"
+                      {...field}
+                    />
                   </FormControl>
                   {error && <FormMessage>{error.message}</FormMessage>}
                 </FormItem>

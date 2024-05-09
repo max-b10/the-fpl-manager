@@ -37,67 +37,63 @@ const Navbar: React.FC<NavbarProps> = ({ handleSubmit, showIdForm = true }) => {
   const isLandingPage = location.pathname === '/';
   return (
     <>
-      <div className="flex w-full flex-col">
+      <div className="flex w-full flex-col justify-between">
         <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-background px-4 md:px-6">
-          {!isLandingPage && (
-            <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={
-                    item.current
-                      ? 'rounded-md px-3 py-2 text-sm font-medium text-foreground'
-                      : 'rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground'
-                  }
-                  aria-current={item.current ? 'page' : undefined}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </nav>
-          )}
-          <div className="flex items-center gap-4">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="shrink-0 md:hidden"
-                >
-                  <Menu className="h-5 w-5" />
-                  <span className="sr-only">Toggle navigation menu</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left">
-                <nav className="grid gap-6 text-lg font-medium">
-                  {navigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.href}
-                      className={
-                        item.current
-                          ? 'rounded-md px-3 py-2 text-sm font-medium text-foreground'
-                          : 'rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground'
-                      }
-                      aria-current={item.current ? 'page' : undefined}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </nav>
-              </SheetContent>
-            </Sheet>
+          <div className="flex items-center">
+            {!isLandingPage && (
+              <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={
+                      item.current
+                        ? 'rounded-md px-3 py-2 text-sm font-medium text-foreground'
+                        : 'rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground'
+                    }
+                    aria-current={item.current ? 'page' : undefined}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </nav>
+            )}
+            <div className="flex items-center gap-4">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="shrink-0 md:hidden"
+                  >
+                    <Menu className="h-5 w-5" />
+                    <span className="sr-only">Toggle navigation menu</span>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left">
+                  <nav className="grid gap-6 text-lg font-medium">
+                    {navigation.map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.href}
+                        className={
+                          item.current
+                            ? 'rounded-md px-3 py-2 text-sm font-medium text-foreground'
+                            : 'rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground'
+                        }
+                        aria-current={item.current ? 'page' : undefined}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </nav>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
-          {showIdForm && <IdForm onSubmit={handleSubmit} />}
-          {/* {fplIdString && (
-            <Button
-              variant="secondary"
-              className="mr-1 rounded-full border border-primary p-1"
-            >
-              <p className="p-2 text-xs text-primary">Id: {fplIdString}</p>
-            </Button>
-          )} */}
+          <div className="flex w-full items-center md:w-auto">
+            {showIdForm && <IdForm onSubmit={handleSubmit} />}
+          </div>
         </header>
       </div>
     </>
