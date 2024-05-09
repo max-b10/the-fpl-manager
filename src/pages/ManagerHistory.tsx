@@ -23,22 +23,19 @@ const ManagerHistory = () => {
     useManagerData(fplId);
   const { pastSeasonsData } = useManagerHistoryData(fplId);
   const handleSubmit = useNavigationWithId();
+
   useCheckId();
 
   return (
     <>
-      <Navbar />
+      <Navbar handleSubmit={handleSubmit} />
       {isLoadingManagerData || isLoadingManagerHistory ? (
         <div className="flex min-h-screen items-center justify-center">
           <LoaderIcon className="animate-spin" />
         </div>
       ) : (
         <>
-          <Header
-            headerText={totalRankMean}
-            subText="Mean overall rank"
-            handleSubmit={handleSubmit}
-          />
+          <Header headerText={totalRankMean} subText="Mean overall rank" />
           <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
             <div className="flex justify-center">
               <Carousel

@@ -2,10 +2,8 @@ import { useSelector } from 'react-redux';
 import { useCheckId } from '../hooks/useCheckId';
 import { RootState } from '../state/store';
 import { useNavigate, useParams } from 'react-router-dom';
-
 import { useManagerData } from '../hooks/useManagerData';
 import Header from '../components/Header';
-
 import { LoaderIcon } from 'lucide-react';
 import ManagerCard from '../components/Cards/ManagerCard';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
@@ -13,6 +11,7 @@ import { useEnemyManagerData } from '../hooks/useEnemyManagerData';
 
 const CompareDetails = () => {
   const navigate = useNavigate();
+  const handleSubmit = useNavigationWithId();
   const { id } = useParams();
   const fplIdString = useSelector((state: RootState) => state.id.value);
   const fplId = Number(fplIdString);
@@ -25,7 +24,6 @@ const CompareDetails = () => {
     isLoadingEnemyHistory,
   } = useEnemyManagerData(Number(id));
 
-  const handleSubmit = useNavigationWithId();
   useCheckId();
 
   return (
@@ -38,9 +36,7 @@ const CompareDetails = () => {
         <>
           <Header
             headerText={''}
-            handleSubmit={handleSubmit}
             showBackIcon={true}
-            showIdForm={false}
             onBackClick={() => navigate('/managercomparison')}
           />
           <main>

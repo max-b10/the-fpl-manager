@@ -10,12 +10,15 @@ import {
 } from '../UI/organisms/Form/Form';
 import { useForm } from 'react-hook-form';
 import { IFormData } from '../types/FormData';
+import { useSelector } from 'react-redux';
+import { RootState } from '../state/store';
 
 interface IdFormProps {
   onSubmit: (data: IFormData) => void;
 }
 
 const IdForm = ({ onSubmit }: IdFormProps) => {
+  const fplIdString = useSelector((state: RootState) => state.id.value);
   const form = useForm({
     defaultValues: {
       id: '',
@@ -25,7 +28,7 @@ const IdForm = ({ onSubmit }: IdFormProps) => {
   const handleSubmit = form.handleSubmit(onSubmit);
 
   return (
-    <Card className="m-auto flex border-primary">
+    <Card className="m-auto flex h-full overflow-auto border-primary">
       <Form {...form}>
         <form
           className="-mx-auto -mb-2 mt-3 flex w-full items-center justify-between"
@@ -49,7 +52,7 @@ const IdForm = ({ onSubmit }: IdFormProps) => {
                     <Input
                       type="number"
                       className="w-full md:w-40"
-                      placeholder="e.g. 123456"
+                      placeholder={fplIdString}
                       {...field}
                     />
                   </FormControl>

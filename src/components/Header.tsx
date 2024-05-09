@@ -1,12 +1,8 @@
-import IdForm from './IdForm';
-import { IFormData } from '../types/FormData';
 import { CircleArrowLeft } from 'lucide-react';
 
 interface HeaderProps {
   headerText?: string;
   subText?: string;
-  handleSubmit: (data: IFormData) => void;
-  showIdForm?: boolean;
   showBackIcon?: boolean;
   onBackClick?: () => void;
 }
@@ -14,14 +10,12 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({
   headerText,
   subText,
-  handleSubmit,
   showBackIcon = false,
-  showIdForm = true,
   onBackClick,
 }) => {
   return (
-    <div className="flex flex-col justify-between px-6 py-6 sm:flex-row sm:px-6 lg:px-8">
-      <div className="flex items-center">
+    <div className="flex flex-col-reverse justify-between px-6 py-6 sm:flex-row sm:px-6 lg:px-8">
+      <div className="flex flex-col items-start sm:flex-row sm:items-center">
         {showBackIcon && (
           <CircleArrowLeft
             className="mr-3 h-8 w-8 cursor-pointer"
@@ -33,11 +27,6 @@ const Header: React.FC<HeaderProps> = ({
           <p className="text-s text-muted-foreground">{subText}</p>
         </div>
       </div>
-      {showIdForm && (
-        <div className="mt-4 sm:mt-0">
-          <IdForm onSubmit={handleSubmit} />
-        </div>
-      )}
     </div>
   );
 };

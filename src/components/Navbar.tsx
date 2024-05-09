@@ -2,11 +2,15 @@ import { Link, useLocation } from 'react-router-dom';
 import { Sheet, SheetContent, SheetTrigger } from '../UI/organisms/Sheet';
 import { Button } from '../UI/molecules/Button/Button';
 import { Menu } from 'lucide-react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../state/store';
+import { IFormData } from '../types/FormData';
+import IdForm from './IdForm';
 
-export default function Navbar() {
-  const fplIdString = useSelector((state: RootState) => state.id.value);
+interface NavbarProps {
+  handleSubmit: (data: IFormData) => void;
+  showIdForm?: boolean;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ handleSubmit, showIdForm = true }) => {
   const location = useLocation();
   const navigation = [
     {
@@ -85,17 +89,18 @@ export default function Navbar() {
               </SheetContent>
             </Sheet>
           </div>
-
-          {fplIdString && (
+          {showIdForm && <IdForm onSubmit={handleSubmit} />}
+          {/* {fplIdString && (
             <Button
               variant="secondary"
               className="mr-1 rounded-full border border-primary p-1"
             >
               <p className="p-2 text-xs text-primary">Id: {fplIdString}</p>
             </Button>
-          )}
+          )} */}
         </header>
       </div>
     </>
   );
-}
+};
+export default Navbar;

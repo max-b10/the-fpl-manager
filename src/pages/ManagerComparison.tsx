@@ -4,7 +4,6 @@ import { RootState } from '../state/store';
 import { LoaderIcon } from 'lucide-react';
 import { useCheckId } from '../hooks/useCheckId';
 import { useManagerData } from '../hooks/useManagerData';
-import IdForm from '../components/IdForm';
 import {
   Card,
   CardContent,
@@ -44,7 +43,7 @@ const ManagerComparison = () => {
   const leagueMembers = selectedLeague?.standings.results;
   return (
     <>
-      <Navbar />
+      <Navbar handleSubmit={handleSubmit} />
       {isLoadingManagerData || isLoadingManagerHistory ? (
         <div className="flex min-h-screen items-center justify-center">
           <LoaderIcon className="animate-spin" />
@@ -59,9 +58,6 @@ const ManagerComparison = () => {
               <p className="text-s ml-0.5 text-muted-foreground">
                 Pick a league and compare with players
               </p>
-            </div>
-            <div className="mt-4 sm:mt-0">
-              <IdForm onSubmit={handleSubmit} />
             </div>
           </div>
 

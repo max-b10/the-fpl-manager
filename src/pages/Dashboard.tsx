@@ -14,15 +14,11 @@ import { useManagerData } from '../hooks/useManagerData';
 import { Card, CardContent, CardHeader, CardTitle } from '../UI/organisms/Card';
 import { usePlayerData } from '../hooks/usePlayerData';
 import { useCheckId } from '../hooks/useCheckId';
-import { setId } from '../state/idSlice';
-import { useDispatch } from 'react-redux';
-import { IFormData } from '../types/FormData';
 import { DashboardTable } from '../components/Table/Dashboard/DashboardTable';
 import { columns } from '../components/Table/Dashboard/columns';
 import Header from '../components/Header';
-
+import { useNavigationWithId } from '../hooks/useNavigationWithId';
 const Dashboard = () => {
-  const dispatch = useDispatch();
   const fplIdString = useSelector((state: RootState) => state.id.value);
   const fplId = Number(fplIdString);
   const {
@@ -56,9 +52,8 @@ const Dashboard = () => {
         {Math.abs(rankDifference).toLocaleString()}
       </div>
     );
-  const handleSubmit = (data: IFormData) => {
-    dispatch(setId(data.id));
-  };
+  const handleSubmit = useNavigationWithId();
+
   useCheckId();
   const playerInformation =
     currentSquad?.map((player) => {
@@ -70,18 +65,14 @@ const Dashboard = () => {
     }) || [];
   return (
     <>
-      <Navbar />
+      <Navbar handleSubmit={handleSubmit} />
       {isLoadingManagerData || isLoadingManagerHistory ? (
         <div className="flex min-h-screen items-center justify-center">
           <LoaderIcon className="animate-spin" />
         </div>
       ) : (
         <>
-          <Header
-            headerText={playerName}
-            subText={regionName}
-            handleSubmit={handleSubmit}
-          />
+          <Header headerText={playerName} subText={regionName} />
 
           <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
             <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
