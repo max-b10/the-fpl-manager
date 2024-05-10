@@ -14,7 +14,7 @@ const Navbar: React.FC<NavbarProps> = ({ handleSubmit, showIdForm = true }) => {
   const location = useLocation();
   const navigation = [
     {
-      name: 'Profile',
+      name: 'Dashboard',
       href: '/dashboard',
       current: location.pathname === '/dashboard',
     },
@@ -35,6 +35,7 @@ const Navbar: React.FC<NavbarProps> = ({ handleSubmit, showIdForm = true }) => {
     },
   ];
   const isLandingPage = location.pathname === '/';
+
   return (
     <>
       <div data-cy="navbar" className="flex w-full flex-col justify-between">
@@ -52,6 +53,7 @@ const Navbar: React.FC<NavbarProps> = ({ handleSubmit, showIdForm = true }) => {
                         : 'rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground'
                     }
                     aria-current={item.current ? 'page' : undefined}
+                    data-cy={`navbar-link-${item.name.toLowerCase()}`}
                   >
                     {item.name}
                   </Link>

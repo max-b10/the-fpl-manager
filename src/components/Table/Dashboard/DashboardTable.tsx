@@ -33,7 +33,7 @@ export function DashboardTable<
 
   return (
     <div className="rounded-md border">
-      <Table>
+      <Table data-cy="dashboard-table">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow hoverEffect={false} key={headerGroup.id}>

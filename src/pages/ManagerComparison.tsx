@@ -21,6 +21,7 @@ import { MembersTable } from '../components/Table/ManagerCompare/MembersTable/Me
 import { leagueColumns } from '../components/Table/ManagerCompare/LeaguesTable/leagueColumns';
 import { memberColumns } from '../components/Table/ManagerCompare/MembersTable/memberColumns';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
+import Header from '../components/Header';
 
 const ManagerComparison = () => {
   const fplIdString = useSelector((state: RootState) => state.id.value);
@@ -50,16 +51,10 @@ const ManagerComparison = () => {
         </div>
       ) : (
         <>
-          <div className="flex flex-col justify-between px-6 py-6 sm:flex-row sm:px-6 lg:px-8">
-            <div>
-              <h2 className="text-3xl font-bold tracking-tight ">
-                Compare manager history
-              </h2>
-              <p className="text-s ml-0.5 text-muted-foreground">
-                Pick a league and compare with players
-              </p>
-            </div>
-          </div>
+          <Header
+            headerText="Compare manager history"
+            subText="Pick a league and compare with players"
+          />
 
           <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
             <div className="grid items-stretch gap-4 md:gap-8 lg:grid-cols-3">

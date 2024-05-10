@@ -36,4 +36,22 @@ describe('Dashboard Page', () => {
       .should('be.visible')
       .contains('Gameweek');
   });
+  it('renders the table title', () => {
+    cy.get('[data-cy="table-title"]').should('be.visible');
+  });
+  it('renders the table', () => {
+    cy.get('[data-cy="dashboard-table"]').should('be.visible');
+  });
+  it('navigates to the Manager History page', () => {
+    cy.get('[data-cy="navbar-link-history"]').click();
+    cy.url().should('eq', 'http://localhost:5173/managerHistory');
+  });
+  it('navigates to the Manager Comparison page', () => {
+    cy.get('[data-cy="navbar-link-compare"]').click();
+    cy.url().should('eq', 'http://localhost:5173/managerComparison');
+  });
+  it('navigates to the About page', () => {
+    cy.get('[data-cy="navbar-link-about"]').click();
+    cy.url().should('eq', 'http://localhost:5173/about');
+  });
 });
