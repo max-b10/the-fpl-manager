@@ -15,7 +15,7 @@ app.get('/general', async (req, res) => {
     const data = response.data;
     res.json(data);
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).json({ message: 'An error occurred' });
   }
 });
@@ -28,7 +28,7 @@ app.get('/league/:id', async (req, res) => {
     const data = response.data;
     res.json(data);
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).json({ message: 'An error occurred' });
   }
 });
@@ -40,7 +40,7 @@ app.get('/manager/:id', async (req, res) => {
     const data = response.data;
     res.json(data);
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).json({ message: 'An error occurred' });
   }
 });
@@ -54,7 +54,7 @@ app.get('/manager-history/:id', async (req, res) => {
     const data = response.data;
     res.json(data);
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).json({ message: 'An error occurred' });
   }
 });
@@ -68,7 +68,7 @@ app.get('/squad-picks/:fplId/:previousGameweek', async (req, res) => {
     const data = response.data;
     res.json(data);
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).json({ message: 'An error occurred' });
   }
 });
@@ -81,7 +81,7 @@ app.get('/player-summary/', async (_, res) => {
     const data = response.data;
     res.json(data);
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).json({ message: 'An error occurred' });
   }
 });

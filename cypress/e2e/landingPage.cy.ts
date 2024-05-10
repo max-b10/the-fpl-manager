@@ -3,16 +3,16 @@ describe('Landing Page', () => {
     cy.visit('http://localhost:5173/');
   });
   it('renders the title', () => {
-    cy.get('[data-testid="landing-title"]').should(
-      'contain',
-      'The FPL Manager'
-    );
+    cy.get('[data-cy="landing-title"]')
+      .should('be.visible')
+      .contains('The FPL Manager');
   });
   it('renders the description', () => {
-    cy.get('[data-testid="landing-description"]').should(
-      'contain',
-      'Enter your Fantasy Premier League id to analyse your manager history and more!'
-    );
+    cy.get('[data-cy="landing-description"]')
+      .should('be.visible')
+      .contains(
+        'Enter your Fantasy Premier League id to analyse your manager history and more!'
+      );
   });
   it('renders the form', () => {
     cy.get('form').should('be.visible');
@@ -27,9 +27,8 @@ describe('Landing Page', () => {
   it('shows an error message with invalid input', () => {
     cy.get('input[type="number"]').type('0');
     cy.get('button[type="submit"]').click();
-    cy.get('[data-testid="form-message"]').should(
-      'contain',
-      'ID must be at least 1'
-    );
+    cy.get('[data-cy="form-message"]')
+      .should('be.visible')
+      .contains('ID must be at least 1');
   });
 });

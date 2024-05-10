@@ -37,7 +37,7 @@ const Navbar: React.FC<NavbarProps> = ({ handleSubmit, showIdForm = true }) => {
   const isLandingPage = location.pathname === '/';
   return (
     <>
-      <div className="flex w-full flex-col justify-between">
+      <div data-cy="navbar" className="flex w-full flex-col justify-between">
         <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-background px-4 md:px-6">
           <div className="flex items-center">
             {!isLandingPage && (

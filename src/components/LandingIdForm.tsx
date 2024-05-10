@@ -34,10 +34,10 @@ const LandingIdForm = ({ onSubmit }: IdFormProps) => {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
-        <CardTitle data-testid="landing-title" className="text-2xl">
+        <CardTitle data-cy="landing-title" className="text-2xl">
           The FPL Manager
         </CardTitle>
-        <CardDescription data-testid="landing-description">
+        <CardDescription data-cy="landing-description">
           Enter your Fantasy Premier League id to analyse your manager history
           and more!
         </CardDescription>
@@ -60,7 +60,7 @@ const LandingIdForm = ({ onSubmit }: IdFormProps) => {
                 <FormItem>
                   <FormControl>
                     <Input
-                      data-testid="input-id"
+                      data-cy="input-id"
                       className="no-spinner"
                       type="number"
                       placeholder="e.g. 123456"
@@ -68,7 +68,7 @@ const LandingIdForm = ({ onSubmit }: IdFormProps) => {
                     />
                   </FormControl>
                   {error && (
-                    <FormMessage data-testid="form-message">
+                    <FormMessage data-cy="form-message">
                       {error.message}
                     </FormMessage>
                   )}
@@ -77,11 +77,7 @@ const LandingIdForm = ({ onSubmit }: IdFormProps) => {
             />
           </CardContent>
           <CardFooter>
-            <Button
-              data-testid="submit-button"
-              className="w-full"
-              type="submit"
-            >
+            <Button data-cy="submit-button" className="w-full" type="submit">
               Enter
             </Button>
           </CardFooter>

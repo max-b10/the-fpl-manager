@@ -14,7 +14,10 @@ const Header: React.FC<HeaderProps> = ({
   onBackClick,
 }) => {
   return (
-    <div className="flex flex-col-reverse justify-between px-6 py-6 sm:flex-row sm:px-6 lg:px-8">
+    <div
+      data-cy="header"
+      className="flex flex-col-reverse justify-between px-6 py-6 sm:flex-row sm:px-6 lg:px-8"
+    >
       <div className="flex flex-col items-start sm:flex-row sm:items-center">
         {showBackIcon && (
           <CircleArrowLeft

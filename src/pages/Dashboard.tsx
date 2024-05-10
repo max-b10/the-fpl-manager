@@ -67,7 +67,10 @@ const Dashboard = () => {
     <>
       <Navbar handleSubmit={handleSubmit} />
       {isLoadingManagerData || isLoadingManagerHistory ? (
-        <div className="flex min-h-screen items-center justify-center">
+        <div
+          className="flex min-h-screen items-center justify-center"
+          data-cy="loader"
+        >
           <LoaderIcon className="animate-spin" />
         </div>
       ) : (
@@ -77,24 +80,28 @@ const Dashboard = () => {
           <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
             <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
               <DashboardCard
+                data-cy="dashboard-card-team"
                 title="Team"
                 icon={<ShieldHalf className="h-4 w-4 text-primary" />}
                 content={teamName}
                 footer={favouriteTeam}
               />
               <DashboardCard
+                data-cy="dashboard-card-overall-rank"
                 title="Overall Rank"
                 icon={<Activity className="h-4 w-4 text-primary" />}
                 content={managerData?.summary_overall_rank?.toLocaleString()}
                 footer={<>{rankDifferenceElement}</>}
               />
               <DashboardCard
+                data-cy="dashboard-card-previous-gameweek"
                 title={'Gameweek ' + previousGameweek}
                 icon={<Tally5 className="h-4 w-4 text-primary" />}
                 content={previousGameweekScore}
                 footer={gameweekRank}
               />
               <DashboardCard
+                data-cy="dashboard-card-current-gameweek"
                 title={'Gameweek ' + currentGameweek}
                 icon={<Tally5 className="h-4 w-4 text-primary" />}
                 content={gameweekScore}

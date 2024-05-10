@@ -11,6 +11,7 @@ interface DashboardCardProps {
   icon: ReactNode;
   content: ReactNode;
   footer?: ReactNode;
+  'data-cy'?: string;
 }
 
 const DashboardCard: React.FC<DashboardCardProps> = ({
@@ -18,8 +19,9 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   icon,
   content,
   footer,
+  'data-cy': dataCy,
 }) => (
-  <Card className="border-primary">
+  <Card data-cy={dataCy} className="border-primary">
     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
       <CardTitle className="text-sm font-medium">{title}</CardTitle>
       {icon}
