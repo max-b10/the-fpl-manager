@@ -20,6 +20,5 @@ export const stack = [
   { title: 'Axios', icon: SiAxios },
   { title: 'useSWR', icon: SiSwr },
   { title: 'Cypress', icon: SiCypress },
-
-  // Add more technologies as needed
 ];
+export const STACK_LENGTH = 9;

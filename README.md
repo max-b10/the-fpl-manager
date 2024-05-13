@@ -1,8 +1,10 @@
 # the-fpl-manager
 
-The FPL Manager is a web application that gives FPL managers the opportunity to view their historical performance as an FPL manager, and compare against their FPL manager friends (or enemies!).
+The FPL Manager is a web application that gives Fantasy Premier League managers the opportunity to view their historical performance as an FPL manager, and compare against their FPL manager friends (or enemies!).
 
 The project consists of a React frontend and a Node.js/Express CORS proxy.
+
+![Landing Image](./public/landing.png)
 
 ## Frontend
 
@@ -16,7 +18,7 @@ The src folder is a React application built with Vite and TypeScript. It uses a 
 - Table management: @tanstack/react-table
 - CSS-in-JS: Tailwind CSS with tailwind-merge and tailwindcss-animate
 - Data fetching: SWR
-- Testing: Jest with @testing-library/react and @testing-library/jest-dom
+- Testing: Cypress for e2e testing
 - Linting: ESLint with @typescript-eslint/eslint-plugin and eslint-plugin-react-hooks
 - Formatting: Prettier with prettier-plugin-tailwindcss
 
