@@ -54,7 +54,10 @@ export const useManagerData = (fplId: number) => {
     ? `${managerHistory.current[managerHistory.current.length - 2].points} pts`
     : undefined;
   const totalPointsMean = calculateMeanPoints(managerHistory?.past);
-  const totalRankMean = calculateMeanRank(managerHistory?.past);
+  const totalRankMean = calculateMeanRank(
+    managerHistory?.past,
+    managerData?.summary_overall_rank
+  );
   const favouriteTeamId = managerData?.favourite_team;
   const favouriteTeamObj = teamMapping.find(
     (team) => team.id === favouriteTeamId

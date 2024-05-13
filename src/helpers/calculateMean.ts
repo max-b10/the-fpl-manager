@@ -12,11 +12,23 @@ export const calculateMeanPoints = (
   return mean.toLocaleString();
 };
 
+// export const calculateMeanRank = (
+//   arr: IPast[] | undefined
+// ): string | undefined => {
+//   if (!arr || arr.length === 0) {
+//     return undefined;
+//   }
+
+//   const sum = arr.reduce((sum, season) => sum + season.rank, 0);
+//   const mean = Math.floor(sum / arr.length);
+//   return mean.toLocaleString();
+// };
 export const calculateMeanRank = (
-  arr: IPast[] | undefined
+  arr: IPast[] | undefined,
+  overallRank: number | undefined
 ): string | undefined => {
   if (!arr || arr.length === 0) {
-    return undefined;
+    return overallRank ? overallRank.toLocaleString() : undefined;
   }
 
   const sum = arr.reduce((sum, season) => sum + season.rank, 0);

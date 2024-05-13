@@ -18,6 +18,7 @@ const CompareDetails = () => {
   const { playerName, totalRankMean, favouriteTeamSrc } = useManagerData(fplId);
   const {
     enemyName,
+    enemySeasonsPlayed,
     enemyTotalRankMean,
     enemyFavouriteTeamSrc,
     isLoadingEnemyData,
@@ -41,21 +42,22 @@ const CompareDetails = () => {
           />
           <main>
             <div className="mt-10 flex flex-col items-center px-4 md:flex-row md:justify-center md:px-0">
-              <div className="flex flex-1 justify-center">
+              <div className="mb-4 flex flex-1 justify-center md:mb-0">
                 <ManagerCard
                   id={id}
                   name={playerName}
+                  seasonsPlayed={enemySeasonsPlayed}
                   totalRankMean={totalRankMean}
                   src={favouriteTeamSrc}
                   onSubmit={handleSubmit}
                   showIcon={false}
                 />
               </div>
-              <div>vs</div>
               <div className="mx-auto flex flex-1 justify-center ">
                 <ManagerCard
                   id={id}
                   name={enemyName}
+                  seasonsPlayed={enemySeasonsPlayed}
                   totalRankMean={enemyTotalRankMean}
                   src={enemyFavouriteTeamSrc}
                   onSubmit={handleSubmit}

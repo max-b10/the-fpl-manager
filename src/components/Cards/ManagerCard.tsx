@@ -17,6 +17,7 @@ import { useForm } from 'react-hook-form';
 
 interface DashboardCardProps {
   name?: string;
+  seasonsPlayed?: number;
   totalRankMean?: string;
   id?: string;
   src?: string;
@@ -26,6 +27,7 @@ interface DashboardCardProps {
 
 const ManagerCard: React.FC<DashboardCardProps> = ({
   name,
+  seasonsPlayed,
   totalRankMean,
   src,
   id,
@@ -79,6 +81,12 @@ const ManagerCard: React.FC<DashboardCardProps> = ({
           <div className="flex w-full justify-between">
             <span className="text-xs text-muted-foreground">Average Rank:</span>
             <span className="text-lg font-medium">{totalRankMean}</span>
+          </div>
+          <div className="flex w-full justify-between">
+            <span className="text-xs text-muted-foreground">
+              Seasons Played
+            </span>
+            <span className="text-lg font-medium">{seasonsPlayed}</span>
           </div>
         </div>
       </CardContent>

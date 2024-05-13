@@ -17,8 +17,16 @@ export const useEnemyManagerData = (enemyId: number) => {
       `http://localhost:3005/${API_ENDPOINTS.managerHistory}/${enemyId}`,
       fetcher
     );
+  const enemyOverallRank = enemyData?.summary_overall_rank;
+
   const enemyPastSeasonsData = enemyHistory?.past;
-  const enemyTotalRankMean = calculateMeanRank(enemyPastSeasonsData);
+  const enemySeasonsPlayed = enemyHistory?.past?.length
+    ? Number(enemyHistory.past.length) + 1
+    : 1;
+  const enemyTotalRankMean = calculateMeanRank(
+    enemyPastSeasonsData,
+    enemyOverallRank
+  );
 
   const enemyName = `${enemyData?.player_first_name} ${enemyData?.player_last_name}`;
   const enemyFavouriteTeamId = enemyData?.favourite_team;
@@ -26,9 +34,9 @@ export const useEnemyManagerData = (enemyId: number) => {
     (team) => team.id === enemyFavouriteTeamId
   );
   const enemyFavouriteTeamSrc = enemyFavouriteTeamObj?.src;
-
   return {
     enemyName,
+    enemySeasonsPlayed,
     enemyTotalRankMean,
     enemyFavouriteTeamSrc,
     isLoadingEnemyData,
