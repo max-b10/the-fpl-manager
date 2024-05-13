@@ -10,66 +10,85 @@ import {
 import teamMapping from '../constants/teamMapping';
 import { ISquad } from '../types/squad/squadPicks';
 
-export const useManagerData = (fplId: number) => {
-  const { data: managerData, isValidating: isLoadingManagerData } =
-    useSWR<IManagerData>(
-      `http://localhost:3005/${API_ENDPOINTS.manager}/${fplId}`,
-      fetcher
-    );
-  const { data: managerHistory, isValidating: isLoadingManagerHistory } =
-    useSWR<IManagerHistory>(
-      `http://localhost:3005/${API_ENDPOINTS.managerHistory}/${fplId}`,
-      fetcher
-    );
+const useManagerDataFetch = (fplId: number) =>
+  useSWR<IManagerData>(
+    `http://localhost:3005/${API_ENDPOINTS.manager}/${fplId}`,
+    fetcher
+  );
 
-  const playerName = `${managerData?.player_first_name} ${managerData?.player_last_name}`;
-  const teamName = managerData?.name;
-  const regionName = managerData?.player_region_name;
+const useManagerHistoryFetch = (fplId: number) =>
+  useSWR<IManagerHistory>(
+    `http://localhost:3005/${API_ENDPOINTS.managerHistory}/${fplId}`,
+    fetcher
+  );
 
+const useSquadPicksFetch = (
+  fplId: number,
+  previousGameweek: number | undefined
+) =>
+  useSWR<ISquad>(
+    previousGameweek !== undefined
+      ? `http://localhost:3005/${API_ENDPOINTS.squadPicks}/${fplId}/${previousGameweek}`
+      : null,
+    fetcher
+  );
+
+const getPreviousWeekData = (managerHistory: IManagerHistory | undefined) => {
   const previousWeek =
     managerHistory?.current?.[managerHistory.current.length - 2];
   const previousWeekOverallRank = previousWeek?.overall_rank;
-  const rankDifference =
-    (managerData?.summary_overall_rank ?? 0) - (previousWeekOverallRank ?? 0);
-  const currentGameweek = managerData?.current_event;
-  const previousGameweek = managerData?.current_event
-    ? managerData.current_event - 1
+  const previousGameweekScore = previousWeek?.points
+    ? `${previousWeek.points} pts`
     : undefined;
+  return { previousWeekOverallRank, previousGameweekScore };
+};
+
+export const useManagerData = (fplId: number) => {
+  const { data: managerData, isValidating: isLoadingManagerData } =
+    useManagerDataFetch(fplId);
+  const { data: managerHistory, isValidating: isLoadingManagerHistory } =
+    useManagerHistoryFetch(fplId);
+
+  const {
+    player_first_name: firstName,
+    player_last_name: lastName,
+    name: teamName,
+    player_region_name: regionName,
+    summary_overall_rank: overallRank,
+    current_event: currentGameweek,
+    summary_event_points: eventPoints,
+    summary_event_rank: eventRank,
+    favourite_team: favouriteTeamId,
+    leagues,
+  } = managerData || {};
+
+  const playerName = `${firstName} ${lastName}`;
+  const { previousWeekOverallRank, previousGameweekScore } =
+    getPreviousWeekData(managerHistory);
+  const rankDifference = (overallRank ?? 0) - (previousWeekOverallRank ?? 0);
+  const previousGameweek = currentGameweek ? currentGameweek - 1 : undefined;
   const { data: squadPicksData, isValidating: isLoadingSquadPicks } =
-    useSWR<ISquad>(
-      previousGameweek !== undefined
-        ? `http://localhost:3005/${API_ENDPOINTS.squadPicks}/${fplId}/${previousGameweek}`
-        : null,
-      fetcher
-    );
-  const gameweekScore = managerData?.summary_event_points
-    ? `${managerData.summary_event_points} pts`
-    : undefined;
-  const gameweekRank = managerData?.summary_event_rank
-    ? `${managerData.summary_event_rank.toLocaleString()} rank`
-    : undefined;
-  const previousGameweekScore = managerHistory?.current?.[
-    managerHistory.current.length - 2
-  ]?.points
-    ? `${managerHistory.current[managerHistory.current.length - 2].points} pts`
+    useSquadPicksFetch(fplId, previousGameweek);
+  const gameweekScore = eventPoints ? `${eventPoints} pts` : undefined;
+  const gameweekRank = eventRank
+    ? `${eventRank.toLocaleString()} rank`
     : undefined;
   const totalPointsMean = calculateMeanPoints(managerHistory?.past);
-  const totalRankMean = calculateMeanRank(
-    managerHistory?.past,
-    managerData?.summary_overall_rank
-  );
-  const favouriteTeamId = managerData?.favourite_team;
+  const totalRankMean = calculateMeanRank(managerHistory?.past, overallRank);
   const favouriteTeamObj = teamMapping.find(
     (team) => team.id === favouriteTeamId
   );
   const favouriteTeam = favouriteTeamObj?.name;
   const favouriteTeamSrc = favouriteTeamObj?.src;
-  const overallLeague = managerData?.leagues?.classic?.find(
+  const overallLeague = leagues?.classic?.find(
     (league) => league.name === 'Overall'
   );
   const totalPlayers = overallLeague?.rank_count;
   const currentSquad = squadPicksData?.picks;
-  const managerClassicLeagues = managerData?.leagues.classic.slice(5);
+  const managerClassicLeagues = leagues?.classic.slice(5);
+  const managerSeasonsPlayed = managerHistory?.past?.length
+    ? Number(managerHistory.past.length) + 1
+    : 1;
   return {
     playerName,
     teamName,
@@ -91,5 +110,6 @@ export const useManagerData = (fplId: number) => {
     totalPlayers,
     currentSquad,
     managerClassicLeagues,
+    managerSeasonsPlayed,
   };
 };

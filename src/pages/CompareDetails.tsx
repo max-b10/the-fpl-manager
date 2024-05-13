@@ -15,7 +15,8 @@ const CompareDetails = () => {
   const { id } = useParams();
   const fplIdString = useSelector((state: RootState) => state.id.value);
   const fplId = Number(fplIdString);
-  const { playerName, totalRankMean, favouriteTeamSrc } = useManagerData(fplId);
+  const { playerName, totalRankMean, favouriteTeamSrc, managerSeasonsPlayed } =
+    useManagerData(fplId);
   const {
     enemyName,
     enemySeasonsPlayed,
@@ -46,7 +47,7 @@ const CompareDetails = () => {
                 <ManagerCard
                   id={id}
                   name={playerName}
-                  seasonsPlayed={enemySeasonsPlayed}
+                  seasonsPlayed={managerSeasonsPlayed}
                   totalRankMean={totalRankMean}
                   src={favouriteTeamSrc}
                   onSubmit={handleSubmit}

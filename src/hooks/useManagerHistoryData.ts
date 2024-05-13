@@ -10,7 +10,11 @@ export const useManagerHistoryData = (fplId: number) => {
       fetcher
     );
 
-  const pastSeasonsData = managerHistory?.past;
+  const pastSeasonsData = managerHistory?.past?.map((season) => ({
+    ...season,
+    total_points: season.total_points.toLocaleString(),
+    rank: season.rank.toLocaleString(),
+  }));
   return {
     pastSeasonsData,
     isLoadingManagerHistory,
