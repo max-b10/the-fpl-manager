@@ -1,4 +1,4 @@
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Navbar/Navbar';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
 import {
@@ -19,6 +19,7 @@ import { columns } from '../components/Table/Dashboard/columns';
 import Header from '../components/Header';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
 import FadeIn from '../components/FadeIn';
+import Footer from '../components/Footer';
 
 const Dashboard = () => {
   const fplIdString = useSelector((state: RootState) => state.id.value);
@@ -127,6 +128,7 @@ const Dashboard = () => {
             </main>
           </>
         )}
+        <Footer />
       </>
     </FadeIn>
   );

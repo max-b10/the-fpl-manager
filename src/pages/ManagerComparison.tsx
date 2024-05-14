@@ -1,4 +1,4 @@
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Navbar/Navbar';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
 import { LoaderIcon } from 'lucide-react';
@@ -23,6 +23,7 @@ import { memberColumns } from '../components/Table/ManagerCompare/MembersTable/m
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
 import Header from '../components/Header';
 import FadeIn from '../components/FadeIn';
+import Footer from '../components/Footer';
 
 const ManagerComparison = () => {
   const fplIdString = useSelector((state: RootState) => state.id.value);
@@ -103,6 +104,7 @@ const ManagerComparison = () => {
                   )}
                 </Card>
               </div>
+              <Footer />
             </main>
           </>
         )}

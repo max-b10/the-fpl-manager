@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { IGeneralData } from '../types/general/generalData';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Navbar/Navbar';
 import { API_ENDPOINTS } from '../../api/endpoints';
 import { fetcher } from '../lib/fetcher';
 

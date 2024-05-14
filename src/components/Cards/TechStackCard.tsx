@@ -23,7 +23,7 @@ const TechStackCard: React.FC<TechStackCardProps> = ({
       <PopoverTrigger>
         <Card
           data-cy="tech-stack-card"
-          className="sm:min-w-2/5 sm:min-w-2/5 flex h-full  min-w-full cursor-pointer flex-col items-center justify-between border border-primary px-4 py-4 hover:bg-slate-100/50 data-[state=selected]:bg-slate-100 dark:hover:bg-slate-800/50 dark:data-[state=selected]:bg-slate-800 md:px-2 md:py-2"
+          className="sm:min-w-2/5 sm:min-w-2/5 flex h-full  min-w-full cursor-pointer flex-col items-center justify-between border border-primary px-4 py-4 hover:bg-slate-100/50 data-[state=selected]:bg-slate-100 dark:hover:bg-slate-800/50 dark:data-[state=selected]:bg-slate-800 md:px-2 md:py-3"
         >
           <div className="flex w-full items-center justify-between px-3">
             <div className="flex w-full items-center justify-between">

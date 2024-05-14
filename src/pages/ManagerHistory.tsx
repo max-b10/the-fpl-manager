@@ -1,4 +1,4 @@
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Navbar/Navbar';
 import {
   Carousel,
   CarouselContent,
@@ -21,6 +21,7 @@ import {
   AlertTitle,
 } from '../UI/molecules/Alert/Alert';
 import FadeIn from '../components/FadeIn';
+import Footer from '../components/Footer';
 
 const ManagerHistory = () => {
   const fplIdString = useSelector((state: RootState) => state.id.value);
@@ -91,6 +92,7 @@ const ManagerHistory = () => {
                 </div>
               )}
             </main>
+            <Footer />
           </>
         )}
       </>

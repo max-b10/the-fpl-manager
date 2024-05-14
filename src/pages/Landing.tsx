@@ -1,6 +1,6 @@
 import FadeIn from '../components/FadeIn';
 import LandingIdForm from '../components/LandingIdForm';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Navbar/Navbar';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
 
 const Landing = () => {
