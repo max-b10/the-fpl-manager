@@ -1,54 +1,45 @@
 import React, { ReactElement } from 'react';
 import { Card } from '../../UI/organisms/Card';
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '../../UI/molecules/Collapsible/Collapsible';
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '../../UI/molecules/Popover/Popover';
 
 interface TechStackCardProps {
   icon: ReactElement;
   title: string;
   description: string;
-  isOpen: boolean;
-  onOpenChange: (isOpen: boolean) => void;
+  comments: string;
 }
-
 const TechStackCard: React.FC<TechStackCardProps> = ({
   icon,
   title,
   description,
-  isOpen,
-  onOpenChange,
+  comments,
 }) => {
   return (
-    <Card
-      data-cy="tech-stack-card"
-      className="sm:min-w-2/5 sm:min-w-2/5 flex min-w-full cursor-pointer flex-col items-center justify-between border border-primary p-4 px-4 hover:bg-slate-100/50 data-[state=selected]:bg-slate-100 dark:hover:bg-slate-800/50 dark:data-[state=selected]:bg-slate-800"
-    >
-      <Collapsible
-        open={isOpen}
-        onOpenChange={onOpenChange}
-        className="flex w-full flex-col space-y-2"
-      >
-        <CollapsibleTrigger asChild>
+    <Popover>
+      <PopoverTrigger>
+        <Card
+          data-cy="tech-stack-card"
+          className="sm:min-w-2/5 sm:min-w-2/5 flex h-full  min-w-full cursor-pointer flex-col items-center justify-between border border-primary px-4 py-4 hover:bg-slate-100/50 data-[state=selected]:bg-slate-100 dark:hover:bg-slate-800/50 dark:data-[state=selected]:bg-slate-800 md:px-2 md:py-2"
+        >
           <div className="flex w-full items-center justify-between px-3">
             <div className="flex w-full items-center justify-between">
+              <div className="text-muted-foreground">{title}</div>
               <div data-cy="icon" className="mr-2 text-primary">
                 {icon}
               </div>
-              <div>{title}</div>
             </div>
           </div>
-        </CollapsibleTrigger>
-        <CollapsibleContent className="space-y-2">
-          <div className="rounded-md border px-4 py-3 font-mono text-sm">
+          <div className="mt-3 flex-grow px-3 py-2 text-left font-mono text-sm">
             {description}
           </div>
-        </CollapsibleContent>
-      </Collapsible>
-    </Card>
+        </Card>
+      </PopoverTrigger>
+      <PopoverContent>{comments}</PopoverContent>
+    </Popover>
   );
 };
-
 export default TechStackCard;

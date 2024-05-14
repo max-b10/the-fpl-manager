@@ -1,30 +1,30 @@
-import Navbar from '../components/Navbar';
 import { stack } from '../constants/stack';
 import TechStackCard from '../components/Cards/TechStackCard';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
-import { useState } from 'react';
+import Navbar from '../components/Navbar';
 
 const About = () => {
   const handleSubmit = useNavigationWithId();
-  const [openCard, setOpenCard] = useState<number | null>(null);
 
   return (
     <>
       <Navbar showIdForm={false} handleSubmit={handleSubmit} />
-      <main className="flex h-screen items-center justify-center">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <main className="flex flex-col items-center justify-center space-y-4 overflow-auto px-4">
+        <div className="mb-4 text-center">
+          <p className="text-m font-medium">
+            This application is built with the following technologies:
+          </p>
+        </div>
+        <div className="max-w-2/3 grid-auto-rows-1fr mx-auto grid w-4/5 flex-grow grid-cols-1 gap-4 sm:max-w-screen-lg sm:grid-cols-3">
           {stack.map((tech, index) => {
             const Icon = tech.icon;
             return (
               <TechStackCard
                 title={tech.title}
                 key={index}
-                icon={<Icon className="h-8 w-8" />}
+                icon={<Icon className="h-6 w-6" />}
                 description={tech.description}
-                isOpen={openCard === index}
-                onOpenChange={(isOpen: boolean) => {
-                  setOpenCard(isOpen ? index : null);
-                }}
+                comments={tech.comments}
               />
             );
           })}
