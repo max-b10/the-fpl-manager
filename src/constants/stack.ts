@@ -6,6 +6,8 @@ import {
   SiAxios,
   SiSwr,
   SiShadcnui,
+  SiFramer,
+  SiExpress,
 } from 'react-icons/si';
 import { FaReact } from 'react-icons/fa';
 import { RiTailwindCssFill } from 'react-icons/ri';
@@ -75,6 +77,20 @@ export const stack = [
       'An end-to-end testing framework designed to simplify the testing process',
     comments:
       'Cypress makes it nice and easy to write tests and see them run in real-time.',
+  },
+  {
+    title: 'Framer Motion',
+    icon: SiFramer,
+    description:
+      'Framer Motion is a simple yet powerful motion library for React.',
+    comments: "I don't want gimmicky, I want a smooth and professional UX.",
+  },
+  {
+    title: 'Express',
+    icon: SiExpress,
+    description: 'Fast, unopinionated, minimalist web framework for Node.js',
+    comments:
+      'I wanted a server to avoid CORS errors when making requests to external APIs.',
   },
 ];
 export const STACK_LENGTH = 9;

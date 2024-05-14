@@ -3,6 +3,7 @@ import { IGeneralData } from '../types/general/generalData';
 import Navbar from '../components/Navbar/Navbar';
 import { API_ENDPOINTS } from '../../api/endpoints';
 import { fetcher } from '../lib/fetcher';
+import { useNavigationWithId } from '../hooks/useNavigationWithId';
 
 const Player = () => {
   const { data: generalData } = useSWR<IGeneralData>(
@@ -13,10 +14,11 @@ const Player = () => {
   const erlingHaaland = generalData?.elements.find(
     (player) => player.first_name === 'Erling'
   );
+  const handleSubmit = useNavigationWithId();
 
   return (
     <>
-      <Navbar />
+      <Navbar handleSubmit={handleSubmit} />
 
       <div>
         <h1 className="text-red-700">Dashboard</h1>

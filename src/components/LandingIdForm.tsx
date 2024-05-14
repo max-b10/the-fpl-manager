@@ -17,6 +17,7 @@ import {
 } from '../UI/organisms/Form/Form';
 import { useForm } from 'react-hook-form';
 import { IFormData } from '../types/FormData';
+import { motion } from 'framer-motion';
 
 interface IdFormProps {
   onSubmit: (data: IFormData) => void;
@@ -77,9 +78,16 @@ const LandingIdForm = ({ onSubmit }: IdFormProps) => {
             />
           </CardContent>
           <CardFooter>
-            <Button data-cy="submit-button" className="w-full" type="submit">
-              Enter
-            </Button>
+            <motion.div
+              className="w-full"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+            >
+              <Button data-cy="submit-button" className="w-full" type="submit">
+                Enter
+              </Button>
+            </motion.div>
           </CardFooter>
         </form>
       </Form>
