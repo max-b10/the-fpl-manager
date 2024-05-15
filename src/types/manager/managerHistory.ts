@@ -1,4 +1,4 @@
-interface ICurrent {
+export interface ICurrent {
   event: number;
   points: number;
   total_points: number;

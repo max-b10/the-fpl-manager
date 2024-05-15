@@ -9,9 +9,13 @@ export const useGeneralData = () => {
       `http://localhost:3005/${API_ENDPOINTS.general}`,
       fetcher
     );
-
+  const generalGameweekData = generalData?.events?.map((gameWeek) => ({
+    ...gameWeek,
+    average_entry_score: gameWeek.average_entry_score,
+  }));
   return {
     generalData,
     isLoadingGeneralData,
+    generalGameweekData,
   };
 };

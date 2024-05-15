@@ -18,7 +18,7 @@ type HistoryCarouselProps = {
 };
 
 const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
-  const options = { loop: true }; // define your options here
+  const options = { loop: true };
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
@@ -32,11 +32,11 @@ const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
   } = usePrevNextButtons(emblaApi);
 
   return (
-    <section className="mx-auto max-w-[18rem] sm:max-w-[24rem] md:max-w-[30rem] lg:max-w-[36rem] xl:max-w-[48rem]">
+    <section className="mx-auto max-w-[18rem] sm:max-w-[22rem] md:max-w-[26rem] lg:max-w-[30rem] xl:max-w-[36rem]">
       {slides.length > 1 ? (
         <>
           <div className="overflow-hidden" ref={emblaRef}>
-            <div className="ml-[-1rem] flex">
+            <div className="flex">
               {slides.map((slide, index) => (
                 <div
                   className="mx-8 w-full min-w-0 flex-none pl-4 sm:pl-0"

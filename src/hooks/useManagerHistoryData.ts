@@ -15,8 +15,17 @@ export const useManagerHistoryData = (fplId: number) => {
     total_points: season.total_points.toLocaleString(),
     rank: season.rank.toLocaleString(),
   }));
+  const gameWeekHistoryData = managerHistory?.current?.map((gameWeek) => ({
+    ...gameWeek,
+    event: gameWeek.event,
+    Points: gameWeek.points,
+    total_points: gameWeek.total_points,
+    rank: gameWeek.rank,
+    overall_rank: gameWeek.overall_rank,
+  }));
   return {
     pastSeasonsData,
+    gameWeekHistoryData,
     isLoadingManagerHistory,
   };
 };
