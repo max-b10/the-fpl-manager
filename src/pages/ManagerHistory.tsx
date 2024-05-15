@@ -1,16 +1,8 @@
 import Navbar from '../components/Navbar/Navbar';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '../UI/organisms/Carousel';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
 import { useManagerHistoryData } from '../hooks/useManagerHistoryData';
-import CarouselCard from '../components/Cards/CarouselCard';
-import { AlertCircle, History, LoaderIcon } from 'lucide-react';
+import { AlertCircle, LoaderIcon } from 'lucide-react';
 import { useCheckId } from '../hooks/useCheckId';
 import { useManagerData } from '../hooks/useManagerData';
 import Header from '../components/Header';
@@ -33,6 +25,25 @@ const ManagerHistory = () => {
   const handleSubmit = useNavigationWithId();
 
   useCheckId();
+  const oneSeason = [
+    {
+      rank: '1',
+      season_name: '1',
+      total_points: '1',
+    },
+  ];
+  const twoSeasons = [
+    {
+      rank: '1',
+      season_name: '1',
+      total_points: '1',
+    },
+    {
+      rank: '2',
+      season_name: '2',
+      total_points: '3',
+    },
+  ];
 
   return (
     <FadeIn>
@@ -53,39 +64,11 @@ const ManagerHistory = () => {
                     : 'Current overall rank'
                 }
               />
-              <HistoryCarousel slides={pastSeasonsData || []} />
 
               <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
                 {pastSeasonsData && pastSeasonsData.length > 0 ? (
-                  <div className="flex justify-center">
-                    <Carousel
-                      opts={{
-                        align: 'start',
-                      }}
-                      className="mx-auto max-w-5xl"
-                    >
-                      <CarouselContent>
-                        {pastSeasonsData.map((season, index) => (
-                          <CarouselItem
-                            className="md:w-1/5 md:basis-1/2 lg:basis-1/3"
-                            key={index}
-                          >
-                            <div className="p-2">
-                              <CarouselCard
-                                title={'Season: ' + season.season_name}
-                                icon={
-                                  <History className="h-4 w-4 text-primary" />
-                                }
-                                content={season.total_points}
-                                footer={season.rank}
-                              />
-                            </div>
-                          </CarouselItem>
-                        ))}
-                      </CarouselContent>
-                      <CarouselPrevious />
-                      <CarouselNext />
-                    </Carousel>
+                  <div className="flex  justify-center">
+                    <HistoryCarousel slides={oneSeason || []} />
                   </div>
                 ) : (
                   <div className="flex justify-center  text-primary">

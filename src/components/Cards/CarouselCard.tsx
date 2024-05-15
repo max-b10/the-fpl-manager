@@ -25,7 +25,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({
       {icon}
     </CardHeader>
 
-    <CardContent className="flex aspect-square items-center justify-center p-6">
+    <CardContent className="flex items-center justify-center p-6">
       <div className="flex flex-col">
         <div>
           <span className="text-2xl font-bold">{content}</span>

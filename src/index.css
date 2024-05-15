@@ -8,6 +8,12 @@
     -webkit-appearance: none;
     margin: 0;
   }
+  .ring-muted-foreground {
+    --tw-ring-color: var(--muted-foreground);
+  }
+  .ring-white {
+    --tw-ring-color: var(--foreground);
+  }
 }
 @layer base {
   :root {
