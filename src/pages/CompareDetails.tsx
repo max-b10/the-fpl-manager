@@ -3,7 +3,7 @@ import { useCheckId } from '../hooks/useCheckId';
 import { RootState } from '../state/store';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useManagerData } from '../hooks/useManagerData';
-import Header from '../components/Header';
+import Header from '../components/Headers/Header';
 import { LoaderIcon } from 'lucide-react';
 import ManagerCard from '../components/Cards/ManagerCard';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';

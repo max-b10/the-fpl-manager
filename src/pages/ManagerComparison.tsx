@@ -21,7 +21,7 @@ import { MembersTable } from '../components/Table/ManagerCompare/MembersTable/Me
 import { leagueColumns } from '../components/Table/ManagerCompare/LeaguesTable/leagueColumns';
 import { memberColumns } from '../components/Table/ManagerCompare/MembersTable/memberColumns';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
-import Header from '../components/Header';
+import Header from '../components/Headers/Header';
 import FadeIn from '../components/FadeIn';
 import Footer from '../components/Footer';
 
@@ -46,15 +46,15 @@ const ManagerComparison = () => {
   const leagueMembers = selectedLeague?.standings.results;
 
   return (
-    <FadeIn>
-      <>
-        <Navbar handleSubmit={handleSubmit} />
-        {isLoadingManagerData || isLoadingManagerHistory ? (
-          <div className="flex min-h-screen items-center justify-center">
-            <LoaderIcon className="animate-spin" />
-          </div>
-        ) : (
-          <>
+    <>
+      <Navbar handleSubmit={handleSubmit} />
+      {isLoadingManagerData || isLoadingManagerHistory ? (
+        <div className="flex min-h-screen items-center justify-center">
+          <LoaderIcon className="animate-spin" />
+        </div>
+      ) : (
+        <>
+          <FadeIn>
             <Header
               headerText="Compare manager history"
               subText="Pick a league and compare with players"
@@ -104,12 +104,12 @@ const ManagerComparison = () => {
                   )}
                 </Card>
               </div>
-              <Footer />
             </main>
-          </>
-        )}
-      </>
-    </FadeIn>
+          </FadeIn>
+        </>
+      )}
+      <Footer />
+    </>
   );
 };
 

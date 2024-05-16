@@ -4,15 +4,17 @@ type TooltipProps = {
   active?: boolean;
   payload?: { name: string; value: number }[];
   label?: string;
+  playerName: string;
 };
 export const CustomTooltip: React.FC<TooltipProps> = ({
   active,
   payload,
   label,
+  playerName,
 }) => {
   if (active && payload?.length) {
-    const managerData = payload.filter((item) => item.name === 'Manager');
-    const averageData = payload.filter((item) => item.name !== 'Manager');
+    const managerData = payload.filter((item) => item.name === playerName);
+    const averageData = payload.filter((item) => item.name !== playerName);
     const sortedPayload = [...managerData, ...averageData];
     return (
       <div className="rounded border border-primary bg-black p-3 ">
@@ -23,12 +25,12 @@ export const CustomTooltip: React.FC<TooltipProps> = ({
             <span
               key={index}
               className={
-                ele.name === 'Manager'
+                ele.name === playerName
                   ? 'text-primary'
                   : 'text-muted-foreground'
               }
             >
-              {ele.name} : {ele.value}pts
+              {ele.name} : {ele.value} pts
             </span>
           ))}
         </div>

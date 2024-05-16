@@ -106,7 +106,7 @@ const Navbar: React.FC<NavbarProps> = ({ handleSubmit, showIdForm = true }) => {
               </Sheet>
             </div>
           </div>
-          <div className="flex w-full items-center md:w-auto">
+          <div className="flex w-auto items-center justify-end">
             {showIdForm && <IdForm onSubmit={handleSubmit} />}
           </div>
         </header>

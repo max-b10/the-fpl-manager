@@ -16,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <div
       data-cy="header"
-      className="flex flex-col-reverse justify-between px-6 py-6 sm:flex-row sm:px-6 lg:px-8"
+      className="flex flex-col-reverse justify-between px-6 pb-0 pt-6 sm:flex-row sm:px-6 lg:px-8"
     >
       <div className="flex flex-col items-start sm:flex-row sm:items-center">
         {showBackIcon && (

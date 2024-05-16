@@ -59,7 +59,6 @@ const IdForm = ({ onSubmit }: IdFormProps) => {
           )}
         />
         <motion.div
-          className="w-full"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: 'spring', stiffness: 400, damping: 17 }}

@@ -7,7 +7,13 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { Card, CardContent, CardHeader, CardTitle } from '../UI/organisms/Card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../UI/organisms/Card';
 import { FC } from 'react';
 import { ICurrent } from '../types/manager/managerHistory';
 import { CustomTooltip } from './CustomTooltip';
@@ -16,17 +22,19 @@ import { IEvent } from '../types/general/event';
 type SimpleLineChartProps = {
   playerGameweekData: ICurrent[];
   generalGameweekData: IEvent[];
-  title?: string;
+  totalPoints: string;
+  playerName: string;
 };
 
 const SimpleLineChart: FC<SimpleLineChartProps> = ({
   playerGameweekData,
   generalGameweekData,
-  title,
+  totalPoints,
+  playerName,
 }) => {
   const series = [
     {
-      name: 'Manager',
+      name: playerName,
       data: playerGameweekData.map((item) => ({
         category: item.event,
         value: item.points,
@@ -49,8 +57,17 @@ const SimpleLineChart: FC<SimpleLineChartProps> = ({
   return (
     <div className="w-full">
       <Card className="border border-primary">
-        <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle>Total Points: {title}</CardTitle>
+        <CardHeader className="flex flex-row justify-between px-7">
+          <div>
+            <CardTitle className="mb-1">Gameweek History</CardTitle>
+            <CardDescription>
+              How often do you beat the average?
+            </CardDescription>
+          </div>
+          <div>
+            <CardTitle>{totalPoints}</CardTitle>
+            <CardDescription>Total pts</CardDescription>
+          </div>
         </CardHeader>
         <CardContent>
           <div className="h-[400px]">
@@ -63,7 +80,7 @@ const SimpleLineChart: FC<SimpleLineChartProps> = ({
                   tickFormatter={tickFormatter}
                 />
                 <YAxis dataKey="value" />
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={<CustomTooltip playerName={playerName} />} />
                 <Legend />
                 {series.map((s) => (
                   <Line
@@ -71,7 +88,7 @@ const SimpleLineChart: FC<SimpleLineChartProps> = ({
                     data={s.data}
                     name={s.name}
                     key={s.name}
-                    stroke={s.name === 'Manager' ? '#22C55E' : '#A3A8B1'}
+                    stroke={s.name === playerName ? '#22C55E' : '#A3A8B1'}
                   />
                 ))}
               </LineChart>

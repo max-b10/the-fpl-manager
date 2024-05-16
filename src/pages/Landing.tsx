@@ -1,4 +1,5 @@
 import FadeIn from '../components/FadeIn';
+import Footer from '../components/Footer';
 import LandingIdForm from '../components/LandingIdForm';
 import Navbar from '../components/Navbar/Navbar';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
@@ -15,6 +16,7 @@ const Landing = () => {
             <LandingIdForm onSubmit={handleSubmit} />
           </div>
         </div>
+        <Footer />
       </>
     </FadeIn>
   );

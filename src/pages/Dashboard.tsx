@@ -16,7 +16,7 @@ import { usePlayerData } from '../hooks/usePlayerData';
 import { useCheckId } from '../hooks/useCheckId';
 import { DashboardTable } from '../components/Table/Dashboard/DashboardTable';
 import { columns } from '../components/Table/Dashboard/columns';
-import Header from '../components/Header';
+import Header from '../components/Headers/Header';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
 import FadeIn from '../components/FadeIn';
 import Footer from '../components/Footer';
@@ -34,11 +34,10 @@ const Dashboard = () => {
     teamName,
     previousGameweek,
     previousGameweekScore,
-    currentGameweek,
-    gameweekScore,
     gameweekRank,
     favouriteTeam,
     currentSquad,
+    totalPoints,
   } = useManagerData(fplId);
   const { getPlayerData } = usePlayerData();
 
@@ -68,18 +67,18 @@ const Dashboard = () => {
     }) || [];
 
   return (
-    <FadeIn>
-      <>
-        <Navbar handleSubmit={handleSubmit} />
-        {isLoadingManagerData || isLoadingManagerHistory ? (
-          <div
-            className="flex min-h-screen items-center justify-center"
-            data-cy="loader"
-          >
-            <LoaderIcon className="animate-spin" />
-          </div>
-        ) : (
-          <>
+    <>
+      <Navbar handleSubmit={handleSubmit} />
+      {isLoadingManagerData || isLoadingManagerHistory ? (
+        <div
+          className="flex min-h-screen items-center justify-center"
+          data-cy="loader"
+        >
+          <LoaderIcon className="animate-spin" />
+        </div>
+      ) : (
+        <>
+          <FadeIn>
             <Header headerText={playerName} subText={regionName} />
 
             <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
@@ -107,9 +106,9 @@ const Dashboard = () => {
                 />
                 <DashboardCard
                   data-cy="dashboard-card-current-gameweek"
-                  title={'Gameweek ' + currentGameweek}
+                  title="Total Points"
                   icon={<Tally5 className="h-4 w-4 text-primary" />}
-                  content={gameweekScore}
+                  content={totalPoints}
                 />
               </div>
               <div className="flex flex-grow flex-col overflow-auto">
@@ -117,7 +116,7 @@ const Dashboard = () => {
                   <CardHeader className="px-7">
                     <CardTitle data-cy="table-title">Current Squad</CardTitle>
                   </CardHeader>
-                  <CardContent className="h-[calc(100vh-30rem)] overflow-auto">
+                  <CardContent className="h-[calc(100vh-27rem)] overflow-auto">
                     <DashboardTable
                       columns={columns}
                       data={playerInformation}
@@ -126,11 +125,11 @@ const Dashboard = () => {
                 </Card>
               </div>
             </main>
-          </>
-        )}
-        <Footer />
-      </>
-    </FadeIn>
+          </FadeIn>
+        </>
+      )}
+      <Footer />
+    </>
   );
 };
 export default Dashboard;
