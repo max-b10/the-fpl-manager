@@ -10,17 +10,19 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from '../UI/organisms/Card';
 import { FC } from 'react';
 import { ICurrent } from '../types/manager/managerHistory';
-import { CustomTooltip } from '../UI/molecules/Tooltip/CustomTooltip';
+import { CustomTooltip } from './CustomTooltip';
 import { IEvent } from '../types/general/event';
 
 type SimpleLineChartProps = {
   playerGameweekData: ICurrent[];
   generalGameweekData: IEvent[];
+  title?: string;
 };
 
 const SimpleLineChart: FC<SimpleLineChartProps> = ({
   playerGameweekData,
   generalGameweekData,
+  title,
 }) => {
   const series = [
     {
@@ -48,10 +50,9 @@ const SimpleLineChart: FC<SimpleLineChartProps> = ({
     <div className="w-full">
       <Card className="border border-primary">
         <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle>Total Points</CardTitle>
+          <CardTitle>Total Points: {title}</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="mb-3 text-xl">2,500</div>
           <div className="h-[400px]">
             <ResponsiveContainer>
               <LineChart width={500} height={300}>
@@ -70,7 +71,7 @@ const SimpleLineChart: FC<SimpleLineChartProps> = ({
                     data={s.data}
                     name={s.name}
                     key={s.name}
-                    stroke={s.name === 'Manager' ? '#22C55E' : 'blue'}
+                    stroke={s.name === 'Manager' ? '#22C55E' : '#A3A8B1'}
                   />
                 ))}
               </LineChart>

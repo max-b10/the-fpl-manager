@@ -25,8 +25,12 @@ import { useGeneralData } from '../hooks/useGeneralData';
 const ManagerHistory = () => {
   const fplIdString = useSelector((state: RootState) => state.id.value);
   const fplId = Number(fplIdString);
-  const { totalRankMean, isLoadingManagerData, isLoadingManagerHistory } =
-    useManagerData(fplId);
+  const {
+    totalRankMean,
+    totalPoints,
+    isLoadingManagerData,
+    isLoadingManagerHistory,
+  } = useManagerData(fplId);
   const { pastSeasonsData, gameWeekHistoryData } = useManagerHistoryData(fplId);
   const { generalGameweekData } = useGeneralData();
   const handleSubmit = useNavigationWithId();
@@ -74,6 +78,7 @@ const ManagerHistory = () => {
 
               <main className="flex flex-1 items-center justify-center p-4 md:p-8">
                 <SimpleLineChart
+                  title={totalPoints?.toString() || '0'}
                   playerGameweekData={gameWeekHistoryData || []}
                   generalGameweekData={generalGameweekData || []}
                 ></SimpleLineChart>

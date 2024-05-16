@@ -89,6 +89,7 @@ export const useManagerData = (fplId: number) => {
   const managerSeasonsPlayed = managerHistory?.past?.length
     ? Number(managerHistory.past.length) + 1
     : 1;
+  const totalPoints = managerData?.summary_overall_points;
   return {
     playerName,
     teamName,
@@ -103,6 +104,7 @@ export const useManagerData = (fplId: number) => {
     previousGameweekScore,
     gameweekScore,
     gameweekRank,
+    totalPoints,
     totalPointsMean,
     totalRankMean,
     favouriteTeam,
