@@ -60,14 +60,14 @@ const ManagerComparison = () => {
               subText="Pick a league and compare with players"
             />
 
-            <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-              <div className="grid items-stretch gap-4 md:gap-8 lg:grid-cols-3">
-                <Card className="border-primary lg:col-span-2">
+            <main className="flex min-h-screen flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
+              <div className="grid h-full items-stretch gap-4 md:gap-8 lg:grid-cols-3">
+                <Card className="flex min-h-[70vh] flex-grow flex-col border-primary lg:col-span-2">
                   <CardHeader className="px-7">
                     <CardTitle>Classic Leagues</CardTitle>
                     <CardDescription>Select a league</CardDescription>
                   </CardHeader>
-                  <CardContent className="max-h-96 overflow-auto">
+                  <CardContent className="max-h-[50vh] overflow-auto">
                     <LeaguesTable
                       columns={leagueColumns}
                       data={(managerClassicLeagues || []).map((league) => ({
@@ -79,7 +79,7 @@ const ManagerComparison = () => {
                     />
                   </CardContent>
                 </Card>
-                <Card className="border-primary lg:col-span-1">
+                <Card className="min-h-[70vh]flex-grow flex flex-col border-primary lg:col-span-1">
                   {selectedLeagueId ? (
                     <>
                       <CardHeader>
@@ -88,7 +88,7 @@ const ManagerComparison = () => {
                           Select a player to compare
                         </CardDescription>
                       </CardHeader>
-                      <CardContent className="max-h-96 overflow-auto">
+                      <CardContent className="max-h-[50vh] overflow-auto">
                         <MembersTable
                           columns={memberColumns}
                           data={(leagueMembers || []).map((member) => ({

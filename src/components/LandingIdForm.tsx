@@ -56,6 +56,12 @@ const LandingIdForm = ({ onSubmit }: IdFormProps) => {
             <SquareArrowOutUpRight className="ml-1 h-3 w-3" />
           </span>
         </a>
+        <div className="flex">
+          <span className="mr-1 text-sm text-muted-foreground">
+            Or use mine:
+          </span>
+          <span className="text-sm text-primary">115660</span>
+        </div>
       </CardHeader>
       <Form {...form}>
         <form onSubmit={handleSubmit} className="mr-5 gap-x-4">

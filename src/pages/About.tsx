@@ -13,7 +13,7 @@ const About = () => {
       <div className="flex min-h-screen flex-col">
         <Navbar showIdForm={false} handleSubmit={handleSubmit} />
         <FadeIn>
-          <main className="mt-2 flex flex-grow flex-col items-center justify-center overflow-auto px-4">
+          <main className="mt-6 flex flex-grow flex-col items-center justify-center overflow-auto px-4">
             <div className="max-w-2/3 grid-auto-rows-1fr mx-auto grid w-4/5 flex-grow grid-cols-1 gap-4 sm:max-w-screen-lg sm:grid-cols-3">
               {stack.map((tech, index) => {
                 const Icon = tech.icon;
