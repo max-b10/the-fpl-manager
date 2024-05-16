@@ -18,6 +18,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { IFormData } from '../types/FormData';
 import { motion } from 'framer-motion';
+import { SquareArrowOutUpRight } from 'lucide-react';
 
 interface IdFormProps {
   onSubmit: (data: IFormData) => void;
@@ -42,9 +43,22 @@ const LandingIdForm = ({ onSubmit }: IdFormProps) => {
           Enter your Fantasy Premier League id to analyse your manager history
           and more!
         </CardDescription>
+        <a
+          href="https://fpl.team/find-id/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex cursor-pointer items-center text-sm text-blue-500 "
+        >
+          <span className="cursor-pointer text-sm text-blue-500 underline ">
+            How do I find my id?{' '}
+          </span>
+          <span>
+            <SquareArrowOutUpRight className="ml-1 h-3 w-3" />
+          </span>
+        </a>
       </CardHeader>
       <Form {...form}>
-        <form onSubmit={handleSubmit} className="mr-5 mt-1 gap-x-4">
+        <form onSubmit={handleSubmit} className="mr-5 gap-x-4">
           <CardContent className="grid gap-4">
             <FormField
               control={form.control}

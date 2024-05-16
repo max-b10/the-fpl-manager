@@ -37,23 +37,21 @@ const ManagerHistory = () => {
 
   return (
     <>
-      <div className="flex min-h-screen flex-col">
-        <Navbar handleSubmit={handleSubmit} />
-        <FadeIn>
-          {isLoadingManagerData || isLoadingManagerHistory ? (
-            <div className="flex min-h-screen items-center justify-center">
-              <LoaderIcon className="animate-spin" />
-            </div>
-          ) : (
+      <Navbar handleSubmit={handleSubmit} />
+      <div className="min-h-screen flex-grow overflow-auto">
+        {isLoadingManagerData || isLoadingManagerHistory ? (
+          <div className="flex min-h-screen items-center justify-center">
+            <LoaderIcon className="animate-spin" />
+          </div>
+        ) : (
+          <FadeIn>
             <Tabs defaultValue="current" className="w-full">
-              <div>
-                <TabsList className="ml-6 mt-3 bg-card p-2">
-                  <TabsTrigger className="mr-2" value="current">
-                    Current
-                  </TabsTrigger>
-                  <TabsTrigger value="past">Past</TabsTrigger>
-                </TabsList>
-              </div>
+              <TabsList className="ml-6 mt-3 bg-card p-2">
+                <TabsTrigger className="mr-2" value="current">
+                  Current
+                </TabsTrigger>
+                <TabsTrigger value="past">Past</TabsTrigger>
+              </TabsList>
               <main className="flex flex-1 flex-col items-center justify-center p-4 md:p-8">
                 <div className="w-full">
                   <TabsContent value="current">
@@ -97,10 +95,10 @@ const ManagerHistory = () => {
                 </div>
               </main>
             </Tabs>
-          )}
-          <Footer />
-        </FadeIn>
+          </FadeIn>
+        )}
       </div>
+      <Footer />
     </>
   );
 };
