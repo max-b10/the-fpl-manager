@@ -1,16 +1,16 @@
-import { Button } from '../UI/molecules/Button/Button';
-import { Input } from '../UI/molecules/Input/Input';
+import { Button } from '../../UI/molecules/Button/Button';
+import { Input } from '../../UI/molecules/Input/Input';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-} from '../UI/organisms/Form/Form';
+} from '../../UI/organisms/Form/Form';
 import { useForm } from 'react-hook-form';
-import { IFormData } from '../types/FormData';
+import { IFormData } from '../../types/FormData';
 import { useSelector } from 'react-redux';
-import { RootState } from '../state/store';
-import { motion } from 'framer-motion';
+import { RootState } from '../../state/store';
+import ButtonClick from '../Animations/ButtonClick';
 
 interface IdFormProps {
   onSubmit: (data: IFormData) => void;
@@ -58,15 +58,11 @@ const IdForm = ({ onSubmit }: IdFormProps) => {
             </FormItem>
           )}
         />
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-        >
+        <ButtonClick>
           <Button className="ml-2 md:w-24" type="submit">
             Change Id
           </Button>
-        </motion.div>
+        </ButtonClick>
       </form>
     </Form>
   );

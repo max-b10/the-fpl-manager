@@ -3,9 +3,8 @@ import { Sheet, SheetContent, SheetTrigger } from '../../UI/organisms/Sheet';
 import { Button } from '../../UI/molecules/Button/Button';
 import { Menu } from 'lucide-react';
 import { IFormData } from '../../types/FormData';
-import IdForm from '../IdForm';
+import IdForm from '../Forms/IdForm';
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 interface NavbarProps {
   handleSubmit: (data: IFormData) => void;
   showIdForm?: boolean;
@@ -38,10 +37,6 @@ const Navbar: React.FC<NavbarProps> = ({ handleSubmit, showIdForm = true }) => {
   const isLandingPage = location.pathname === '/';
   const [isOpen, setIsOpen] = useState(false);
 
-  const sidebarVariants = {
-    open: { x: 0 },
-    closed: { y: '-100%' },
-  };
   return (
     <>
       <div data-cy="navbar" className="flex w-full flex-col justify-between">
@@ -79,30 +74,25 @@ const Navbar: React.FC<NavbarProps> = ({ handleSubmit, showIdForm = true }) => {
                     <span className="sr-only">Toggle navigation menu</span>
                   </Button>
                 </SheetTrigger>
-                <motion.div
-                  initial="closed"
-                  animate={isOpen ? 'open' : 'closed'}
-                  variants={sidebarVariants}
-                >
-                  <SheetContent side="left">
-                    <nav className="grid gap-6 text-lg font-medium">
-                      {navigation.map((item) => (
-                        <Link
-                          key={item.name}
-                          to={item.href}
-                          className={
-                            item.current
-                              ? 'rounded-md px-3 py-2 text-sm font-medium text-foreground'
-                              : 'rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground'
-                          }
-                          aria-current={item.current ? 'page' : undefined}
-                        >
-                          {item.name}
-                        </Link>
-                      ))}
-                    </nav>
-                  </SheetContent>
-                </motion.div>
+
+                <SheetContent side="left">
+                  <nav className="grid gap-6 text-lg font-medium">
+                    {navigation.map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.href}
+                        className={
+                          item.current
+                            ? 'rounded-md px-3 py-2 text-sm font-medium text-foreground'
+                            : 'rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground'
+                        }
+                        aria-current={item.current ? 'page' : undefined}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </nav>
+                </SheetContent>
               </Sheet>
             </div>
           </div>

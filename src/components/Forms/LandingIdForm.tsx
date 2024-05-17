@@ -1,5 +1,5 @@
-import { Button } from '../UI/molecules/Button/Button';
-import { Input } from '../UI/molecules/Input/Input';
+import { Button } from '../../UI/molecules/Button/Button';
+import { Input } from '../../UI/molecules/Input/Input';
 import {
   Card,
   CardContent,
@@ -7,18 +7,18 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '../UI/organisms/Card';
+} from '../../UI/organisms/Card';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '../UI/organisms/Form/Form';
+} from '../../UI/organisms/Form/Form';
 import { useForm } from 'react-hook-form';
-import { IFormData } from '../types/FormData';
-import { motion } from 'framer-motion';
+import { IFormData } from '../../types/FormData';
 import { SquareArrowOutUpRight } from 'lucide-react';
+import ButtonClick from '../Animations/ButtonClick';
 
 interface IdFormProps {
   onSubmit: (data: IFormData) => void;
@@ -98,16 +98,11 @@ const LandingIdForm = ({ onSubmit }: IdFormProps) => {
             />
           </CardContent>
           <CardFooter>
-            <motion.div
-              className="w-full"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-            >
+            <ButtonClick>
               <Button data-cy="submit-button" className="w-full" type="submit">
                 Enter
               </Button>
-            </motion.div>
+            </ButtonClick>
           </CardFooter>
         </form>
       </Form>

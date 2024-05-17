@@ -8,28 +8,28 @@ import { IPick } from '../../../types/squad/squadPicks';
 import { CardContent, CardHeader, CardTitle } from '../../../UI/organisms/Card';
 import { Avatar, AvatarImage } from '../../../UI/molecules/Avatar/Avatar';
 import { IPlayerData } from '../../../types/player/playerData';
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 
-const dropIn = {
-  hidden: {
-    y: '-100vh',
-    opacity: 0,
-  },
-  visible: {
-    y: '0',
-    opacity: 1,
-    transition: {
-      duration: 10,
-      type: 'spring',
-      damping: 25,
-      stiffness: 500,
-    },
-  },
-  exit: {
-    y: '100vh',
-    opacity: 0,
-  },
-};
+// const dropIn = {
+//   hidden: {
+//     y: '-100vh',
+//     opacity: 0,
+//   },
+//   visible: {
+//     y: '0',
+//     opacity: 1,
+//     transition: {
+//       duration: 10,
+//       type: 'spring',
+//       damping: 25,
+//       stiffness: 500,
+//     },
+//   },
+//   exit: {
+//     y: '100vh',
+//     opacity: 0,
+//   },
+// };
 interface TableRowModalProps {
   player: IPick;
   playerData: IPlayerData;
@@ -63,52 +63,44 @@ const TableRowModal: React.FC<TableRowModalProps> = ({
       </DialogTrigger>
 
       <DialogContent className="max-w-[90vw] p-4 sm:max-w-[425px]">
-        <motion.div
-          onClick={(e) => e.stopPropagation()}
-          variants={dropIn}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
-          <div className="flex justify-center">
-            <Avatar className="h-32 w-32 border border-secondary-foreground sm:flex">
-              <AvatarImage src={playerData.image} alt="Avatar" />
-            </Avatar>
-          </div>
-          <CardHeader className="items-centerspace-y-0 flex justify-center pb-2">
-            <CardTitle className=" text-center text-2xl font-bold">
-              {playerData.name}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-col items-center gap-4 py-4">
-              <div className="flex w-full justify-between">
-                <span className="text-xs text-muted-foreground">Club:</span>
-                <span className="text-lg font-medium">{playerData.club}</span>
-              </div>
-              <div className="flex w-full justify-between">
-                <span className="text-xs text-muted-foreground">Price:</span>
-                <span className="text-lg font-medium">{playerData.price}</span>
-              </div>
-              <div className="flex w-full justify-between">
-                <span className="text-xs text-muted-foreground">
-                  Ownership (%):
-                </span>
-                <span className="text-lg font-medium">
-                  {playerData.ownership}
-                </span>
-              </div>
-              <div className="flex w-full justify-between">
-                <span className="text-xs text-muted-foreground">
-                  Total Points:
-                </span>
-                <span className="text-lg font-medium">
-                  {playerData.totalPoints}
-                </span>
-              </div>
+        <div className="flex justify-center">
+          <Avatar className="h-32 w-32 border border-secondary-foreground sm:flex">
+            <AvatarImage src={playerData.image} alt="Avatar" />
+          </Avatar>
+        </div>
+        <CardHeader className="items-centerspace-y-0 flex justify-center pb-2">
+          <CardTitle className=" text-center text-2xl font-bold">
+            {playerData.name}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col items-center gap-4 py-4">
+            <div className="flex w-full justify-between">
+              <span className="text-xs text-muted-foreground">Club:</span>
+              <span className="text-lg font-medium">{playerData.club}</span>
             </div>
-          </CardContent>
-        </motion.div>
+            <div className="flex w-full justify-between">
+              <span className="text-xs text-muted-foreground">Price:</span>
+              <span className="text-lg font-medium">{playerData.price}</span>
+            </div>
+            <div className="flex w-full justify-between">
+              <span className="text-xs text-muted-foreground">
+                Ownership (%):
+              </span>
+              <span className="text-lg font-medium">
+                {playerData.ownership}
+              </span>
+            </div>
+            <div className="flex w-full justify-between">
+              <span className="text-xs text-muted-foreground">
+                Total Points:
+              </span>
+              <span className="text-lg font-medium">
+                {playerData.totalPoints}
+              </span>
+            </div>
+          </div>
+        </CardContent>
       </DialogContent>
     </Dialog>
   );

@@ -8,6 +8,7 @@ import {
 import useEmblaCarousel from 'embla-carousel-react';
 import CarouselCard from '../Cards/CarouselCard';
 import { History } from 'lucide-react';
+import ButtonClick from '../Animations/ButtonClick';
 
 type HistoryCarouselProps = {
   slides: {
@@ -55,27 +56,32 @@ const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
 
           <div className="mt-7 grid grid-cols-[auto,1fr] gap-4">
             <div className="grid grid-cols-2 items-center justify-between gap-3">
-              <PrevButton
-                onClick={onPrevButtonClick}
-                disabled={prevBtnDisabled}
-              />
-              <NextButton
-                onClick={onNextButtonClick}
-                disabled={nextBtnDisabled}
-              />
+              <ButtonClick>
+                <PrevButton
+                  onClick={onPrevButtonClick}
+                  disabled={prevBtnDisabled}
+                />
+              </ButtonClick>
+              <ButtonClick>
+                <NextButton
+                  onClick={onNextButtonClick}
+                  disabled={nextBtnDisabled}
+                />
+              </ButtonClick>
             </div>
 
             <div className="flex flex-wrap items-center justify-end">
               {scrollSnaps.map((_, index) => (
-                <DotButton
-                  key={index}
-                  onClick={() => onDotButtonClick(index)}
-                  className={` mx-1 inline-flex h-3 w-3 items-center justify-center rounded-full ${
-                    index === selectedIndex
-                      ? 'ring-2 ring-primary'
-                      : 'ring-2 ring-muted'
-                  }`}
-                />
+                <ButtonClick key={index}>
+                  <DotButton
+                    onClick={() => onDotButtonClick(index)}
+                    className={` mx-1 inline-flex h-3 w-3 items-center justify-center rounded-full ${
+                      index === selectedIndex
+                        ? 'ring-2 ring-primary'
+                        : 'ring-2 ring-muted'
+                    }`}
+                  />
+                </ButtonClick>
               ))}
             </div>
           </div>
