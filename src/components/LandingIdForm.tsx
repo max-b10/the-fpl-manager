@@ -58,7 +58,7 @@ const LandingIdForm = ({ onSubmit }: IdFormProps) => {
         </a>
         <div className="flex">
           <span className="mr-1 text-sm text-muted-foreground">
-            Or use mine:
+            Or try mine:
           </span>
           <span className="text-sm text-primary">115660</span>
         </div>

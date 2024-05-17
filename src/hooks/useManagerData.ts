@@ -90,6 +90,10 @@ export const useManagerData = (fplId: number) => {
     ? Number(managerHistory.past.length) + 1
     : 1;
   const totalPoints = managerData?.summary_overall_points.toLocaleString();
+  const bestFinish = managerHistory?.past?.reduce((prev, current) => {
+    return prev.rank < current.rank ? prev : current;
+  }).rank;
+
   return {
     playerName,
     teamName,
@@ -113,5 +117,6 @@ export const useManagerData = (fplId: number) => {
     currentSquad,
     managerClassicLeagues,
     managerSeasonsPlayed,
+    bestFinish,
   };
 };
