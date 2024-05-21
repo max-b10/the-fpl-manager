@@ -33,6 +33,9 @@ const LandingIdForm = ({ onSubmit }: IdFormProps) => {
 
   const handleSubmit = form.handleSubmit(onSubmit);
 
+  const handleSpanClick = () => {
+    form.setValue('id', '115660');
+  };
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
@@ -60,7 +63,12 @@ const LandingIdForm = ({ onSubmit }: IdFormProps) => {
           <span className="mr-1 text-sm text-muted-foreground">
             Or try mine:
           </span>
-          <span className="text-sm text-primary">115660</span>
+          <span
+            className="cursor-pointer text-sm text-primary"
+            onClick={handleSpanClick}
+          >
+            115660
+          </span>
         </div>
       </CardHeader>
       <Form {...form}>
