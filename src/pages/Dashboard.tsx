@@ -18,7 +18,7 @@ import { DashboardTable } from '../components/Table/Dashboard/DashboardTable';
 import { columns } from '../components/Table/Dashboard/columns';
 import Header from '../components/Headers/Header';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
-import FadeIn from '../components/FadeIn';
+import FadeIn from '../components/Animations/FadeIn';
 import Footer from '../components/Footer';
 
 const Dashboard = () => {

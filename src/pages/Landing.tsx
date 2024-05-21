@@ -1,4 +1,4 @@
-import FadeIn from '../components/FadeIn';
+import FadeIn from '../components/Animations/FadeIn';
 import Footer from '../components/Footer';
 import LandingIdForm from '../components/Forms/LandingIdForm';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';

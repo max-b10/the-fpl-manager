@@ -22,7 +22,7 @@ import { leagueColumns } from '../components/Table/ManagerCompare/LeaguesTable/l
 import { memberColumns } from '../components/Table/ManagerCompare/MembersTable/memberColumns';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
 import Header from '../components/Headers/Header';
-import FadeIn from '../components/FadeIn';
+import FadeIn from '../components/Animations/FadeIn';
 import Footer from '../components/Footer';
 
 const ManagerComparison = () => {

@@ -14,7 +14,7 @@ import {
 } from '../../../../UI/organisms/Table';
 import { ITeamEntry } from '../../../../types/league/leagueData';
 import TableRowMember from './TableRowMember';
-import FadeIn from '../../../FadeIn';
+import FadeIn from '../../../Animations/FadeIn';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

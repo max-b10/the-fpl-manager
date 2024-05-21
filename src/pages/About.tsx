@@ -2,7 +2,7 @@ import { stack } from '../constants/stack';
 import TechStackCard from '../components/Cards/TechStackCard';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
 import Navbar from '../components/Navbar/Navbar';
-import FadeIn from '../components/FadeIn';
+import FadeIn from '../components/Animations/FadeIn';
 import Footer from '../components/Footer';
 
 const About = () => {

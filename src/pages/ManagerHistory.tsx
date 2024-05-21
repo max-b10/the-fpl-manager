@@ -11,7 +11,7 @@ import {
   AlertDescription,
   AlertTitle,
 } from '../UI/molecules/Alert/Alert';
-import FadeIn from '../components/FadeIn';
+import FadeIn from '../components/Animations/FadeIn';
 import Footer from '../components/Footer';
 import HistoryCarousel from '../components/HistoryCarousel/HistoryCarousel';
 import SimpleLineChart from '../components/SimpleLineChart';
