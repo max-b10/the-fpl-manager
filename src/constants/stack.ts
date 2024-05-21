@@ -8,6 +8,7 @@ import {
   SiShadcnui,
   SiFramer,
   SiExpress,
+  SiVitest,
 } from 'react-icons/si';
 import { FaReact } from 'react-icons/fa';
 import { RiTailwindCssFill } from 'react-icons/ri';
@@ -68,7 +69,7 @@ export const stack = [
     icon: SiSwr,
     description: 'A React Hooks library for remote data fetching',
     comments:
-      'No need to worry about useEffect re-renders when you have useSWR.',
+      'This app has no POST, PUT or DELETE requests, so I chose SWR over react-query.',
   },
   {
     title: 'Cypress',
@@ -92,5 +93,12 @@ export const stack = [
     comments:
       'I wanted a server to avoid CORS errors when making requests to external APIs.',
   },
+  {
+    title: 'Vitest',
+    icon: SiVitest,
+    description: "A Vite-native testing framework. It's fast!",
+    comments:
+      'Due to compatibility issues between Jest and Vite, I opted to use Vitest for unit testing.',
+  },
 ];
-export const STACK_LENGTH = 9;
+export const STACK_LENGTH = 12;

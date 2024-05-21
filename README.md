@@ -11,8 +11,7 @@ The project consists of a React frontend and a Node.js/Express CORS proxy.
 The src folder is a React application built with Vite and TypeScript. It uses a variety of libraries and tools:
 
 - State management: Redux Toolkit with redux-persist for state persistence
-- HTTP requests: axios
-- Form handling: react-hook-form with @hookform/resolvers and Zod for validation
+- HTTP requests: Axios
 - Routing: react-router-dom
 - UI libraries: Shadcn/ui, Radix UI and lucide-react and react-icons for icons
 - Table management: @tanstack/react-table
@@ -24,12 +23,10 @@ The src folder is a React application built with Vite and TypeScript. It uses a 
 
 In the root of the project, you can run:
 
-- `npm run dev`: Runs the app in the development mode.
-- `npm run build`: Builds the app for production.
-- `npm run test`: Launches the Vitest test runner.
-  `npm run cy:open`: Opens the Cypress Test Runner.
-- `npm run lint`: Lints the project files.
-- `npm run preview`: Runs a preview of the built app.
+- `npm run dev`: Runs the app in the development mode
+- `npm run test`: Launches the Vitest test runner
+- `npm run cy:open`: Opens the Cypress Test Runner
+- `npm run lint`: Lints the project files
 
 ## CORS Proxy
 
@@ -37,6 +34,6 @@ The api folder holds a server which is a Node.js application built with Express 
 
 In the api directory, you can run:
 
-- `npm start`: Runs the app in the development mode with nodemon for automatic server restarts.
+- `npm start`: Runs the app in the development mode with nodemon for automatic server restarts
 
 Please refer to the respective package.json files for a full list of scripts and dependencies.
