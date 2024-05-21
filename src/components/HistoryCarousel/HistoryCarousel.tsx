@@ -1,14 +1,12 @@
 import React from 'react';
-import { DotButton, useDotButton } from './CarouselDotButtons';
-import {
-  PrevButton,
-  NextButton,
-  usePrevNextButtons,
-} from './CarouselArrowButtons';
+import { DotButton } from './CarouselDotButtons';
+import { PrevButton, NextButton } from './CarouselArrowButtons';
 import useEmblaCarousel from 'embla-carousel-react';
 import CarouselCard from '../Cards/CarouselCard';
 import { History } from 'lucide-react';
 import ButtonClick from '../Animations/ButtonClick';
+import { usePrevNextButtons } from './usePrevNextButtons';
+import { useDotButton } from './useDotButton';
 
 type HistoryCarouselProps = {
   slides: {
