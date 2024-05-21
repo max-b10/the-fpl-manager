@@ -14,11 +14,11 @@ The src folder is a React application built with Vite and TypeScript. It uses a 
 - HTTP requests: axios
 - Form handling: react-hook-form with @hookform/resolvers and Zod for validation
 - Routing: react-router-dom
-- UI libraries: Shadcn/ui, Radix UI, Embla Carousel for React, and lucide-react for icons
+- UI libraries: Shadcn/ui, Radix UI and lucide-react and react-icons for icons
 - Table management: @tanstack/react-table
 - CSS-in-JS: Tailwind CSS with tailwind-merge and tailwindcss-animate
 - Data fetching: SWR
-- Testing: Cypress for e2e testing
+- Testing: Cypress for e2e testing, Vitest and React Testing Library for unit testing
 - Linting: ESLint with @typescript-eslint/eslint-plugin and eslint-plugin-react-hooks
 - Formatting: Prettier with prettier-plugin-tailwindcss
 
@@ -26,7 +26,8 @@ In the root of the project, you can run:
 
 - `npm run dev`: Runs the app in the development mode.
 - `npm run build`: Builds the app for production.
-- `npm run test`: Launches the test runner.
+- `npm run test`: Launches the Vitest test runner.
+  `npm run cy:open`: Opens the Cypress Test Runner.
 - `npm run lint`: Lints the project files.
 - `npm run preview`: Runs a preview of the built app.
 
