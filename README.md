@@ -4,7 +4,7 @@ The FPL Manager is a web application that gives Fantasy Premier League managers 
 
 The project consists of a React frontend and a Node.js/Express CORS proxy.
 
-![Landing Image](./public/landing.png)
+![Landing Image](./public/landing-2.png)
 
 ## Frontend
 
