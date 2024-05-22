@@ -6,7 +6,7 @@ describe('Button', () => {
   it('renders the button with the correct text', () => {
     render(<Button>Test Button</Button>);
     const buttonElement = screen.getByText(/test button/i);
-    expect(buttonElement).to.not.be.null;
+    expect(buttonElement).toBeInTheDocument();
   });
   it('calls onClick prop when clicked', () => {
     let clicked = false;

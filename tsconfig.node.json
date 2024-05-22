@@ -6,7 +6,7 @@
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "types": ["@testing-library/jest-dom"]
+    "types": ["@testing-library/jest-dom/vitest"]
   },
   "include": ["vite.config.ts"]
 }
