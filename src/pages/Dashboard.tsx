@@ -32,9 +32,8 @@ const Dashboard = () => {
     isLoadingManagerHistory,
     rankDifference,
     teamName,
-    previousGameweek,
-    previousGameweekScore,
-    gameweekRank,
+    previousGameWeek,
+    previousGameWeekScore,
     favouriteTeam,
     currentSquad,
     totalPoints,
@@ -99,10 +98,10 @@ const Dashboard = () => {
                 />
                 <DashboardCard
                   data-cy="dashboard-card-previous-gameweek"
-                  title={'Gameweek ' + previousGameweek}
+                  title={'Gameweek ' + previousGameWeek?.event}
                   icon={<Tally5 className="h-4 w-4 text-primary" />}
-                  content={previousGameweekScore}
-                  footer={gameweekRank}
+                  content={previousGameWeekScore}
+                  footer={`${previousGameWeek?.rank.toLocaleString()} rank`}
                 />
                 <DashboardCard
                   data-cy="dashboard-card-current-gameweek"

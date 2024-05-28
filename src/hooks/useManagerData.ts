@@ -24,34 +24,39 @@ const useManagerHistoryFetch = (fplId: number) =>
 
 const useSquadPicksFetch = (
   fplId: number,
-  previousGameweek: number | undefined
+  previousGameWeek: number | undefined
 ) =>
   useSWR<ISquad>(
-    previousGameweek !== undefined
-      ? `http://localhost:3005/${API_ENDPOINTS.squadPicks}/${fplId}/${previousGameweek}`
+    previousGameWeek !== undefined
+      ? `http://localhost:3005/${API_ENDPOINTS.squadPicks}/${fplId}/${previousGameWeek}`
       : null,
     fetcher
   );
 
-const getPreviousWeekData = (
+const getPreviousGameWeekData = (
   managerHistory: IManagerHistory | undefined,
   currentGameweek: number | undefined
 ) => {
-  if (managerHistory?.current) {
-    const previousWeekIndex =
-      currentGameweek === 38
-        ? managerHistory.current.length - 1
-        : managerHistory.current.length - 2;
-    const previousWeek = managerHistory.current[previousWeekIndex];
-    const previousWeekOverallRank = previousWeek?.overall_rank;
-    const previousGameweekScore = previousWeek?.points
-      ? `${previousWeek.points} pts`
+  if (managerHistory?.current && currentGameweek !== undefined) {
+    const previousGameWeek = managerHistory.current.find(
+      (gameweek) =>
+        gameweek.event === (currentGameweek === 1 ? 1 : currentGameweek - 1)
+    );
+    const previousGameWeekOverallRank = previousGameWeek?.overall_rank;
+    const previousGameWeekScore = previousGameWeek?.points
+      ? `${previousGameWeek.points} pts`
       : undefined;
-    return { previousWeekOverallRank, previousGameweekScore };
+
+    return {
+      previousGameWeek,
+      previousGameWeekOverallRank,
+      previousGameWeekScore,
+    };
   }
   return {
-    previousWeekOverallRank: undefined,
-    previousGameweekScore: undefined,
+    previousGameWeekOverallRank: undefined,
+    previousGameWeekScore: undefined,
+    previousGameWeek: undefined,
   };
 };
 
@@ -75,17 +80,16 @@ export const useManagerData = (fplId: number) => {
   } = managerData || {};
 
   const playerName = `${firstName} ${lastName}`;
-  const { previousWeekOverallRank, previousGameweekScore } =
-    getPreviousWeekData(managerHistory, currentGameweek);
-  const rankDifference = (overallRank ?? 0) - (previousWeekOverallRank ?? 0);
-  const previousGameweek =
-    currentGameweek === 38
-      ? 38
-      : currentGameweek
-        ? currentGameweek - 1
-        : undefined;
+  const {
+    previousGameWeek,
+    previousGameWeekOverallRank,
+    previousGameWeekScore,
+  } = getPreviousGameWeekData(managerHistory, currentGameweek);
+  const rankDifference =
+    (overallRank ?? 0) - (previousGameWeekOverallRank ?? 0);
+
   const { data: squadPicksData, isValidating: isLoadingSquadPicks } =
-    useSquadPicksFetch(fplId, previousGameweek);
+    useSquadPicksFetch(fplId, previousGameWeek?.event);
   const gameweekScore = eventPoints ? `${eventPoints} pts` : undefined;
   const gameweekRank = eventRank
     ? `${eventRank.toLocaleString()} rank`
@@ -121,8 +125,8 @@ export const useManagerData = (fplId: number) => {
     isLoadingSquadPicks,
     rankDifference,
     currentGameweek,
-    previousGameweek,
-    previousGameweekScore,
+    previousGameWeek,
+    previousGameWeekScore,
     gameweekScore,
     gameweekRank,
     totalPoints,
