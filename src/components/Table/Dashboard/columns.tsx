@@ -14,8 +14,8 @@ export const columns: ColumnDef<PlayerData>[] = [
     header: () => <Star />,
   },
   {
-    accessorKey: 'name',
-    header: 'Name',
+    accessorKey: 'Player',
+    header: 'Player',
   },
   {
     accessorKey: 'price',

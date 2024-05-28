@@ -52,7 +52,7 @@ const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
             </div>
           </div>
 
-          <div className="mt-7 grid grid-cols-[auto,1fr] gap-4">
+          <div className="mt-7 flex justify-between gap-4">
             <div className="grid grid-cols-2 items-center justify-between gap-3">
               <ButtonClick>
                 <PrevButton
@@ -68,12 +68,12 @@ const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
               </ButtonClick>
             </div>
 
-            <div className="flex flex-wrap items-center justify-end">
+            <div className="flex items-center justify-end">
               {scrollSnaps.map((_, index) => (
                 <ButtonClick key={index}>
                   <DotButton
                     onClick={() => onDotButtonClick(index)}
-                    className={` mx-1 inline-flex h-3 w-3 items-center justify-center rounded-full ${
+                    className={`mx-1 inline-flex h-3 w-3 items-center justify-center rounded-full ${
                       index === selectedIndex
                         ? 'ring-2 ring-primary'
                         : 'ring-2 ring-muted'

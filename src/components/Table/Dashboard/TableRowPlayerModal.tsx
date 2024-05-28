@@ -6,7 +6,11 @@ import {
 import { TableRow, TableCell } from '../../../UI/organisms/Table';
 import { IPick } from '../../../types/squad/squadPicks';
 import { CardContent, CardHeader, CardTitle } from '../../../UI/organisms/Card';
-import { Avatar, AvatarImage } from '../../../UI/molecules/Avatar/Avatar';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '../../../UI/molecules/Avatar/Avatar';
 import { IPlayerData } from '../../../types/player/playerData';
 // import { motion } from 'framer-motion';
 
@@ -46,6 +50,8 @@ const TableRowModal: React.FC<TableRowModalProps> = ({
           <TableCell>
             <Avatar className="sm:flex">
               <AvatarImage src={playerData.image} alt="Avatar" />
+              {/* <AvatarFallback src='fpl.svg' alt="Avatar"/> */}
+              <AvatarFallback></AvatarFallback>
             </Avatar>
           </TableCell>
           <TableCell>

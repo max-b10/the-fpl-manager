@@ -3,7 +3,7 @@ import { IPlayer } from '../types/general/player';
 import teamMapping from '../constants/teamMapping';
 
 export const usePlayerData = () => {
-  const { generalData } = useGeneralData();
+  const { generalData, isLoadingGeneralData } = useGeneralData();
 
   const getPlayer = (element: number) => {
     return generalData?.elements.find((el: IPlayer) => el.id === element);
@@ -39,5 +39,6 @@ export const usePlayerData = () => {
 
   return {
     getPlayerData,
+    isLoadingPlayerData: isLoadingGeneralData,
   };
 };

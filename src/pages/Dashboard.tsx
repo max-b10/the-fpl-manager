@@ -7,6 +7,7 @@ import {
   ArrowUp,
   LoaderIcon,
   ShieldHalf,
+  Tally4,
   Tally5,
 } from 'lucide-react';
 import DashboardCard from '../components/Cards/DashboardCard';
@@ -38,14 +39,14 @@ const Dashboard = () => {
     currentSquad,
     totalPoints,
   } = useManagerData(fplId);
-  const { getPlayerData } = usePlayerData();
+  const { getPlayerData, isLoadingPlayerData } = usePlayerData();
 
   const rankDifferenceElement =
     rankDifference > 0 ? (
       <div className="flex text-red">
         <ArrowDown className="mr-0.5 h-4 w-4" />
         {Math.abs(rankDifference).toLocaleString()}
-        <p className="ml-1 text-xs text-muted-foreground">from last week</p>
+        {/* <p className="ml-1 text-xs text-muted-foreground">from last week</p> */}
       </div>
     ) : (
       <div className="mr-0.5 flex text-primary">
@@ -99,7 +100,7 @@ const Dashboard = () => {
                 <DashboardCard
                   data-cy="dashboard-card-previous-gameweek"
                   title={'Gameweek ' + previousGameWeek?.event}
-                  icon={<Tally5 className="h-4 w-4 text-primary" />}
+                  icon={<Tally4 className="h-4 w-4 text-primary" />}
                   content={previousGameWeekScore}
                   footer={`${previousGameWeek?.rank.toLocaleString()} rank`}
                 />
@@ -107,7 +108,7 @@ const Dashboard = () => {
                   data-cy="dashboard-card-current-gameweek"
                   title="Total Points"
                   icon={<Tally5 className="h-4 w-4 text-primary" />}
-                  content={totalPoints}
+                  content={`${totalPoints} pts`}
                 />
               </div>
               <div className="flex flex-grow flex-col overflow-auto">
@@ -116,10 +117,19 @@ const Dashboard = () => {
                     <CardTitle data-cy="table-title">Current Squad</CardTitle>
                   </CardHeader>
                   <CardContent className="h-[calc(100vh-27rem)] overflow-auto">
-                    <DashboardTable
-                      columns={columns}
-                      data={playerInformation}
-                    ></DashboardTable>
+                    {isLoadingPlayerData ? (
+                      <div
+                        className="flex min-h-screen items-center justify-center"
+                        data-cy="loader"
+                      >
+                        <LoaderIcon className="animate-spin" />
+                      </div>
+                    ) : (
+                      <DashboardTable
+                        columns={columns}
+                        data={playerInformation}
+                      ></DashboardTable>
+                    )}
                   </CardContent>
                 </Card>
               </div>
