@@ -75,7 +75,7 @@ const ManagerHistory = () => {
                         }
                       />
                       {pastSeasonsData && pastSeasonsData.length > 0 ? (
-                        <div className="flex  justify-center">
+                        <div className="flex justify-center">
                           <HistoryCarousel slides={pastSeasonsData || []} />
                         </div>
                       ) : (

@@ -47,7 +47,7 @@ export const stack = [
     title: 'shadcn/ui',
     icon: SiShadcnui,
     description:
-      'An accessible and customizable collection of components to copy and paste into your apps',
+      'An accessible and customisable collection of components to copy and paste into your apps',
     comments:
       'I had to see what all the fuss what about - I was not disappointed!',
   },
