@@ -31,14 +31,14 @@ const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
   } = usePrevNextButtons(emblaApi);
 
   return (
-    <section className="mx-auto max-w-[18rem] sm:max-w-[22rem] md:max-w-[26rem] lg:max-w-[30rem] xl:max-w-[36rem]">
+    <div className="mx-auto max-w-[18rem] sm:max-w-[22rem] md:max-w-[26rem] lg:max-w-[30rem] xl:max-w-[36rem]">
       {slides.length > 1 ? (
         <>
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {slides.map((slide, index) => (
                 <div
-                  className="mx-8 w-full min-w-0 flex-none pl-4 sm:pl-0"
+                  className="mx-12 w-full min-w-0 flex-none pl-4 sm:pl-0 md:w-1/2"
                   key={index}
                 >
                   <CarouselCard
@@ -94,7 +94,7 @@ const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
           />
         </div>
       )}
-    </section>
+    </div>
   );
 };
 

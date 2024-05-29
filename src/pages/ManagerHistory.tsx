@@ -18,6 +18,8 @@ import SimpleLineChart from '../components/SimpleLineChart';
 import { useGeneralData } from '../hooks/useGeneralData';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../UI/organisms/Tabs';
 import TabHeader from '../components/Headers/TabHeader';
+import { Card, CardContent } from '../UI/organisms/Card';
+import HistoryCard from '../components/Cards/HistoryCard';
 
 const ManagerHistory = () => {
   const fplIdString = useSelector((state: RootState) => state.id.value);
@@ -32,7 +34,6 @@ const ManagerHistory = () => {
   const { pastSeasonsData, gameWeekHistoryData } = useManagerHistoryData(fplId);
   const { generalGameweekData } = useGeneralData();
   const handleSubmit = useNavigationWithId();
-
   useCheckId();
 
   return (
@@ -76,7 +77,24 @@ const ManagerHistory = () => {
                       />
                       {pastSeasonsData && pastSeasonsData.length > 0 ? (
                         <div className="flex justify-center">
-                          <HistoryCarousel slides={pastSeasonsData || []} />
+                          <Card className="flex-grow border-primary py-7">
+                            <CardContent>
+                              <div className="flex h-[400px] justify-between">
+                                <HistoryCard
+                                  headerText={totalRankMean}
+                                  subText={
+                                    pastSeasonsData &&
+                                    pastSeasonsData.length > 0
+                                      ? 'Mean overall rank'
+                                      : 'Current overall rank'
+                                  }
+                                />
+                                <HistoryCarousel
+                                  slides={pastSeasonsData || []}
+                                />
+                              </div>
+                            </CardContent>
+                          </Card>
                         </div>
                       ) : (
                         <div className="flex justify-center  text-primary">
