@@ -23,9 +23,43 @@ export const useManagerHistoryData = (fplId: number) => {
     rank: gameWeek.rank,
     overall_rank: gameWeek.overall_rank,
   }));
+
+  const bestRank = managerHistory?.past
+    ? Math.min(
+        ...managerHistory.past.map((season) => season.rank)
+      ).toLocaleString()
+    : 'N/A';
+
+  const worstRank = managerHistory?.past
+    ? Math.max(
+        ...managerHistory.past.map((season) => season.rank)
+      ).toLocaleString()
+    : 'N/A';
+
+  const seasonsPlayed = managerHistory?.past
+    ? managerHistory.past.length.toLocaleString()
+    : 'N/A';
+
+  const lowestPoints = managerHistory?.past
+    ? Math.min(
+        ...managerHistory.past.map((season) => season.total_points)
+      ).toLocaleString()
+    : 'N/A';
+
+  const highestPoints = managerHistory?.past
+    ? Math.max(
+        ...managerHistory.past.map((season) => season.total_points)
+      ).toLocaleString()
+    : 'N/A';
+
   return {
     pastSeasonsData,
     gameWeekHistoryData,
     isLoadingManagerHistory,
+    bestRank,
+    worstRank,
+    seasonsPlayed,
+    lowestPoints,
+    highestPoints,
   };
 };

@@ -17,7 +17,7 @@ type HistoryCarouselProps = {
 };
 
 const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
-  const options = { loop: true };
+  const options = { loop: false };
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
@@ -31,19 +31,19 @@ const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
   } = usePrevNextButtons(emblaApi);
 
   return (
-    <div className="mx-auto max-w-[18rem] sm:max-w-[22rem] md:max-w-[26rem] lg:max-w-[30rem] xl:max-w-[36rem]">
+    <div className="mx-auto sm:max-w-[26rem] md:max-w-[30rem] lg:max-w-[36rem] xl:max-w-[40rem]">
       {slides.length > 1 ? (
         <>
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {slides.map((slide, index) => (
                 <div
-                  className="mx-12 w-full min-w-0 flex-none pl-4 sm:pl-0 md:w-1/2"
+                  className="min-w-0 flex-none sm:mx-4 sm:pl-0 md:mx-6 md:w-1/2 lg:mx-8 xl:mx-10"
                   key={index}
                 >
                   <CarouselCard
                     title={'Season: ' + slide.season_name}
-                    icon={<History className="h-6 w-6 text-primary" />}
+                    icon={<History className="h-5 w-5 text-primary" />}
                     content={slide.total_points}
                     footer={slide.rank}
                   />
@@ -52,7 +52,7 @@ const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
             </div>
           </div>
 
-          <div className="mt-7 flex justify-between gap-4">
+          <div className="mx-7 mt-7 flex justify-between gap-4">
             <div className="grid grid-cols-2 items-center justify-between gap-3">
               <ButtonClick>
                 <PrevButton
@@ -85,7 +85,7 @@ const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
           </div>
         </>
       ) : (
-        <div className="mx-auto w-full min-w-0 flex-none pl-4 sm:pl-0">
+        <div>
           <CarouselCard
             title={'Season: ' + slides[0].season_name}
             icon={<History className="h-6 w-6 text-primary" />}
