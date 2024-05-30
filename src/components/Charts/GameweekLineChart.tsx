@@ -13,20 +13,20 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '../UI/organisms/Card';
+} from '../../UI/organisms/Card';
 import { FC } from 'react';
-import { ICurrent } from '../types/manager/managerHistory';
-import { CustomTooltip } from './CustomTooltip';
-import { IEvent } from '../types/general/event';
+import { ICurrent } from '../../types/manager/managerHistory';
+import { CustomTooltip } from '../CustomTooltip';
+import { IEvent } from '../../types/general/event';
 
-type SimpleLineChartProps = {
+interface IGameweekLineChartProps {
   playerGameweekData: ICurrent[];
   generalGameweekData: IEvent[];
   totalPoints: string;
   playerName: string;
-};
+}
 
-const SimpleLineChart: FC<SimpleLineChartProps> = ({
+const GameweekLineChart: FC<IGameweekLineChartProps> = ({
   playerGameweekData,
   generalGameweekData,
   totalPoints,
@@ -100,4 +100,4 @@ const SimpleLineChart: FC<SimpleLineChartProps> = ({
   );
 };
 
-export default SimpleLineChart;
+export default GameweekLineChart;

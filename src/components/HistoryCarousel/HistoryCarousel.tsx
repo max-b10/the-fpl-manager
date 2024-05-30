@@ -8,15 +8,15 @@ import ButtonClick from '../Animations/ButtonClick';
 import { usePrevNextButtons } from './usePrevNextButtons';
 import { useDotButton } from './useDotButton';
 
-type HistoryCarouselProps = {
+interface IHistoryCarouselProps {
   slides: {
     total_points: string;
     rank: string;
     season_name: string;
   }[];
-};
+}
 
-const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
+const HistoryCarousel: React.FC<IHistoryCarouselProps> = ({ slides }) => {
   const options = { loop: false };
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
@@ -31,7 +31,7 @@ const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
   } = usePrevNextButtons(emblaApi);
 
   return (
-    <div className="mx-auto sm:max-w-[26rem] md:max-w-[30rem] lg:max-w-[36rem] xl:max-w-[40rem]">
+    <div className="mx-auto rounded border border-primary bg-card p-6 sm:max-w-[26rem] md:max-w-[30rem] lg:max-w-[36rem] xl:max-w-[40rem]">
       {slides.length > 1 ? (
         <>
           <div className="overflow-hidden" ref={emblaRef}>

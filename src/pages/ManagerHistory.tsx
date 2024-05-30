@@ -14,17 +14,17 @@ import {
 import FadeIn from '../components/Animations/FadeIn';
 import Footer from '../components/Footer';
 import HistoryCarousel from '../components/HistoryCarousel/HistoryCarousel';
-import SimpleLineChart from '../components/SimpleLineChart';
 import { useGeneralData } from '../hooks/useGeneralData';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../UI/organisms/Tabs';
 import {
-  Card,
   CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+  // CardDescription,
+  // CardHeader,
+  // CardTitle,
 } from '../UI/organisms/Card';
 import HistoryCard from '../components/Cards/HistoryCard';
+import GameweekLineChart from '../components/Charts/GameweekLineChart';
+import SeasonBarChart from '../components/Charts/SeasonBarChart';
 
 const ManagerHistory = () => {
   const fplIdString = useSelector((state: RootState) => state.id.value);
@@ -70,55 +70,46 @@ const ManagerHistory = () => {
                 <div className="w-full">
                   <TabsContent value="current">
                     <FadeIn>
-                      <SimpleLineChart
+                      <GameweekLineChart
                         playerName={playerName || ''}
                         totalPoints={totalPoints || ''}
                         playerGameweekData={gameWeekHistoryData || []}
                         generalGameweekData={generalGameweekData || []}
-                      ></SimpleLineChart>
+                      ></GameweekLineChart>
                     </FadeIn>
                   </TabsContent>
                   <TabsContent value="past">
                     <FadeIn>
                       {pastSeasonsData && pastSeasonsData.length > 0 ? (
-                        <div className="flex justify-center">
-                          <Card className="flex-grow border-primary">
-                            <CardHeader>
-                              <div>
-                                <CardTitle className="mb-1">
-                                  Season History
-                                </CardTitle>
-                                <CardDescription>
-                                  Check out your past seasons as an FPL manager
-                                </CardDescription>
+                        <div className="w-full">
+                          <CardContent>
+                            <div className="grid h-[440px] grid-cols-1 items-center md:grid-cols-3">
+                              <div className="md:col-span-1">
+                                <HistoryCard
+                                  headerText={totalRankMean}
+                                  subText={
+                                    pastSeasonsData &&
+                                    pastSeasonsData.length > 0
+                                      ? 'Mean overall rank'
+                                      : 'Current overall rank'
+                                  }
+                                  bestFinish={bestRank}
+                                  worstFinish={worstRank}
+                                  seasonsPlayed={seasonsPlayed}
+                                  lowestPoints={lowestPoints}
+                                  highestPoints={highestPoints}
+                                />
                               </div>
-                            </CardHeader>
-                            <CardContent>
-                              <div className="grid h-[440px] grid-cols-3 items-center">
-                                <div className="col-span-1">
-                                  <HistoryCard
-                                    headerText={totalRankMean}
-                                    subText={
-                                      pastSeasonsData &&
-                                      pastSeasonsData.length > 0
-                                        ? 'Mean overall rank'
-                                        : 'Current overall rank'
-                                    }
-                                    bestFinish={bestRank}
-                                    worstFinish={worstRank}
-                                    seasonsPlayed={seasonsPlayed}
-                                    lowestPoints={lowestPoints}
-                                    highestPoints={highestPoints}
-                                  />
-                                </div>
-                                <div className="col-span-2">
-                                  <HistoryCarousel
-                                    slides={pastSeasonsData || []}
-                                  />
-                                </div>
+                              <div className="space-y-4 md:col-span-2">
+                                <HistoryCarousel
+                                  slides={pastSeasonsData || []}
+                                />
+                                <SeasonBarChart
+                                  pastSeasonsData={pastSeasonsData || []}
+                                />
                               </div>
-                            </CardContent>
-                          </Card>
+                            </div>
+                          </CardContent>
                         </div>
                       ) : (
                         <div className="flex justify-center  text-primary">

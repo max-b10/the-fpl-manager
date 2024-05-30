@@ -6,14 +6,14 @@ import {
 } from '../../UI/organisms/Card';
 import { ReactNode } from 'react';
 
-interface CarouselCardProps {
+interface ICarouselCardProps {
   title: string;
   icon: ReactNode;
   content: ReactNode;
   footer: ReactNode;
 }
 
-const CarouselCard: React.FC<CarouselCardProps> = ({
+const CarouselCard: React.FC<ICarouselCardProps> = ({
   title,
   icon,
   content,
