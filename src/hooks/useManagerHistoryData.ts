@@ -12,9 +12,11 @@ export const useManagerHistoryData = (fplId: number) => {
 
   const pastSeasonsData = managerHistory?.past?.map((season) => ({
     ...season,
+    season_name: season.season_name,
     total_points: season.total_points.toLocaleString(),
     rank: season.rank.toLocaleString(),
   }));
+
   const gameWeekHistoryData = managerHistory?.current?.map((gameWeek) => ({
     ...gameWeek,
     event: gameWeek.event,
@@ -24,17 +26,22 @@ export const useManagerHistoryData = (fplId: number) => {
     overall_rank: gameWeek.overall_rank,
   }));
 
-  const bestRank = managerHistory?.past
-    ? Math.min(
-        ...managerHistory.past.map((season) => season.rank)
-      ).toLocaleString()
-    : 'N/A';
+  const bestSeason = managerHistory?.past
+    ? managerHistory.past.reduce((prev, current) =>
+        prev.rank < current.rank ? prev : current
+      )
+    : null;
 
-  const worstRank = managerHistory?.past
-    ? Math.max(
-        ...managerHistory.past.map((season) => season.rank)
-      ).toLocaleString()
-    : 'N/A';
+  const worstSeason = managerHistory?.past
+    ? managerHistory.past.reduce((prev, current) =>
+        prev.rank > current.rank ? prev : current
+      )
+    : null;
+
+  const bestRank = bestSeason ? bestSeason.rank.toLocaleString() : 'N/A';
+  const worstRank = worstSeason ? worstSeason.rank.toLocaleString() : 'N/A';
+  const bestSeasonName = bestSeason ? bestSeason.season_name : 'N/A';
+  const worstSeasonName = worstSeason ? worstSeason.season_name : 'N/A';
 
   const seasonsPlayed = managerHistory?.past
     ? managerHistory.past.length.toLocaleString()
@@ -61,5 +68,7 @@ export const useManagerHistoryData = (fplId: number) => {
     seasonsPlayed,
     lowestPoints,
     highestPoints,
+    bestSeasonName,
+    worstSeasonName,
   };
 };

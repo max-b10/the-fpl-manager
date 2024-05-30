@@ -17,6 +17,7 @@ import HistoryCarousel from '../components/HistoryCarousel/HistoryCarousel';
 import { useGeneralData } from '../hooks/useGeneralData';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../UI/organisms/Tabs';
 import {
+  Card,
   CardContent,
   // CardDescription,
   // CardHeader,
@@ -32,6 +33,7 @@ const ManagerHistory = () => {
   const {
     totalRankMean,
     totalPoints,
+    totalPointsMean,
     isLoadingManagerData,
     isLoadingManagerHistory,
     playerName,
@@ -44,6 +46,8 @@ const ManagerHistory = () => {
     seasonsPlayed,
     highestPoints,
     lowestPoints,
+    bestSeasonName,
+    worstSeasonName,
   } = useManagerHistoryData(fplId);
   const { generalGameweekData } = useGeneralData();
   const handleSubmit = useNavigationWithId();
@@ -66,7 +70,7 @@ const ManagerHistory = () => {
                 </TabsTrigger>
                 <TabsTrigger value="past">Past</TabsTrigger>
               </TabsList>
-              <main className="flex flex-1 flex-col items-center justify-center p-4 md:p-8">
+              <main className="flex min-h-screen flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
                 <div className="w-full">
                   <TabsContent value="current">
                     <FadeIn>
@@ -81,38 +85,44 @@ const ManagerHistory = () => {
                   <TabsContent value="past">
                     <FadeIn>
                       {pastSeasonsData && pastSeasonsData.length > 0 ? (
-                        <div className="w-full">
-                          <CardContent>
-                            <div className="grid h-[440px] grid-cols-1 items-center md:grid-cols-3">
-                              <div className="md:col-span-1">
-                                <HistoryCard
-                                  headerText={totalRankMean}
-                                  subText={
-                                    pastSeasonsData &&
-                                    pastSeasonsData.length > 0
-                                      ? 'Mean overall rank'
-                                      : 'Current overall rank'
-                                  }
-                                  bestFinish={bestRank}
-                                  worstFinish={worstRank}
-                                  seasonsPlayed={seasonsPlayed}
-                                  lowestPoints={lowestPoints}
-                                  highestPoints={highestPoints}
-                                />
-                              </div>
-                              <div className="space-y-4 md:col-span-2">
+                        <div className="grid h-full items-stretch gap-4 md:grid-cols-3 md:gap-8">
+                          <Card className="flex max-h-[70vh] flex-grow flex-col border-primary p-0 md:col-span-1">
+                            <HistoryCard
+                              rankMean={totalRankMean}
+                              subText={
+                                pastSeasonsData && pastSeasonsData.length > 0
+                                  ? 'Mean rank'
+                                  : 'Current rank'
+                              }
+                              bestFinish={bestRank}
+                              worstFinish={worstRank}
+                              seasonsPlayed={seasonsPlayed}
+                              lowestPoints={lowestPoints}
+                              highestPoints={highestPoints}
+                              pointsMean={totalPointsMean}
+                              bestSeasonName={bestSeasonName}
+                              worstSeasonName={worstSeasonName}
+                            />
+                          </Card>
+                          <div className="flex max-h-[70vh] flex-grow flex-col gap-4 border-primary md:col-span-2 md:grid md:grid-rows-5">
+                            <Card className="border-primary md:row-span-2">
+                              <CardContent>
                                 <HistoryCarousel
                                   slides={pastSeasonsData || []}
                                 />
+                              </CardContent>
+                            </Card>
+                            <Card className="border-primary md:row-span-3">
+                              <CardContent>
                                 <SeasonBarChart
                                   pastSeasonsData={pastSeasonsData || []}
                                 />
-                              </div>
-                            </div>
-                          </CardContent>
+                              </CardContent>
+                            </Card>
+                          </div>
                         </div>
                       ) : (
-                        <div className="flex justify-center  text-primary">
+                        <div className="flex justify-center text-primary">
                           <Alert variant="destructive">
                             <AlertCircle className="h-4 w-4" />
                             <AlertTitle>Oops!</AlertTitle>

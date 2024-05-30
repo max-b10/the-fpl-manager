@@ -31,7 +31,7 @@ const HistoryCarousel: React.FC<IHistoryCarouselProps> = ({ slides }) => {
   } = usePrevNextButtons(emblaApi);
 
   return (
-    <div className="mx-auto rounded border border-primary bg-card p-6 sm:max-w-[26rem] md:max-w-[30rem] lg:max-w-[36rem] xl:max-w-[40rem]">
+    <div className="mx-auto rounded bg-card p-6 sm:max-w-[26rem] md:max-w-[30rem] lg:max-w-[36rem] xl:max-w-[40rem]">
       {slides.length > 1 ? (
         <>
           <div className="overflow-hidden" ref={emblaRef}>
