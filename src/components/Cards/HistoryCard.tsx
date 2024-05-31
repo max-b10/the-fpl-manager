@@ -35,7 +35,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({
       </div>
     </CardHeader>
 
-    <CardContent className="text-sm">
+    <CardContent className="text-m">
       <div className="grid gap-3">
         <div className="my-1 font-semibold">Best Season</div>
         <ul className="grid gap-3">
