@@ -1,12 +1,12 @@
 import React from 'react';
 
-type TooltipProps = {
+type GameweekTooltipProps = {
   active?: boolean;
   payload?: { name: string; value: number }[];
   label?: string;
   playerName: string;
 };
-export const CustomTooltip: React.FC<TooltipProps> = ({
+export const GameweekTooltip: React.FC<GameweekTooltipProps> = ({
   active,
   payload,
   label,

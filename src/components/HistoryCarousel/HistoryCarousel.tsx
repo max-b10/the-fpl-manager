@@ -31,16 +31,13 @@ const HistoryCarousel: React.FC<IHistoryCarouselProps> = ({ slides }) => {
   } = usePrevNextButtons(emblaApi);
 
   return (
-    <div className="mx-auto rounded bg-card p-6 sm:max-w-[26rem] md:max-w-[30rem] lg:max-w-[36rem] xl:max-w-[40rem]">
+    <>
       {slides.length > 1 ? (
         <>
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {slides.map((slide, index) => (
-                <div
-                  className="min-w-0 flex-none sm:mx-4 sm:pl-0 md:mx-6 md:w-1/2 lg:mx-8 xl:mx-10"
-                  key={index}
-                >
+                <div className="flex-none" key={index}>
                   <CarouselCard
                     title={'Season: ' + slide.season_name}
                     icon={<History className="h-5 w-5 text-primary" />}
@@ -94,7 +91,7 @@ const HistoryCarousel: React.FC<IHistoryCarouselProps> = ({ slides }) => {
           />
         </div>
       )}
-    </div>
+    </>
   );
 };
 

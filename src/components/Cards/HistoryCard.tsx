@@ -1,10 +1,5 @@
 import { Separator } from '../../UI/molecules/Separator/Separator';
-import {
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '../../UI/organisms/Card';
+import { CardContent, CardHeader, CardTitle } from '../../UI/organisms/Card';
 
 interface HistoryCardProps {
   bestFinish: string;
@@ -37,13 +32,12 @@ const HistoryCard: React.FC<HistoryCardProps> = ({
         <CardTitle className="group flex items-center gap-2 text-lg">
           Season History
         </CardTitle>
-        <CardDescription>Summary of your past seasons</CardDescription>
       </div>
     </CardHeader>
 
     <CardContent className="text-sm">
       <div className="grid gap-3">
-        <div className="my-2 font-semibold">Best Season</div>
+        <div className="my-1 font-semibold">Best Season</div>
         <ul className="grid gap-3">
           <li className="flex items-center justify-between">
             <span className="text-muted-foreground">Season</span>
@@ -59,7 +53,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({
           </li>
         </ul>
         <Separator />
-        <div className="my-2 font-semibold">Worst Season</div>
+        <div className="my-1 font-semibold">Worst Season</div>
         <ul className="grid gap-3">
           <li className="flex items-center justify-between">
             <span className="text-muted-foreground">Season</span>
@@ -75,7 +69,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({
           </li>
         </ul>
         <Separator />
-        <div className="my-2 font-semibold">Summary</div>
+        <div className="my-1 font-semibold">Summary</div>
         <ul className="grid gap-3">
           <li className="flex items-center justify-between">
             <span className="text-muted-foreground">Seasons Played</span>

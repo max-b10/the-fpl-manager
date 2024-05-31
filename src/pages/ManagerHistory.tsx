@@ -16,13 +16,7 @@ import Footer from '../components/Footer';
 import HistoryCarousel from '../components/HistoryCarousel/HistoryCarousel';
 import { useGeneralData } from '../hooks/useGeneralData';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../UI/organisms/Tabs';
-import {
-  Card,
-  CardContent,
-  // CardDescription,
-  // CardHeader,
-  // CardTitle,
-} from '../UI/organisms/Card';
+import { Card } from '../UI/organisms/Card';
 import HistoryCard from '../components/Cards/HistoryCard';
 import GameweekLineChart from '../components/Charts/GameweekLineChart';
 import SeasonBarChart from '../components/Charts/SeasonBarChart';
@@ -86,7 +80,7 @@ const ManagerHistory = () => {
                     <FadeIn>
                       {pastSeasonsData && pastSeasonsData.length > 0 ? (
                         <div className="grid h-full items-stretch gap-4 md:grid-cols-3 md:gap-8">
-                          <Card className="flex max-h-[70vh] flex-grow flex-col border-primary p-0 md:col-span-1">
+                          <Card className="flex max-h-[75vh] flex-grow flex-col overflow-scroll border-primary p-0 md:col-span-1">
                             <HistoryCard
                               rankMean={totalRankMean}
                               subText={
@@ -104,20 +98,14 @@ const ManagerHistory = () => {
                               worstSeasonName={worstSeasonName}
                             />
                           </Card>
-                          <div className="flex max-h-[70vh] flex-grow flex-col gap-4 border-primary md:col-span-2 md:grid md:grid-rows-5">
-                            <Card className="border-primary md:row-span-2">
-                              <CardContent>
-                                <HistoryCarousel
-                                  slides={pastSeasonsData || []}
-                                />
-                              </CardContent>
+                          <div className="flex max-h-[75vh] flex-grow flex-col gap-4 border-primary md:col-span-2 md:grid md:grid-rows-5">
+                            <Card className="overflow-hidden border-primary md:row-span-2">
+                              <HistoryCarousel slides={pastSeasonsData || []} />
                             </Card>
                             <Card className="border-primary md:row-span-3">
-                              <CardContent>
-                                <SeasonBarChart
-                                  pastSeasonsData={pastSeasonsData || []}
-                                />
-                              </CardContent>
+                              <SeasonBarChart
+                                pastSeasonsData={pastSeasonsData || []}
+                              />
                             </Card>
                           </div>
                         </div>

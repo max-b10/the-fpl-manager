@@ -16,7 +16,7 @@ import {
 } from '../../UI/organisms/Card';
 import { FC } from 'react';
 import { ICurrent } from '../../types/manager/managerHistory';
-import { CustomTooltip } from '../CustomTooltip';
+import { GameweekTooltip } from '../Tooltips/GameweekTooltip';
 import { IEvent } from '../../types/general/event';
 
 interface IGameweekLineChartProps {
@@ -72,7 +72,16 @@ const GameweekLineChart: FC<IGameweekLineChartProps> = ({
         <CardContent>
           <div className="h-[400px]">
             <ResponsiveContainer>
-              <LineChart width={500} height={300}>
+              <LineChart
+                width={500}
+                margin={{
+                  top: 0,
+                  right: 30,
+                  left: 0,
+                  bottom: 0,
+                }}
+                height={300}
+              >
                 <XAxis
                   dataKey="category"
                   type="category"
@@ -80,7 +89,9 @@ const GameweekLineChart: FC<IGameweekLineChartProps> = ({
                   tickFormatter={tickFormatter}
                 />
                 <YAxis dataKey="value" />
-                <Tooltip content={<CustomTooltip playerName={playerName} />} />
+                <Tooltip
+                  content={<GameweekTooltip playerName={playerName} />}
+                />
                 <Legend />
                 {series.map((s) => (
                   <Line
