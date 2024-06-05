@@ -7,13 +7,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '../../UI/organisms/Card';
 import { FC } from 'react';
 import { ICurrent } from '../../types/manager/managerHistory';
 import { GameweekTooltip } from '../Tooltips/GameweekTooltip';
@@ -29,7 +22,6 @@ interface IGameweekLineChartProps {
 const GameweekLineChart: FC<IGameweekLineChartProps> = ({
   playerGameweekData,
   generalGameweekData,
-  totalPoints,
   playerName,
 }) => {
   const series = [
@@ -55,58 +47,37 @@ const GameweekLineChart: FC<IGameweekLineChartProps> = ({
     return tickCount % 2 === 0 ? tick : '';
   };
   return (
-    <div className="w-full">
-      <Card className="border border-primary">
-        <CardHeader className="flex flex-row justify-between px-7">
-          <div>
-            <CardTitle className="mb-1">Gameweek History</CardTitle>
-            <CardDescription>
-              How often do you beat the average?
-            </CardDescription>
-          </div>
-          <div>
-            <CardTitle>{totalPoints}</CardTitle>
-            <CardDescription>Total pts</CardDescription>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <div className="h-[400px]">
-            <ResponsiveContainer>
-              <LineChart
-                width={500}
-                margin={{
-                  top: 0,
-                  right: 30,
-                  left: 0,
-                  bottom: 0,
-                }}
-                height={300}
-              >
-                <XAxis
-                  dataKey="category"
-                  type="category"
-                  allowDuplicatedCategory={false}
-                  tickFormatter={tickFormatter}
-                />
-                <YAxis dataKey="value" />
-                <Tooltip
-                  content={<GameweekTooltip playerName={playerName} />}
-                />
-                <Legend />
-                {series.map((s) => (
-                  <Line
-                    dataKey="value"
-                    data={s.data}
-                    name={s.name}
-                    key={s.name}
-                    stroke={s.name === playerName ? '#22C55E' : '#A3A8B1'}
-                  />
-                ))}
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </CardContent>
-      </Card>
+    <div className="h-full w-full">
+      <ResponsiveContainer>
+        <LineChart
+          width={500}
+          margin={{
+            top: 0,
+            right: 30,
+            left: 0,
+            bottom: 0,
+          }}
+        >
+          <XAxis
+            dataKey="category"
+            type="category"
+            allowDuplicatedCategory={false}
+            tickFormatter={tickFormatter}
+          />
+          <YAxis dataKey="value" />
+          <Tooltip content={<GameweekTooltip playerName={playerName} />} />
+          <Legend />
+          {series.map((s) => (
+            <Line
+              dataKey="value"
+              data={s.data}
+              name={s.name}
+              key={s.name}
+              stroke={s.name === playerName ? '#22C55E' : '#A3A8B1'}
+            />
+          ))}
+        </LineChart>
+      </ResponsiveContainer>
     </div>
   );
 };

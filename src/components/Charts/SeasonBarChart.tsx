@@ -9,7 +9,6 @@ import {
 import { FC } from 'react';
 import { stringToNumber } from '../../helpers/stringToNumber';
 import { SeasonTooltip } from '../Tooltips/SeasonTooltip';
-import { CardHeader, CardTitle } from '../../UI/organisms/Card';
 
 interface ISeasonBarChartProps {
   pastSeasonsData: {
@@ -41,66 +40,67 @@ const SeasonBarChart: FC<ISeasonBarChartProps> = ({ pastSeasonsData }) => {
   });
 
   return (
-    <div className="flex h-full w-full flex-col justify-center">
-      <CardHeader className="mb-4 flex flex-row items-start rounded-tl-lg rounded-tr-lg bg-muted/50">
-        <div className="grid gap-0.5">
-          <CardTitle className="group flex items-center gap-2 text-lg">
-            Rank History
-          </CardTitle>
-        </div>
-      </CardHeader>
-      <div className="flex-grow">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            data={modifiedData}
-            margin={{
-              top: 5,
-              right: 50,
-              left: 50,
-              bottom: 0,
+    <div className="h-full w-full">
+      <ResponsiveContainer>
+        <BarChart
+          data={modifiedData}
+          margin={{
+            top: 5,
+            right: 50,
+            left: 0,
+            bottom: 10,
+          }}
+        >
+          <XAxis
+            label={{
+              value: 'Season',
+              position: 'insideBottom',
+              offset: -10,
+              height: 70,
             }}
-          >
-            <XAxis
-              dataKey="season_name"
-              tickFormatter={(season_name) => `${season_name.slice(2)}`}
-              tick={({ x, y, payload }) => (
-                <text
-                  x={x}
-                  y={y}
-                  dy={16}
-                  textAnchor="middle"
-                  fill="#666"
-                  fontSize={10}
-                >
-                  {payload.value.slice(2)}
-                </text>
-              )}
-            />
-            <YAxis name={'Rank'} values="data" />
-            <Tooltip
-              cursor={{ fill: 'transparent' }}
-              content={({ active, payload }) => {
-                if (active && payload && payload[0]) {
-                  return (
-                    <SeasonTooltip
-                      season={payload[0].payload.season_name}
-                      rank={payload[0].payload.rank}
-                      total_points={payload[0].payload.total_points}
-                    />
-                  );
-                }
-                return null;
-              }}
-            />
-            <Bar
-              name={'Season'}
-              dataKey={(data) => stringToNumber(data.rank)}
-              fill="#22C55E"
-              radius={[5, 5, 0, 0]}
-            />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+            dataKey="season_name"
+            tickFormatter={(season_name) => `${season_name.slice(2)}`}
+            tick={({ x, y, payload }) => (
+              <text
+                x={x}
+                y={y}
+                dy={5}
+                textAnchor="middle"
+                fill="#666"
+                fontSize={10}
+              >
+                {payload.value.slice(2)}
+              </text>
+            )}
+          />
+          <YAxis
+            tickFormatter={(value) => {
+              return `${value / 1000}k`;
+            }}
+          />
+          <Tooltip
+            cursor={{ fill: 'transparent' }}
+            content={({ active, payload }) => {
+              if (active && payload && payload[0]) {
+                return (
+                  <SeasonTooltip
+                    season={payload[0].payload.season_name}
+                    rank={payload[0].payload.rank}
+                    total_points={payload[0].payload.total_points}
+                  />
+                );
+              }
+              return null;
+            }}
+          />
+          <Bar
+            name={'Season'}
+            dataKey={(data) => stringToNumber(data.rank)}
+            fill="#22C55E"
+            radius={[5, 5, 0, 0]}
+          />
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 };

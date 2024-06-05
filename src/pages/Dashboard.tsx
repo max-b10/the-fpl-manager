@@ -8,7 +8,7 @@ import {
   LoaderIcon,
   ShieldHalf,
   Tally4,
-  Tally5,
+  User,
 } from 'lucide-react';
 import DashboardCard from '../components/Cards/DashboardCard';
 import { useManagerData } from '../hooks/useManagerData';
@@ -17,7 +17,6 @@ import { usePlayerData } from '../hooks/usePlayerData';
 import { useCheckId } from '../hooks/useCheckId';
 import { DashboardTable } from '../components/Table/Dashboard/DashboardTable';
 import { columns } from '../components/Table/Dashboard/columns';
-import Header from '../components/Headers/Header';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
 import FadeIn from '../components/Animations/FadeIn';
 import Footer from '../components/Footer';
@@ -37,7 +36,6 @@ const Dashboard = () => {
     previousGameWeekScore,
     favouriteTeam,
     currentSquad,
-    totalPoints,
   } = useManagerData(fplId);
   const { getPlayerData, isLoadingPlayerData } = usePlayerData();
 
@@ -79,10 +77,15 @@ const Dashboard = () => {
       ) : (
         <>
           <FadeIn>
-            <Header headerText={playerName} subText={regionName} />
-
             <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
               <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+                <DashboardCard
+                  data-cy="dashboard-card-current-gameweek"
+                  title="Manager"
+                  icon={<User className="h-4 w-4 text-primary" />}
+                  content={playerName}
+                  footer={regionName}
+                />
                 <DashboardCard
                   data-cy="dashboard-card-team"
                   title="Team"
@@ -104,19 +107,13 @@ const Dashboard = () => {
                   content={previousGameWeekScore}
                   footer={`${previousGameWeek?.rank.toLocaleString()} rank`}
                 />
-                <DashboardCard
-                  data-cy="dashboard-card-current-gameweek"
-                  title="Total Points"
-                  icon={<Tally5 className="h-4 w-4 text-primary" />}
-                  content={`${totalPoints} pts`}
-                />
               </div>
               <div className="flex flex-grow flex-col overflow-auto">
                 <Card className="flex-grow border-primary">
                   <CardHeader className="px-7">
                     <CardTitle data-cy="table-title">Current Squad</CardTitle>
                   </CardHeader>
-                  <CardContent className="h-[calc(100vh-27rem)] overflow-auto">
+                  <CardContent className="h-[calc(100vh-23rem)] overflow-auto">
                     {isLoadingPlayerData ? (
                       <div
                         className="flex min-h-screen items-center justify-center"

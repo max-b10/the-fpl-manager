@@ -13,10 +13,15 @@ import {
 } from '../UI/molecules/Alert/Alert';
 import FadeIn from '../components/Animations/FadeIn';
 import Footer from '../components/Footer';
-import HistoryCarousel from '../components/HistoryCarousel/HistoryCarousel';
 import { useGeneralData } from '../hooks/useGeneralData';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../UI/organisms/Tabs';
-import { Card } from '../UI/organisms/Card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../UI/organisms/Card';
 import HistoryCard from '../components/Cards/HistoryCard';
 import GameweekLineChart from '../components/Charts/GameweekLineChart';
 import SeasonBarChart from '../components/Charts/SeasonBarChart';
@@ -68,19 +73,53 @@ const ManagerHistory = () => {
                 <div className="w-full">
                   <TabsContent value="current">
                     <FadeIn>
-                      <GameweekLineChart
-                        playerName={playerName || ''}
-                        totalPoints={totalPoints || ''}
-                        playerGameweekData={gameWeekHistoryData || []}
-                        generalGameweekData={generalGameweekData || []}
-                      ></GameweekLineChart>
+                      <Card className="flex-grow border-primary">
+                        <CardHeader className="flex flex-row justify-between px-7">
+                          <div>
+                            <CardTitle className="mb-1">
+                              Gameweek History
+                            </CardTitle>
+                            <CardDescription>
+                              How often do you beat the average?
+                            </CardDescription>
+                          </div>
+                          <div>
+                            <CardTitle>{totalPoints}</CardTitle>
+                            <CardDescription>Total pts</CardDescription>
+                          </div>
+                        </CardHeader>
+                        <CardContent className="h-[calc(100vh-20rem)] overflow-auto">
+                          <GameweekLineChart
+                            playerName={playerName || ''}
+                            totalPoints={totalPoints || ''}
+                            playerGameweekData={gameWeekHistoryData || []}
+                            generalGameweekData={generalGameweekData || []}
+                          ></GameweekLineChart>
+                        </CardContent>
+                      </Card>
                     </FadeIn>
                   </TabsContent>
                   <TabsContent value="past">
                     <FadeIn>
                       {pastSeasonsData && pastSeasonsData.length > 0 ? (
-                        <div className="grid h-full items-stretch gap-4 md:grid-cols-3 md:gap-8">
-                          <Card className="flex max-h-[75vh] flex-grow flex-col overflow-scroll border-primary p-0 md:col-span-1">
+                        <div className="grid h-full gap-4 md:grid-cols-3 md:gap-8">
+                          <div className="flex h-full flex-grow flex-col gap-4 border-primary md:col-span-2">
+                            <Card className="h-full border-primary">
+                              <CardHeader className="mb-4 flex flex-row items-start rounded-tl-lg rounded-tr-lg bg-muted/50">
+                                <div className="grid gap-0.5">
+                                  <CardTitle className="group flex items-center gap-2 text-lg">
+                                    Rank History
+                                  </CardTitle>
+                                </div>
+                              </CardHeader>
+                              <CardContent className="h-[calc(100vh-20rem)] overflow-auto">
+                                <SeasonBarChart
+                                  pastSeasonsData={pastSeasonsData || []}
+                                />
+                              </CardContent>
+                            </Card>
+                          </div>
+                          <div className="flex h-full flex-grow flex-col gap-4 border-primary md:col-span-1">
                             <HistoryCard
                               rankMean={totalRankMean}
                               subText={
@@ -97,16 +136,6 @@ const ManagerHistory = () => {
                               bestSeasonName={bestSeasonName}
                               worstSeasonName={worstSeasonName}
                             />
-                          </Card>
-                          <div className="flex max-h-[75vh] flex-grow flex-col gap-4 border-primary md:col-span-2 md:grid md:grid-rows-5">
-                            <Card className="overflow-hidden border-primary md:row-span-2">
-                              <HistoryCarousel slides={pastSeasonsData || []} />
-                            </Card>
-                            <Card className="border-primary md:row-span-3">
-                              <SeasonBarChart
-                                pastSeasonsData={pastSeasonsData || []}
-                              />
-                            </Card>
                           </div>
                         </div>
                       ) : (
