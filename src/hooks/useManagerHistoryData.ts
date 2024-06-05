@@ -1,12 +1,12 @@
 import useSWR from 'swr';
 import { IManagerHistory } from '../types/manager/managerHistory';
-import { API_ENDPOINTS } from '../../api/endpoints';
+import { API_ENDPOINTS, BASE_URL } from '../../api/endpoints';
 import { fetcher } from '../lib/fetcher';
 
 export const useManagerHistoryData = (fplId: number) => {
   const { data: managerHistory, isValidating: isLoadingManagerHistory } =
     useSWR<IManagerHistory>(
-      `http://localhost:3005/${API_ENDPOINTS.managerHistory}/${fplId}`,
+      `${BASE_URL}/${API_ENDPOINTS.managerHistory}/${fplId}`,
       fetcher
     );
 

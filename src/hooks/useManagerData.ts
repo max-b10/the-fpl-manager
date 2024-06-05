@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import { IManagerData } from '../types/manager/managerData';
 import { IManagerHistory } from '../types/manager/managerHistory';
-import { API_ENDPOINTS } from '../../api/endpoints';
+import { API_ENDPOINTS, BASE_URL } from '../../api/endpoints';
 import { fetcher } from '../lib/fetcher';
 import {
   calculateMeanPoints,
@@ -12,13 +12,13 @@ import { ISquad } from '../types/squad/squadPicks';
 
 const useManagerDataFetch = (fplId: number) =>
   useSWR<IManagerData>(
-    `http://localhost:3005/${API_ENDPOINTS.manager}/${fplId}`,
+    `${BASE_URL}/${API_ENDPOINTS.manager}/${fplId}`,
     fetcher
   );
 
 const useManagerHistoryFetch = (fplId: number) =>
   useSWR<IManagerHistory>(
-    `http://localhost:3005/${API_ENDPOINTS.managerHistory}/${fplId}`,
+    `${BASE_URL}/${API_ENDPOINTS.managerHistory}/${fplId}`,
     fetcher
   );
 
@@ -28,7 +28,7 @@ const useSquadPicksFetch = (
 ) =>
   useSWR<ISquad>(
     previousGameWeek !== undefined
-      ? `http://localhost:3005/${API_ENDPOINTS.squadPicks}/${fplId}/${previousGameWeek}`
+      ? `${BASE_URL}/${API_ENDPOINTS.squadPicks}/${fplId}/${previousGameWeek}`
       : null,
     fetcher
   );

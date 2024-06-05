@@ -34,38 +34,38 @@ const HistoryCarousel: React.FC<IHistoryCarouselProps> = ({ slides }) => {
     <>
       {slides.length > 1 ? (
         <>
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex">
-              {slides.map((slide, index) => (
-                <div className="flex-none" key={index}>
-                  <CarouselCard
-                    title={'Season: ' + slide.season_name}
-                    icon={<History className="h-5 w-5 text-primary" />}
-                    content={slide.total_points}
-                    footer={slide.rank}
-                  />
-                </div>
-              ))}
+          <div className="flex items-center justify-center space-x-4">
+            <ButtonClick>
+              <PrevButton
+                onClick={onPrevButtonClick}
+                disabled={prevBtnDisabled}
+              />
+            </ButtonClick>
+
+            <div className="overflow-hidden" ref={emblaRef}>
+              <div className="mt-1 flex justify-center">
+                {slides.map((slide, index) => (
+                  <div className="flex-none" key={index}>
+                    <CarouselCard
+                      title={'Season: ' + slide.season_name}
+                      icon={<History className="h-5 w-5 text-primary" />}
+                      content={slide.total_points}
+                      footer={slide.rank}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
+            <ButtonClick>
+              <NextButton
+                onClick={onNextButtonClick}
+                disabled={nextBtnDisabled}
+              />
+            </ButtonClick>
           </div>
 
-          <div className="mx-7 mt-7 flex justify-between gap-4">
-            <div className="grid grid-cols-2 items-center justify-between gap-3">
-              <ButtonClick>
-                <PrevButton
-                  onClick={onPrevButtonClick}
-                  disabled={prevBtnDisabled}
-                />
-              </ButtonClick>
-              <ButtonClick>
-                <NextButton
-                  onClick={onNextButtonClick}
-                  disabled={nextBtnDisabled}
-                />
-              </ButtonClick>
-            </div>
-
-            <div className="flex items-center justify-end">
+          <div className="mx-auto flex justify-center gap-4">
+            <div className="flex items-center justify-center">
               {scrollSnaps.map((_, index) => (
                 <ButtonClick key={index}>
                   <DotButton
