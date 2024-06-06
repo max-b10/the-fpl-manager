@@ -36,7 +36,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({
       <CardHeader className="mb-4 flex flex-row items-start rounded-tl-lg rounded-tr-lg bg-muted/50">
         <div className="grid gap-0.5">
           <CardTitle className="group flex items-center gap-2 text-lg">
-            Season History
+            History Summary
           </CardTitle>
         </div>
       </CardHeader>

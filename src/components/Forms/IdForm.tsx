@@ -28,10 +28,7 @@ const IdForm = ({ onSubmit }: IdFormProps) => {
 
   return (
     <Form {...form}>
-      <form
-        className="-mx-auto flex w-full min-w-fit items-center"
-        onSubmit={handleSubmit}
-      >
+      <form className="flex w-full justify-end" onSubmit={handleSubmit}>
         <FormField
           control={form.control}
           name="id"
@@ -58,6 +55,7 @@ const IdForm = ({ onSubmit }: IdFormProps) => {
             </FormItem>
           )}
         />
+
         <ButtonClick>
           <Button className="ml-2 md:w-24" type="submit">
             Change Id
