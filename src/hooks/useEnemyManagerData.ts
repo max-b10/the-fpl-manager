@@ -26,6 +26,15 @@ export const useEnemyManagerData = (enemyId: number) => {
   const enemyFavouriteTeamObj = teamMapping.find(
     (team) => team.id === enemyData?.favourite_team
   );
+  const enemyBestSeason = enemyHistory?.past
+    ? enemyHistory.past.reduce((prev, current) =>
+        prev.rank < current.rank ? prev : current
+      )
+    : null;
+  const enemyBestRank = enemyBestSeason
+    ? enemyBestSeason.rank.toLocaleString()
+    : 'N/A';
+
   return {
     enemyName: `${enemyData?.player_first_name} ${enemyData?.player_last_name}`,
     enemyPastSeasonsData,
@@ -39,5 +48,7 @@ export const useEnemyManagerData = (enemyId: number) => {
     enemyFavouriteTeamSrc: enemyFavouriteTeamObj?.src,
     isLoadingEnemyData,
     isLoadingEnemyHistory,
+    enemyBestSeason,
+    enemyBestRank,
   };
 };

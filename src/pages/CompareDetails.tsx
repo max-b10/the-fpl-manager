@@ -11,6 +11,7 @@ import { useEnemyManagerData } from '../hooks/useEnemyManagerData';
 import HistoryCarousel from '../components/HistoryCarousel/HistoryCarousel';
 import { useManagerHistoryData } from '../hooks/useManagerHistoryData';
 import MainContainer from '../components/Layout/MainContainer';
+import PieChart from '../components/Charts/PieChart';
 
 const CompareDetails = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const CompareDetails = () => {
     managerSeasonsPlayed,
     regionName,
   } = useManagerData(fplId);
-  const { pastSeasonsData } = useManagerHistoryData(fplId);
+  const { pastSeasonsData, bestRank } = useManagerHistoryData(fplId);
   const {
     enemyName,
     enemySeasonsPlayed,
@@ -34,10 +35,11 @@ const CompareDetails = () => {
     isLoadingEnemyData,
     isLoadingEnemyHistory,
     enemyPastSeasonsData,
+    enemyBestRank,
   } = useEnemyManagerData(Number(id));
 
   useCheckId();
-
+  console.log(bestRank);
   return (
     <>
       {isLoadingEnemyData || isLoadingEnemyHistory ? (
@@ -69,7 +71,9 @@ const CompareDetails = () => {
               <div>
                 <HistoryCarousel slides={pastSeasonsData || []} />
               </div>
-              <div>row 3</div>
+              <div className="h-[50vh]">
+                <PieChart bestRank={bestRank}></PieChart>
+              </div>
             </div>
             <div>
               <div>
@@ -87,7 +91,9 @@ const CompareDetails = () => {
               <div>
                 <HistoryCarousel slides={enemyPastSeasonsData || []} />
               </div>
-              <div>row 3</div>
+              <div className="h-[50vh]">
+                <PieChart bestRank={enemyBestRank}></PieChart>
+              </div>
             </div>
           </MainContainer>
         </>
