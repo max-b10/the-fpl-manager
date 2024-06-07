@@ -20,6 +20,7 @@ import { columns } from '../components/Table/Dashboard/columns';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
 import FadeIn from '../components/Animations/FadeIn';
 import Footer from '../components/Footer';
+import MainContainer from '../components/Layout/MainContainer';
 
 const Dashboard = () => {
   const fplIdString = useSelector((state: RootState) => state.id.value);
@@ -77,7 +78,7 @@ const Dashboard = () => {
       ) : (
         <>
           <FadeIn>
-            <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
+            <MainContainer>
               <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
                 <DashboardCard
                   data-cy="dashboard-card-current-gameweek"
@@ -130,7 +131,7 @@ const Dashboard = () => {
                   </CardContent>
                 </Card>
               </div>
-            </main>
+            </MainContainer>
           </FadeIn>
         </>
       )}

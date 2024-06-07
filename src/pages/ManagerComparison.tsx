@@ -24,6 +24,7 @@ import { useNavigationWithId } from '../hooks/useNavigationWithId';
 import Header from '../components/Headers/Header';
 import FadeIn from '../components/Animations/FadeIn';
 import Footer from '../components/Footer';
+import MainContainer from '../components/Layout/MainContainer';
 
 const ManagerComparison = () => {
   const fplIdString = useSelector((state: RootState) => state.id.value);
@@ -60,7 +61,7 @@ const ManagerComparison = () => {
               subText="Pick a league and compare with players"
             />
 
-            <main className="flex min-h-screen flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
+            <MainContainer>
               <div className="grid h-full items-stretch gap-4 md:gap-8 lg:grid-cols-3">
                 <Card className="flex min-h-[70vh] flex-grow flex-col border-primary lg:col-span-2">
                   <CardHeader className="px-7">
@@ -104,7 +105,7 @@ const ManagerComparison = () => {
                   )}
                 </Card>
               </div>
-            </main>
+            </MainContainer>
           </FadeIn>
         </>
       )}

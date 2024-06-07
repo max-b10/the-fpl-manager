@@ -25,6 +25,7 @@ import {
 import HistoryCard from '../components/Cards/HistoryCard';
 import GameweekLineChart from '../components/Charts/GameweekLineChart';
 import SeasonBarChart from '../components/Charts/SeasonBarChart';
+import MainContainer from '../components/Layout/MainContainer';
 
 const ManagerHistory = () => {
   const fplIdString = useSelector((state: RootState) => state.id.value);
@@ -69,7 +70,7 @@ const ManagerHistory = () => {
                 </TabsTrigger>
                 <TabsTrigger value="past">Past</TabsTrigger>
               </TabsList>
-              <main className="flex min-h-screen flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
+              <MainContainer>
                 <div className="w-full">
                   <TabsContent value="current">
                     <FadeIn>
@@ -153,7 +154,7 @@ const ManagerHistory = () => {
                     </FadeIn>
                   </TabsContent>
                 </div>
-              </main>
+              </MainContainer>
             </Tabs>
           </FadeIn>
         )}

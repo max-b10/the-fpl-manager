@@ -17,11 +17,18 @@ export const useEnemyManagerData = (enemyId: number) => {
       `${BASE_URL}/${API_ENDPOINTS.managerHistory}/${enemyId}`,
       fetcher
     );
+  const enemyPastSeasonsData = enemyHistory?.past?.map((season) => ({
+    ...season,
+    season_name: season.season_name,
+    total_points: season.total_points.toLocaleString(),
+    rank: season.rank.toLocaleString(),
+  }));
   const enemyFavouriteTeamObj = teamMapping.find(
     (team) => team.id === enemyData?.favourite_team
   );
   return {
     enemyName: `${enemyData?.player_first_name} ${enemyData?.player_last_name}`,
+    enemyPastSeasonsData,
     enemySeasonsPlayed: enemyHistory?.past?.length
       ? Number(enemyHistory.past.length) + 1
       : 1,

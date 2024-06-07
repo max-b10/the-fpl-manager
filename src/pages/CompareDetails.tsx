@@ -5,9 +5,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useManagerData } from '../hooks/useManagerData';
 import Header from '../components/Headers/Header';
 import { LoaderIcon } from 'lucide-react';
-import ManagerCard from '../components/Cards/ManagerCard';
+import ManagerProfile from '../components/ManagerProfile';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
 import { useEnemyManagerData } from '../hooks/useEnemyManagerData';
+import HistoryCarousel from '../components/HistoryCarousel/HistoryCarousel';
+import { useManagerHistoryData } from '../hooks/useManagerHistoryData';
+import MainContainer from '../components/Layout/MainContainer';
 
 const CompareDetails = () => {
   const navigate = useNavigate();
@@ -15,8 +18,14 @@ const CompareDetails = () => {
   const { id } = useParams();
   const fplIdString = useSelector((state: RootState) => state.id.value);
   const fplId = Number(fplIdString);
-  const { playerName, totalRankMean, favouriteTeamSrc, managerSeasonsPlayed } =
-    useManagerData(fplId);
+  const {
+    playerName,
+    totalRankMean,
+    favouriteTeamSrc,
+    managerSeasonsPlayed,
+    regionName,
+  } = useManagerData(fplId);
+  const { pastSeasonsData } = useManagerHistoryData(fplId);
   const {
     enemyName,
     enemySeasonsPlayed,
@@ -24,6 +33,7 @@ const CompareDetails = () => {
     enemyFavouriteTeamSrc,
     isLoadingEnemyData,
     isLoadingEnemyHistory,
+    enemyPastSeasonsData,
   } = useEnemyManagerData(Number(id));
 
   useCheckId();
@@ -41,21 +51,29 @@ const CompareDetails = () => {
             showBackIcon={true}
             onBackClick={() => navigate('/managercomparison')}
           />
-          <main>
-            <div className="mt-10 flex flex-col items-center px-4 md:flex-row md:justify-center md:px-0">
-              <div className="mb-4 flex flex-1 justify-center md:mb-0">
-                <ManagerCard
+          <MainContainer>
+            <div>
+              <div>
+                <ManagerProfile
                   id={id}
                   name={playerName}
+                  region={regionName}
                   seasonsPlayed={managerSeasonsPlayed}
                   totalRankMean={totalRankMean}
                   src={favouriteTeamSrc}
                   onSubmit={handleSubmit}
                   showIcon={false}
+                  reverse={false}
                 />
               </div>
-              <div className="mx-auto flex flex-1 justify-center ">
-                <ManagerCard
+              <div>
+                <HistoryCarousel slides={pastSeasonsData || []} />
+              </div>
+              <div>row 3</div>
+            </div>
+            <div>
+              <div>
+                <ManagerProfile
                   id={id}
                   name={enemyName}
                   seasonsPlayed={enemySeasonsPlayed}
@@ -63,10 +81,15 @@ const CompareDetails = () => {
                   src={enemyFavouriteTeamSrc}
                   onSubmit={handleSubmit}
                   showIcon={true}
+                  reverse={true}
                 />
               </div>
+              <div>
+                <HistoryCarousel slides={enemyPastSeasonsData || []} />
+              </div>
+              <div>row 3</div>
             </div>
-          </main>
+          </MainContainer>
         </>
       )}
     </>
