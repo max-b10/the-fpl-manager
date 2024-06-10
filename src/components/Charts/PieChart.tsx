@@ -15,7 +15,7 @@ const PieChartComponent: FC<IPieChartProps> = ({ bestRank }) => {
   ];
 
   return (
-    <PieChart width={400} height={200}>
+    <PieChart width={200} height={200}>
       <Pie
         cornerRadius={5}
         stroke={'none'}

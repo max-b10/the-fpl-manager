@@ -60,7 +60,9 @@ const CompareDetails = () => {
                 slides={pastSeasonsData || []}
                 bestRank={bestRank}
               />
+
               <CompareSection
+                region={regionName || ''}
                 id={id}
                 name={enemyName}
                 seasonsPlayed={enemySeasonsPlayed}

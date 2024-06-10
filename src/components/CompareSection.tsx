@@ -1,6 +1,7 @@
 import PieChart from './Charts/PieChart';
+import ManagerProfileCard from './Cards/ManagerProfileCard';
 import HistoryCarousel from './HistoryCarousel/HistoryCarousel';
-import ManagerProfile from './ManagerProfile';
+import BestSeasonCard from './Cards/BestSeasonCard';
 
 interface ICompareSectionProps {
   id?: string;
@@ -27,9 +28,9 @@ const CompareSection: React.FC<ICompareSectionProps> = ({
   bestRank = 'N/A',
   region,
 }) => (
-  <div className="mx-auto w-full">
-    <div>
-      <ManagerProfile
+  <div className="mx-auto mb-6 w-full">
+    <div className="mb-6">
+      <ManagerProfileCard
         region={region}
         id={id}
         name={name}
@@ -38,9 +39,14 @@ const CompareSection: React.FC<ICompareSectionProps> = ({
         src={src}
       />
     </div>
-    <div>{slides && <HistoryCarousel slides={slides} />}</div>
-    <div className="flex max-w-xs justify-start">
-      <PieChart bestRank={bestRank}></PieChart>
+    <div className="mb-6">{slides && <HistoryCarousel slides={slides} />}</div>
+    <div className="grid min-w-full grid-cols-3">
+      <div className="col-span-2">
+        <BestSeasonCard></BestSeasonCard>
+      </div>
+      <div className="col-span-1 flex items-center justify-center overflow-hidden">
+        <PieChart bestRank={bestRank}></PieChart>
+      </div>
     </div>
   </div>
 );
