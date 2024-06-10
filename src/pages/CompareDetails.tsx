@@ -5,17 +5,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useManagerData } from '../hooks/useManagerData';
 import Header from '../components/Headers/Header';
 import { LoaderIcon } from 'lucide-react';
-import ManagerProfile from '../components/ManagerProfile';
-import { useNavigationWithId } from '../hooks/useNavigationWithId';
 import { useEnemyManagerData } from '../hooks/useEnemyManagerData';
-import HistoryCarousel from '../components/HistoryCarousel/HistoryCarousel';
 import { useManagerHistoryData } from '../hooks/useManagerHistoryData';
 import MainContainer from '../components/Layout/MainContainer';
-import PieChart from '../components/Charts/PieChart';
+import CompareSection from '../components/CompareSection';
 
 const CompareDetails = () => {
   const navigate = useNavigate();
-  const handleSubmit = useNavigationWithId();
   const { id } = useParams();
   const fplIdString = useSelector((state: RootState) => state.id.value);
   const fplId = Number(fplIdString);
@@ -39,7 +35,6 @@ const CompareDetails = () => {
   } = useEnemyManagerData(Number(id));
 
   useCheckId();
-  console.log(bestRank);
   return (
     <>
       {isLoadingEnemyData || isLoadingEnemyHistory ? (
@@ -54,46 +49,26 @@ const CompareDetails = () => {
             onBackClick={() => navigate('/managercomparison')}
           />
           <MainContainer>
-            <div>
-              <div>
-                <ManagerProfile
-                  id={id}
-                  name={playerName}
-                  region={regionName}
-                  seasonsPlayed={managerSeasonsPlayed}
-                  totalRankMean={totalRankMean}
-                  src={favouriteTeamSrc}
-                  onSubmit={handleSubmit}
-                  showIcon={false}
-                  reverse={false}
-                />
-              </div>
-              <div>
-                <HistoryCarousel slides={pastSeasonsData || []} />
-              </div>
-              <div className="h-[50vh]">
-                <PieChart bestRank={bestRank}></PieChart>
-              </div>
-            </div>
-            <div>
-              <div>
-                <ManagerProfile
-                  id={id}
-                  name={enemyName}
-                  seasonsPlayed={enemySeasonsPlayed}
-                  totalRankMean={enemyTotalRankMean}
-                  src={enemyFavouriteTeamSrc}
-                  onSubmit={handleSubmit}
-                  showIcon={true}
-                  reverse={true}
-                />
-              </div>
-              <div>
-                <HistoryCarousel slides={enemyPastSeasonsData || []} />
-              </div>
-              <div className="h-[50vh]">
-                <PieChart bestRank={enemyBestRank}></PieChart>
-              </div>
+            <div className="flex flex-col items-center justify-center lg:flex-row">
+              <CompareSection
+                region={regionName || ''}
+                id={id}
+                name={playerName}
+                seasonsPlayed={managerSeasonsPlayed}
+                totalRankMean={totalRankMean}
+                src={favouriteTeamSrc}
+                slides={pastSeasonsData || []}
+                bestRank={bestRank}
+              />
+              <CompareSection
+                id={id}
+                name={enemyName}
+                seasonsPlayed={enemySeasonsPlayed}
+                totalRankMean={enemyTotalRankMean}
+                src={enemyFavouriteTeamSrc}
+                slides={enemyPastSeasonsData || []}
+                bestRank={enemyBestRank}
+              />
             </div>
           </MainContainer>
         </>

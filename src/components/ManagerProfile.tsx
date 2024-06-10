@@ -7,8 +7,6 @@ import {
 } from '../UI/organisms/Card';
 import { Avatar, AvatarImage } from '../UI/molecules/Avatar/Avatar';
 
-import { IFormData } from '../types/FormData';
-
 interface IManagerProfileProps {
   name?: string;
   region?: string;
@@ -16,9 +14,6 @@ interface IManagerProfileProps {
   totalRankMean?: string;
   id?: string;
   src?: string;
-  onSubmit: (data: IFormData) => void;
-  showIcon: boolean;
-  reverse?: boolean;
 }
 
 const ManagerProfile: React.FC<IManagerProfileProps> = ({
@@ -27,52 +22,41 @@ const ManagerProfile: React.FC<IManagerProfileProps> = ({
   seasonsPlayed,
   totalRankMean,
   src,
-  reverse,
-  // id,
-  // onSubmit,
-  // showIcon,
 }) => {
   return (
-    <div className={`flex ${reverse ? 'flex-row-reverse' : 'flex-row'}`}>
-      <div>
-        <div className="flex justify-center">
-          <Avatar className="h-32 w-32 border border-secondary-foreground sm:flex">
-            <AvatarImage src={src} alt="Avatar" />
-          </Avatar>
-        </div>
-        <CardHeader className="items-centerspace-y-0 flex justify-center pb-2">
-          <CardTitle className=" text-center text-2xl font-bold">
-            {name}
-          </CardTitle>
-          <CardDescription>{region}</CardDescription>
-        </CardHeader>
-      </div>
-
-      <Card
-        className={`border border-primary p-4  ${reverse ? 'flex-col-reverse' : ''}`}
-      >
-        <CardContent>
-          <div className="flex flex-col items-center gap-4 py-4">
-            <div
-              className={`flex w-full justify-between ${reverse ? 'flex-row-reverse' : ''}`}
-            >
+    <Card className="flex w-full border border-primary">
+      <CardContent>
+        <div className="flex">
+          <div>
+            <div className="flex justify-center">
+              <Avatar className="sm:h-30 sm:w-30 h-24 w-24 border border-secondary-foreground">
+                <AvatarImage src={src} alt="Avatar" />
+              </Avatar>
+            </div>
+            <CardHeader className="flex justify-start">
+              <CardTitle className="text-lg font-bold">{name}</CardTitle>
+              <CardDescription className="flex justify-start">
+                {region}
+              </CardDescription>
+            </CardHeader>
+          </div>
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex w-full justify-between">
               <span className="text-xs text-muted-foreground">
                 Average Rank
               </span>
               <span className="text-lg font-medium">{totalRankMean}</span>
             </div>
-            <div
-              className={`flex w-full justify-between ${reverse ? 'flex-row-reverse' : ''}`}
-            >
+            <div className="flex w-full justify-between">
               <span className="text-xs text-muted-foreground">
                 Seasons Played
               </span>
               <span className="text-lg font-medium">{seasonsPlayed}</span>
             </div>
           </div>
-        </CardContent>
-      </Card>
-    </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 

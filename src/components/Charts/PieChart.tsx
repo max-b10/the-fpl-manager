@@ -9,28 +9,31 @@ interface IPieChartProps {
 const PieChartComponent: FC<IPieChartProps> = ({ bestRank }) => {
   const bestRankNumber = Number(bestRank.replace(/,/g, ''));
   const rankProportion = 10000000 - bestRankNumber;
-  const data = [{ name: 'Best Rank', value: rankProportion }];
+  const data = [
+    { name: 'Best Rank', value: rankProportion },
+    { name: 'Rest', value: 10000000 - rankProportion },
+  ];
 
   return (
-    <PieChart width={800} height={400}>
+    <PieChart width={400} height={200}>
       <Pie
         cornerRadius={5}
         stroke={'none'}
         data={data}
-        cx={420}
-        cy={200}
         startAngle={90}
         endAngle={-270}
         innerRadius={60}
         outerRadius={80}
-        fill="#8884d8"
         paddingAngle={5}
         dataKey="value"
       >
         {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={getColour(bestRankNumber)} />
+          <Cell
+            key={`cell-${index}`}
+            fill={index === 0 ? getColour(bestRankNumber) : 'transparent'}
+          />
         ))}
-        <Label position={'center'} style={{ fill: '#5EC26A' }}>
+        <Label position={'center'} style={{ fill: '#fff' }}>
           {bestRank}
         </Label>
       </Pie>
