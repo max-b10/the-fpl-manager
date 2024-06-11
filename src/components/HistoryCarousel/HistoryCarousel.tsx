@@ -8,9 +8,10 @@ import ButtonClick from '../Animations/ButtonClick';
 import { usePrevNextButtons } from './usePrevNextButtons';
 import { useDotButton } from './useDotButton';
 import { Card, CardContent } from '../../UI/organisms/Card';
+import { IPast } from '../../types/manager/managerHistory';
 
 interface IHistoryCarouselProps {
-  slides: { season_name: string; total_points: string; rank: string }[];
+  slides: IPast[];
 }
 
 const HistoryCarousel: React.FC<IHistoryCarouselProps> = ({ slides }) => {

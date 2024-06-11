@@ -27,6 +27,6 @@ interface IChips {
 
 export interface IManagerHistory {
   current: ICurrent[];
-  past: IPast[];
+  past: IPast[] | undefined;
   chips: IChips[];
 }

@@ -2,22 +2,19 @@ import PieChart from './Charts/PieChart';
 import ManagerProfileCard from './Cards/ManagerProfileCard';
 import HistoryCarousel from './HistoryCarousel/HistoryCarousel';
 import BestSeasonCard from './Cards/BestSeasonCard';
+import { IPast } from '../types/manager/managerHistory';
 
 interface ICompareSectionProps {
   id?: string;
   name?: string;
   seasonsPlayed?: number;
-  totalRankMean?: string;
+  totalRankMean?: number;
   src?: string;
-  slides?: { season_name: string; total_points: string; rank: string }[];
-  bestRank?: string;
+  slides: IPast[];
+  bestRank: number;
   region?: string;
   isLeftColumn: boolean;
-  bestSeason?: {
-    season_name: string;
-    total_points: string;
-    rank: string;
-  } | null;
+  bestSeason: IPast;
 }
 
 const CompareSection: React.FC<ICompareSectionProps> = ({
@@ -27,7 +24,7 @@ const CompareSection: React.FC<ICompareSectionProps> = ({
   totalRankMean,
   src,
   slides,
-  bestRank = 'N/A',
+  bestRank,
   bestSeason,
   region,
   isLeftColumn,

@@ -91,9 +91,7 @@ export const useManagerData = (fplId: number) => {
   const { data: squadPicksData, isValidating: isLoadingSquadPicks } =
     useSquadPicksFetch(fplId, previousGameWeek?.event);
   const gameweekScore = eventPoints ? `${eventPoints} pts` : undefined;
-  const gameweekRank = eventRank
-    ? `${eventRank.toLocaleString()} rank`
-    : undefined;
+  const gameweekRank = eventRank ? `${eventRank} rank` : undefined;
   const totalPointsMean = calculateMeanPoints(managerHistory?.past);
   const totalRankMean = calculateMeanRank(managerHistory?.past, overallRank);
   const favouriteTeamObj = teamMapping.find(
@@ -110,7 +108,7 @@ export const useManagerData = (fplId: number) => {
   const managerSeasonsPlayed = managerHistory?.past?.length
     ? Number(managerHistory.past.length) + 1
     : 1;
-  const totalPoints = managerData?.summary_overall_points.toLocaleString();
+  const totalPoints = managerData?.summary_overall_points;
   const bestFinish = managerHistory?.past?.reduce((prev, current) => {
     return prev.rank < current.rank ? prev : current;
   }).rank;

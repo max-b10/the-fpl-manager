@@ -60,8 +60,10 @@ const CompareDetails = () => {
                 totalRankMean={totalRankMean}
                 src={favouriteTeamSrc}
                 slides={pastSeasonsData || []}
-                bestRank={bestRank}
-                bestSeason={bestSeason}
+                bestRank={bestRank || 0}
+                bestSeason={
+                  bestSeason || { season_name: '', total_points: 0, rank: 0 }
+                }
                 isLeftColumn={true}
               />
 
@@ -74,7 +76,13 @@ const CompareDetails = () => {
                 src={enemyFavouriteTeamSrc}
                 slides={enemyPastSeasonsData || []}
                 bestRank={enemyBestRank}
-                bestSeason={enemyBestSeason}
+                bestSeason={
+                  enemyBestSeason || {
+                    season_name: '',
+                    total_points: 0,
+                    rank: 0,
+                  }
+                }
                 isLeftColumn={false}
               />
             </div>

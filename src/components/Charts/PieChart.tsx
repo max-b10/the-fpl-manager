@@ -3,12 +3,11 @@ import { PieChart, Pie, Cell, Label } from 'recharts';
 import { getColour } from '../../helpers/getColour';
 
 interface IPieChartProps {
-  bestRank: string;
+  bestRank: number;
 }
 
 const PieChartComponent: FC<IPieChartProps> = ({ bestRank }) => {
-  const bestRankNumber = Number(bestRank.replace(/,/g, ''));
-  const rankProportion = 5000000 - bestRankNumber;
+  const rankProportion = 5000000 - bestRank;
   const data = [
     { name: 'Best Rank', value: rankProportion },
     { name: 'Rest', value: 5000000 - rankProportion },
@@ -30,7 +29,7 @@ const PieChartComponent: FC<IPieChartProps> = ({ bestRank }) => {
         {data.map((entry, index) => (
           <Cell
             key={`cell-${index}`}
-            fill={index === 0 ? getColour(bestRankNumber) : 'transparent'}
+            fill={index === 0 ? getColour(bestRank) : 'transparent'}
           />
         ))}
         <Label position={'center'} style={{ fill: '#fff' }}>

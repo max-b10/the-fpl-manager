@@ -4,14 +4,11 @@ import {
   CardHeader,
   CardTitle,
 } from '../../UI/organisms/Card';
+import { IPast } from '../../types/manager/managerHistory';
 
 interface IBestSeasonProps {
-  bestRank?: string;
-  bestSeason?: {
-    season_name: string;
-    total_points: string;
-    rank: string;
-  } | null;
+  bestRank?: number;
+  bestSeason?: IPast;
   isLeftColumn?: boolean;
 }
 
@@ -19,7 +16,6 @@ const BestSeasonCard: React.FC<IBestSeasonProps> = ({
   isLeftColumn,
   bestSeason,
 }) => {
-  console.log(bestSeason);
   return (
     <Card className="flex flex-grow flex-col border border-primary">
       <CardHeader

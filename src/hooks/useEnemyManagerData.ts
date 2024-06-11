@@ -17,12 +17,7 @@ export const useEnemyManagerData = (enemyId: number) => {
       `${BASE_URL}/${API_ENDPOINTS.managerHistory}/${enemyId}`,
       fetcher
     );
-  const enemyPastSeasonsData = enemyHistory?.past?.map((season) => ({
-    ...season,
-    season_name: season.season_name,
-    total_points: season.total_points.toLocaleString(),
-    rank: season.rank.toLocaleString(),
-  }));
+  const enemyPastSeasonsData = enemyHistory?.past;
   const enemyFavouriteTeamObj = teamMapping.find(
     (team) => team.id === enemyData?.favourite_team
   );
@@ -31,9 +26,7 @@ export const useEnemyManagerData = (enemyId: number) => {
         prev.rank < current.rank ? prev : current
       )
     : null;
-  const enemyBestRank = enemyBestSeason
-    ? enemyBestSeason.rank.toLocaleString()
-    : 'N/A';
+  const enemyBestRank = enemyBestSeason ? enemyBestSeason.rank : 0;
 
   return {
     enemyName: `${enemyData?.player_first_name} ${enemyData?.player_last_name}`,

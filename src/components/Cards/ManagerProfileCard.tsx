@@ -12,7 +12,7 @@ interface IManagerProfileProps {
   name?: string;
   region?: string;
   seasonsPlayed?: number;
-  totalRankMean?: string;
+  totalRankMean?: number;
   id?: string;
   src?: string;
   isLeftColumn?: boolean;

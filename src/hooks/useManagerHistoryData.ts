@@ -10,65 +10,40 @@ export const useManagerHistoryData = (fplId: number) => {
       fetcher
     );
 
-  const pastSeasonsData = managerHistory?.past?.map((season) => ({
-    ...season,
-    season_name: season.season_name,
-    total_points: season.total_points.toLocaleString(),
-    rank: season.rank.toLocaleString(),
-  }));
+  const pastSeasonsData = managerHistory?.past;
+  const gameWeekHistoryData = managerHistory?.current;
 
-  const gameWeekHistoryData = managerHistory?.current?.map((gameWeek) => ({
-    ...gameWeek,
-    event: gameWeek.event,
-    Points: gameWeek.points,
-    total_points: gameWeek.total_points,
-    rank: gameWeek.rank,
-    overall_rank: gameWeek.overall_rank,
-  }));
+  const bestSeason = pastSeasonsData
+    ? [...pastSeasonsData].sort((a, b) => a.rank - b.rank)[0]
+    : undefined;
+  const worstSeason = pastSeasonsData
+    ? [...pastSeasonsData].sort((a, b) => b.rank - a.rank)[0]
+    : undefined;
 
-  const bestSeason = managerHistory?.past
-    ? managerHistory?.past?.reduce((prev, current) =>
-        prev.rank < current.rank ? prev : current
-      )
-    : null;
-  const worstSeason = managerHistory?.past
-    ? managerHistory?.past?.reduce((prev, current) =>
-        prev.rank > current.rank ? prev : current
-      )
-    : null;
-
-  const bestRank = bestSeason ? bestSeason.rank.toLocaleString() : 'N/A';
-  const worstRank = worstSeason ? worstSeason.rank.toLocaleString() : 'N/A';
-  const bestSeasonName = bestSeason ? bestSeason.season_name : 'N/A';
-  const worstSeasonName = worstSeason ? worstSeason.season_name : 'N/A';
-
-  const seasonsPlayed = managerHistory?.past
-    ? managerHistory?.past?.length.toLocaleString()
-    : 'N/A';
-
-  const lowestPoints = managerHistory?.past
-    ? Math.min(
-        ...managerHistory.past.map((season) => season.total_points)
-      ).toLocaleString()
-    : 'N/A';
-
-  const highestPoints = managerHistory?.past
-    ? Math.max(
-        ...managerHistory.past.map((season) => season.total_points)
-      ).toLocaleString()
-    : 'N/A';
+  const bestRank = bestSeason?.rank;
+  const worstRank = worstSeason?.rank;
+  const bestSeasonName = bestSeason?.season_name;
+  const worstSeasonName = worstSeason?.season_name;
+  const seasonsPlayed = pastSeasonsData?.length;
+  const lowestPoints = pastSeasonsData
+    ? Math.min(...pastSeasonsData.map((season) => season.total_points))
+    : 0;
+  const highestPoints = pastSeasonsData
+    ? Math.max(...pastSeasonsData.map((season) => season.total_points))
+    : 0;
 
   return {
     pastSeasonsData,
     gameWeekHistoryData,
     isLoadingManagerHistory,
-    bestRank,
     bestSeason,
+    worstSeason,
+    bestRank,
     worstRank,
+    bestSeasonName,
+    worstSeasonName,
     seasonsPlayed,
     lowestPoints,
     highestPoints,
-    bestSeasonName,
-    worstSeasonName,
   };
 };
