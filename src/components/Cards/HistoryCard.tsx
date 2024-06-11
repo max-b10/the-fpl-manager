@@ -7,14 +7,14 @@ import {
 } from '../../UI/organisms/Card';
 
 interface HistoryCardProps {
-  bestFinish: string;
-  worstFinish: string;
-  seasonsPlayed: string;
-  rankMean?: string;
-  pointsMean?: string;
+  bestRank: number;
+  worstRank: number;
+  seasonsPlayed: number;
+  rankMean: number;
+  pointsMean: number;
   subText?: string;
-  lowestPoints?: string;
-  highestPoints?: string;
+  lowestPoints: number;
+  highestPoints: number;
   bestSeasonName?: string;
   worstSeasonName?: string;
 }
@@ -23,8 +23,8 @@ const HistoryCard: React.FC<HistoryCardProps> = ({
   rankMean,
   pointsMean,
   subText,
-  bestFinish,
-  worstFinish,
+  bestRank,
+  worstRank,
   seasonsPlayed,
   lowestPoints,
   highestPoints,
@@ -51,7 +51,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({
             </li>
             <li className="flex items-center justify-between">
               <span className="text-muted-foreground">Rank</span>
-              <span>{bestFinish}</span>
+              <span>{bestRank}</span>
             </li>
             <li className="flex items-center justify-between">
               <span className="text-muted-foreground">Total points</span>
@@ -67,7 +67,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({
             </li>
             <li className="flex items-center justify-between">
               <span className="text-muted-foreground">Rank</span>
-              <span>{worstFinish}</span>
+              <span>{worstRank}</span>
             </li>
             <li className="flex items-center justify-between">
               <span className="text-muted-foreground">Total points</span>

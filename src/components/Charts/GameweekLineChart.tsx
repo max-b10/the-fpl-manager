@@ -15,7 +15,7 @@ import { IEvent } from '../../types/general/event';
 interface IGameweekLineChartProps {
   playerGameweekData: ICurrent[];
   generalGameweekData: IEvent[];
-  totalPoints: string;
+  totalPoints: number;
   playerName: string;
 }
 

@@ -7,15 +7,11 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { FC } from 'react';
-import { stringToNumber } from '../../helpers/stringToNumber';
 import { SeasonTooltip } from '../Tooltips/SeasonTooltip';
+import { IPast } from '../../types/manager/managerHistory';
 
 interface ISeasonBarChartProps {
-  pastSeasonsData: {
-    total_points: string;
-    rank: string;
-    season_name: string;
-  }[];
+  pastSeasonsData: IPast[];
 }
 
 const SeasonBarChart: FC<ISeasonBarChartProps> = ({ pastSeasonsData }) => {
@@ -95,7 +91,7 @@ const SeasonBarChart: FC<ISeasonBarChartProps> = ({ pastSeasonsData }) => {
           />
           <Bar
             name={'Season'}
-            dataKey={(data) => stringToNumber(data.rank)}
+            dataKey={(data) => data.rank}
             fill="#22C55E"
             radius={[5, 5, 0, 0]}
           />

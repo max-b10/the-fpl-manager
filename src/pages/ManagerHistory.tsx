@@ -92,7 +92,7 @@ const ManagerHistory = () => {
                         <CardContent className="h-[calc(100vh-20rem)] overflow-auto">
                           <GameweekLineChart
                             playerName={playerName || ''}
-                            totalPoints={totalPoints || ''}
+                            totalPoints={totalPoints || 0}
                             playerGameweekData={gameWeekHistoryData || []}
                             generalGameweekData={generalGameweekData || []}
                           ></GameweekLineChart>
@@ -122,18 +122,18 @@ const ManagerHistory = () => {
                           </div>
                           <div className="flex h-full flex-grow flex-col gap-4 border-primary md:col-span-1">
                             <HistoryCard
-                              rankMean={totalRankMean}
+                              rankMean={totalRankMean || 0}
                               subText={
                                 pastSeasonsData && pastSeasonsData.length > 0
                                   ? 'Mean rank'
                                   : 'Current rank'
                               }
-                              bestFinish={bestRank}
-                              worstFinish={worstRank}
-                              seasonsPlayed={seasonsPlayed}
+                              bestRank={bestRank || 0}
+                              worstRank={worstRank || 0}
+                              seasonsPlayed={seasonsPlayed || 0}
                               lowestPoints={lowestPoints}
                               highestPoints={highestPoints}
-                              pointsMean={totalPointsMean}
+                              pointsMean={totalPointsMean || 0}
                               bestSeasonName={bestSeasonName}
                               worstSeasonName={worstSeasonName}
                             />
