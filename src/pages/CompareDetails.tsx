@@ -22,7 +22,8 @@ const CompareDetails = () => {
     managerSeasonsPlayed,
     regionName,
   } = useManagerData(fplId);
-  const { pastSeasonsData, bestRank } = useManagerHistoryData(fplId);
+  const { pastSeasonsData, bestRank, bestSeason } =
+    useManagerHistoryData(fplId);
   const {
     enemyName,
     enemySeasonsPlayed,
@@ -32,6 +33,7 @@ const CompareDetails = () => {
     isLoadingEnemyHistory,
     enemyPastSeasonsData,
     enemyBestRank,
+    enemyBestSeason,
   } = useEnemyManagerData(Number(id));
 
   useCheckId();
@@ -49,7 +51,7 @@ const CompareDetails = () => {
             onBackClick={() => navigate('/managercomparison')}
           />
           <MainContainer>
-            <div className="flex flex-col items-center justify-center lg:flex-row">
+            <div className="mx-auto flex max-w-6xl flex-col items-center justify-center lg:flex-row lg:space-x-8">
               <CompareSection
                 region={regionName || ''}
                 id={id}
@@ -59,6 +61,8 @@ const CompareDetails = () => {
                 src={favouriteTeamSrc}
                 slides={pastSeasonsData || []}
                 bestRank={bestRank}
+                bestSeason={bestSeason}
+                isLeftColumn={true}
               />
 
               <CompareSection
@@ -70,6 +74,8 @@ const CompareDetails = () => {
                 src={enemyFavouriteTeamSrc}
                 slides={enemyPastSeasonsData || []}
                 bestRank={enemyBestRank}
+                bestSeason={enemyBestSeason}
+                isLeftColumn={false}
               />
             </div>
           </MainContainer>

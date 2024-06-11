@@ -10,11 +10,7 @@ import { useDotButton } from './useDotButton';
 import { Card, CardContent } from '../../UI/organisms/Card';
 
 interface IHistoryCarouselProps {
-  slides: {
-    total_points: string;
-    rank: string;
-    season_name: string;
-  }[];
+  slides: { season_name: string; total_points: string; rank: string }[];
 }
 
 const HistoryCarousel: React.FC<IHistoryCarouselProps> = ({ slides }) => {
@@ -32,47 +28,50 @@ const HistoryCarousel: React.FC<IHistoryCarouselProps> = ({ slides }) => {
   } = usePrevNextButtons(emblaApi);
   return (
     <>
-      <Card className="flex min-w-full flex-grow flex-col border border-primary py-6">
+      <Card className="flex min-w-full flex-grow flex-col border border-primary pt-6">
         <CardContent>
           {slides.length > 1 ? (
             <>
-              <div className="flex items-center justify-center space-x-4">
-                <ButtonClick>
-                  <PrevButton
-                    onClick={onPrevButtonClick}
-                    disabled={prevBtnDisabled}
-                  />
-                </ButtonClick>
-
-                <div className="overflow-hidden" ref={emblaRef}>
-                  <div className="mt-1 flex justify-center">
-                    {slides.map((slide, index) => (
-                      <div className="flex-none" key={index}>
-                        <CarouselCard
-                          title={'Season: ' + slide.season_name}
-                          icon={<History className="h-5 w-5 text-primary" />}
-                          content={slide.total_points}
-                          footer={slide.rank}
-                        />
-                      </div>
-                    ))}
-                  </div>
+              <div
+                className="flex items-center justify-center overflow-hidden"
+                ref={emblaRef}
+              >
+                <div className="mb-2 flex justify-center">
+                  {slides.map((slide, index) => (
+                    <div className="flex-none" key={index}>
+                      <CarouselCard
+                        key={index}
+                        title={'Season: ' + slide.season_name}
+                        icon={<History className="h-5 w-5 text-primary" />}
+                        content={slide.total_points}
+                        footer={slide.rank}
+                      />
+                    </div>
+                  ))}
                 </div>
-                <ButtonClick>
-                  <NextButton
-                    onClick={onNextButtonClick}
-                    disabled={nextBtnDisabled}
-                  />
-                </ButtonClick>
               </div>
 
-              <div className="mx-auto flex justify-center gap-4">
-                <div className="flex items-center justify-center">
+              <div className="flex items-center justify-between">
+                <div className="flex gap-3">
+                  <ButtonClick>
+                    <PrevButton
+                      onClick={onPrevButtonClick}
+                      disabled={prevBtnDisabled}
+                    />
+                  </ButtonClick>
+                  <ButtonClick>
+                    <NextButton
+                      onClick={onNextButtonClick}
+                      disabled={nextBtnDisabled}
+                    />
+                  </ButtonClick>
+                </div>
+                <div className="flex w-full items-center justify-end gap-4">
                   {scrollSnaps.map((_, index) => (
                     <ButtonClick key={index}>
                       <DotButton
                         onClick={() => onDotButtonClick(index)}
-                        className={`mx-1 inline-flex h-3 w-3 items-center justify-center rounded-full ${
+                        className={`-mx-1 h-2 w-2 items-center justify-center rounded-full ${
                           index === selectedIndex
                             ? 'ring-2 ring-primary'
                             : 'ring-2 ring-muted'

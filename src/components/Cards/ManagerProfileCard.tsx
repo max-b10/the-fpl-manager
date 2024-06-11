@@ -6,6 +6,7 @@ import {
   CardTitle,
 } from '../../UI/organisms/Card';
 import { Avatar, AvatarImage } from '../../UI/molecules/Avatar/Avatar';
+import { User } from 'lucide-react';
 
 interface IManagerProfileProps {
   name?: string;
@@ -14,27 +15,42 @@ interface IManagerProfileProps {
   totalRankMean?: string;
   id?: string;
   src?: string;
+  isLeftColumn?: boolean;
 }
 
-const ManagerProfile: React.FC<IManagerProfileProps> = ({
+const ManagerProfileCard: React.FC<IManagerProfileProps> = ({
   name,
   region,
   seasonsPlayed,
   totalRankMean,
   src,
+  isLeftColumn,
 }) => {
   return (
     <Card className="flex min-w-full flex-grow flex-col border border-primary">
-      <CardHeader className="mb-4 flex flex-row items-start rounded-tl-lg rounded-tr-lg bg-muted/50 p-4">
-        <div>
-          <CardTitle className="mb-2 flex items-center">{name}</CardTitle>
-          <CardDescription className="flex justify-start">
-            {region}
-          </CardDescription>
+      <CardHeader
+        className={`mb-4 flex flex-row items-start rounded-tl-lg rounded-tr-lg bg-muted/50 px-4 py-3 ${!isLeftColumn ? 'justify-end' : ''}`}
+      >
+        <div
+          className={`flex w-full justify-between ${!isLeftColumn ? 'flex-row-reverse' : ''}`}
+        >
+          <div>
+            <CardTitle className="mb-2 flex items-center">{name}</CardTitle>
+            <CardDescription
+              className={`flex ${!isLeftColumn ? 'justify-end' : ''}`}
+            >
+              {region}
+            </CardDescription>
+          </div>
+          <div className="my-auto flex h-10 w-10 items-center justify-center rounded-full border border-primary text-primary">
+            <User></User>
+          </div>
         </div>
       </CardHeader>
-      <CardContent className="flex">
-        <div className="flex min-w-full justify-between">
+      <CardContent>
+        <div
+          className={`flex min-w-full justify-between ${!isLeftColumn ? 'flex-row-reverse' : ''}`}
+        >
           <div>
             <div className="flex justify-center">
               <Avatar className="sm:h-30 sm:w-30 h-24 w-24 border border-secondary-foreground">
@@ -42,20 +58,38 @@ const ManagerProfile: React.FC<IManagerProfileProps> = ({
               </Avatar>
             </div>
           </div>
-          <div className="flex flex-grow justify-end">
+          <div
+            className={`flex flex-grow ${!isLeftColumn ? 'justify-start' : 'justify-end'}`}
+          >
             <ul className="grid gap-4">
-              <li className="flex items-center justify-between">
-                <span className="mr-4 text-muted-foreground">
+              <li
+                className={`flex items-center justify-between ${!isLeftColumn ? 'flex-row-reverse' : ''}`}
+              >
+                <span
+                  className={`${isLeftColumn ? 'mr-4' : 'ml-4'} text-muted-foreground`}
+                >
                   Seasons Played
                 </span>
                 <span>{seasonsPlayed}</span>
               </li>
-              <li className="flex items-center justify-between">
-                <span className="mr-4 text-muted-foreground">Average Rank</span>
+              <li
+                className={`flex items-center justify-between ${!isLeftColumn ? 'flex-row-reverse' : ''}`}
+              >
+                <span
+                  className={`${isLeftColumn ? 'mr-4' : 'ml-4'} text-muted-foreground`}
+                >
+                  Average Rank
+                </span>
                 <span>{totalRankMean}</span>
               </li>
-              <li className="flex items-center justify-between">
-                <span className="mr-4 text-muted-foreground">Mean points</span>
+              <li
+                className={`flex items-center justify-between ${!isLeftColumn ? 'flex-row-reverse' : ''}`}
+              >
+                <span
+                  className={`${isLeftColumn ? 'mr-4' : 'ml-4'} text-muted-foreground`}
+                >
+                  Mean points
+                </span>
                 <span>12,345</span>
               </li>
             </ul>
@@ -66,4 +100,4 @@ const ManagerProfile: React.FC<IManagerProfileProps> = ({
   );
 };
 
-export default ManagerProfile;
+export default ManagerProfileCard;

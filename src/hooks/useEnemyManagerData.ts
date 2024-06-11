@@ -26,8 +26,8 @@ export const useEnemyManagerData = (enemyId: number) => {
   const enemyFavouriteTeamObj = teamMapping.find(
     (team) => team.id === enemyData?.favourite_team
   );
-  const enemyBestSeason = enemyHistory?.past
-    ? enemyHistory.past.reduce((prev, current) =>
+  const enemyBestSeason = enemyPastSeasonsData
+    ? enemyPastSeasonsData.reduce((prev, current) =>
         prev.rank < current.rank ? prev : current
       )
     : null;

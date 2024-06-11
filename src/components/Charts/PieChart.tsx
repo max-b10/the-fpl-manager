@@ -8,10 +8,10 @@ interface IPieChartProps {
 
 const PieChartComponent: FC<IPieChartProps> = ({ bestRank }) => {
   const bestRankNumber = Number(bestRank.replace(/,/g, ''));
-  const rankProportion = 10000000 - bestRankNumber;
+  const rankProportion = 5000000 - bestRankNumber;
   const data = [
     { name: 'Best Rank', value: rankProportion },
-    { name: 'Rest', value: 10000000 - rankProportion },
+    { name: 'Rest', value: 5000000 - rankProportion },
   ];
 
   return (

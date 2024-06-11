@@ -9,13 +9,15 @@ interface ICompareSectionProps {
   seasonsPlayed?: number;
   totalRankMean?: string;
   src?: string;
-  slides?: {
-    total_points: string;
-    rank: string;
-    season_name: string;
-  }[];
+  slides?: { season_name: string; total_points: string; rank: string }[];
   bestRank?: string;
   region?: string;
+  isLeftColumn: boolean;
+  bestSeason?: {
+    season_name: string;
+    total_points: string;
+    rank: string;
+  } | null;
 }
 
 const CompareSection: React.FC<ICompareSectionProps> = ({
@@ -26,9 +28,11 @@ const CompareSection: React.FC<ICompareSectionProps> = ({
   src,
   slides,
   bestRank = 'N/A',
+  bestSeason,
   region,
+  isLeftColumn,
 }) => (
-  <div className="mx-auto mb-6 w-full">
+  <div className="mx-auto mb-6 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl">
     <div className="mb-6">
       <ManagerProfileCard
         region={region}
@@ -37,16 +41,36 @@ const CompareSection: React.FC<ICompareSectionProps> = ({
         seasonsPlayed={seasonsPlayed}
         totalRankMean={totalRankMean}
         src={src}
+        isLeftColumn={isLeftColumn}
       />
     </div>
     <div className="mb-6">{slides && <HistoryCarousel slides={slides} />}</div>
     <div className="grid min-w-full grid-cols-3">
-      <div className="col-span-2">
-        <BestSeasonCard></BestSeasonCard>
-      </div>
-      <div className="col-span-1 flex items-center justify-center overflow-hidden">
-        <PieChart bestRank={bestRank}></PieChart>
-      </div>
+      {isLeftColumn ? (
+        <>
+          <div className="col-span-2">
+            <BestSeasonCard
+              bestSeason={bestSeason}
+              isLeftColumn={isLeftColumn}
+            />
+          </div>
+          <div className="col-span-1 flex items-center justify-center overflow-hidden">
+            <PieChart bestRank={bestRank}></PieChart>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="col-span-1 flex items-center justify-center overflow-hidden">
+            <PieChart bestRank={bestRank}></PieChart>
+          </div>
+          <div className="col-span-2">
+            <BestSeasonCard
+              bestSeason={bestSeason}
+              isLeftColumn={isLeftColumn}
+            />
+          </div>
+        </>
+      )}
     </div>
   </div>
 );

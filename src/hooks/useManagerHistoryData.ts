@@ -27,13 +27,12 @@ export const useManagerHistoryData = (fplId: number) => {
   }));
 
   const bestSeason = managerHistory?.past
-    ? managerHistory.past.reduce((prev, current) =>
+    ? managerHistory?.past?.reduce((prev, current) =>
         prev.rank < current.rank ? prev : current
       )
     : null;
-
   const worstSeason = managerHistory?.past
-    ? managerHistory.past.reduce((prev, current) =>
+    ? managerHistory?.past?.reduce((prev, current) =>
         prev.rank > current.rank ? prev : current
       )
     : null;
@@ -44,7 +43,7 @@ export const useManagerHistoryData = (fplId: number) => {
   const worstSeasonName = worstSeason ? worstSeason.season_name : 'N/A';
 
   const seasonsPlayed = managerHistory?.past
-    ? managerHistory.past.length.toLocaleString()
+    ? managerHistory?.past?.length.toLocaleString()
     : 'N/A';
 
   const lowestPoints = managerHistory?.past
@@ -64,6 +63,7 @@ export const useManagerHistoryData = (fplId: number) => {
     gameWeekHistoryData,
     isLoadingManagerHistory,
     bestRank,
+    bestSeason,
     worstRank,
     seasonsPlayed,
     lowestPoints,
