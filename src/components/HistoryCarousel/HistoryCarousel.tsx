@@ -42,10 +42,10 @@ const HistoryCarousel: React.FC<IHistoryCarouselProps> = ({ slides }) => {
                     <div className="flex-none" key={index}>
                       <CarouselCard
                         key={index}
-                        title={'Season: ' + slide.season_name}
+                        title={slide.season_name}
                         icon={<History className="h-5 w-5 text-primary" />}
-                        content={slide.total_points}
-                        footer={slide.rank}
+                        totalPoints={slide.total_points}
+                        rank={slide.rank}
                       />
                     </div>
                   ))}
@@ -86,10 +86,10 @@ const HistoryCarousel: React.FC<IHistoryCarouselProps> = ({ slides }) => {
           ) : (
             <div>
               <CarouselCard
-                title={'Season: ' + slides[0].season_name}
+                title={slides[0].season_name}
                 icon={<History className="h-6 w-6 text-primary" />}
-                content={slides[0].total_points}
-                footer={slides[0].rank}
+                totalPoints={slides[0].total_points}
+                rank={slides[0].rank}
               />
             </div>
           )}

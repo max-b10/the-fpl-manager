@@ -15,7 +15,14 @@ interface IBestSeasonProps {
 const BestSeasonCard: React.FC<IBestSeasonProps> = ({
   isLeftColumn,
   bestSeason,
+  bestRank,
 }) => {
+  const formattedBestRank = bestRank?.toLocaleString();
+  const formattedBestPoints = bestSeason?.total_points.toLocaleString();
+
+  const flexDirection = isLeftColumn ? '' : 'flex-row-reverse';
+  const marginDirection = isLeftColumn ? 'mr-4' : 'ml-4';
+
   return (
     <Card className="flex flex-grow flex-col border border-primary">
       <CardHeader
@@ -31,34 +38,28 @@ const BestSeasonCard: React.FC<IBestSeasonProps> = ({
         <div className={`flex min-w-full justify-between`}>
           <ul className="grid w-full gap-4">
             <li
-              className={`flex items-center justify-between ${!isLeftColumn ? 'flex-row-reverse' : ''}`}
+              className={`flex items-center justify-between ${flexDirection}`}
             >
-              <span
-                className={`${isLeftColumn ? 'mr-4' : 'ml-4'} text-muted-foreground`}
-              >
+              <span className={`${marginDirection} text-muted-foreground`}>
                 Season
               </span>
               <span>{bestSeason?.season_name}</span>
             </li>
             <li
-              className={`flex items-center justify-between ${!isLeftColumn ? 'flex-row-reverse' : ''}`}
+              className={`flex items-center justify-between ${flexDirection}`}
             >
-              <span
-                className={`${isLeftColumn ? 'mr-4' : 'ml-4'} text-muted-foreground`}
-              >
+              <span className={`${marginDirection} text-muted-foreground`}>
                 Points
               </span>
-              <span>{bestSeason?.total_points}</span>
+              <span>{formattedBestPoints}</span>
             </li>
             <li
-              className={`flex items-center justify-between ${!isLeftColumn ? 'flex-row-reverse' : ''}`}
+              className={`flex items-center justify-between ${flexDirection}`}
             >
-              <span
-                className={`${isLeftColumn ? 'mr-4' : 'ml-4'} text-muted-foreground`}
-              >
+              <span className={`${marginDirection} text-muted-foreground`}>
                 Rank
               </span>
-              <span>127,988</span>
+              <span>{formattedBestRank}</span>
             </li>
           </ul>
         </div>

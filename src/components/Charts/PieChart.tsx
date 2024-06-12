@@ -6,12 +6,15 @@ interface IPieChartProps {
   bestRank: number;
 }
 
+const TOTAL_RANKS = 10000000;
+
 const PieChartComponent: FC<IPieChartProps> = ({ bestRank }) => {
-  const rankProportion = 5000000 - bestRank;
+  const rankProportion = TOTAL_RANKS - bestRank;
   const data = [
     { name: 'Best Rank', value: rankProportion },
-    { name: 'Rest', value: 5000000 - rankProportion },
+    { name: 'Rest', value: TOTAL_RANKS - rankProportion },
   ];
+  const formattedBestRank = bestRank.toLocaleString();
 
   return (
     <PieChart width={200} height={200}>
@@ -33,7 +36,7 @@ const PieChartComponent: FC<IPieChartProps> = ({ bestRank }) => {
           />
         ))}
         <Label position={'center'} style={{ fill: '#fff' }}>
-          {bestRank}
+          {formattedBestRank}
         </Label>
       </Pie>
     </PieChart>

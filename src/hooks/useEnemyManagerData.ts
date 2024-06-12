@@ -4,7 +4,10 @@ import { fetcher } from '../lib/fetcher';
 import { API_ENDPOINTS, BASE_URL } from '../../api/endpoints';
 import { IManagerData } from '../types/manager/managerData';
 import teamMapping from '../constants/teamMapping';
-import { calculateMeanRank } from '../helpers/calculateMean';
+import {
+  calculateMeanRank,
+  calculateMeanPoints,
+} from '../helpers/calculateMean';
 
 export const useEnemyManagerData = (enemyId: number) => {
   const { data: enemyData, isValidating: isLoadingEnemyData } =
@@ -28,17 +31,24 @@ export const useEnemyManagerData = (enemyId: number) => {
     : null;
   const enemyBestRank = enemyBestSeason ? enemyBestSeason.rank : 0;
 
+  const enemyName = `${enemyData?.player_first_name} ${enemyData?.player_last_name}`;
+  const enemySeasonsPlayed = enemyHistory?.past?.length
+    ? Number(enemyHistory.past.length) + 1
+    : 1;
+  const enemyTotalRankMean = calculateMeanRank(
+    enemyHistory?.past,
+    enemyData?.summary_overall_rank
+  );
+  const enemyTotalPointsMean = calculateMeanPoints(enemyHistory?.past);
+  const enemyFavouriteTeamSrc = enemyFavouriteTeamObj?.src;
+
   return {
-    enemyName: `${enemyData?.player_first_name} ${enemyData?.player_last_name}`,
+    enemyName,
     enemyPastSeasonsData,
-    enemySeasonsPlayed: enemyHistory?.past?.length
-      ? Number(enemyHistory.past.length) + 1
-      : 1,
-    enemyTotalRankMean: calculateMeanRank(
-      enemyHistory?.past,
-      enemyData?.summary_overall_rank
-    ),
-    enemyFavouriteTeamSrc: enemyFavouriteTeamObj?.src,
+    enemySeasonsPlayed,
+    enemyTotalRankMean,
+    enemyTotalPointsMean,
+    enemyFavouriteTeamSrc,
     isLoadingEnemyData,
     isLoadingEnemyHistory,
     enemyBestSeason,

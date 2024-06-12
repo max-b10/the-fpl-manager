@@ -18,6 +18,7 @@ const CompareDetails = () => {
   const {
     playerName,
     totalRankMean,
+    totalPointsMean,
     favouriteTeamSrc,
     managerSeasonsPlayed,
     regionName,
@@ -28,6 +29,7 @@ const CompareDetails = () => {
     enemyName,
     enemySeasonsPlayed,
     enemyTotalRankMean,
+    enemyTotalPointsMean,
     enemyFavouriteTeamSrc,
     isLoadingEnemyData,
     isLoadingEnemyHistory,
@@ -35,7 +37,6 @@ const CompareDetails = () => {
     enemyBestRank,
     enemyBestSeason,
   } = useEnemyManagerData(Number(id));
-
   useCheckId();
   return (
     <>
@@ -58,6 +59,7 @@ const CompareDetails = () => {
                 name={playerName}
                 seasonsPlayed={managerSeasonsPlayed}
                 totalRankMean={totalRankMean}
+                totalPointsMean={totalPointsMean}
                 src={favouriteTeamSrc}
                 slides={pastSeasonsData || []}
                 bestRank={bestRank || 0}
@@ -73,9 +75,10 @@ const CompareDetails = () => {
                 name={enemyName}
                 seasonsPlayed={enemySeasonsPlayed}
                 totalRankMean={enemyTotalRankMean}
+                totalPointsMean={enemyTotalPointsMean}
                 src={enemyFavouriteTeamSrc}
                 slides={enemyPastSeasonsData || []}
-                bestRank={enemyBestRank}
+                bestRank={enemyBestRank || 0}
                 bestSeason={
                   enemyBestSeason || {
                     season_name: '',

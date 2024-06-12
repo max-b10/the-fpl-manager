@@ -13,6 +13,7 @@ interface IManagerProfileProps {
   region?: string;
   seasonsPlayed?: number;
   totalRankMean?: number;
+  totalPointsMean?: number;
   id?: string;
   src?: string;
   isLeftColumn?: boolean;
@@ -23,9 +24,14 @@ const ManagerProfileCard: React.FC<IManagerProfileProps> = ({
   region,
   seasonsPlayed,
   totalRankMean,
+  totalPointsMean,
   src,
   isLeftColumn,
 }) => {
+  const formattedTotalRankMean = totalRankMean?.toLocaleString();
+  const formattedTotalPointsMean = totalPointsMean?.toLocaleString();
+  const flexDirection = !isLeftColumn ? 'flex-row-reverse' : '';
+  const marginDirection = isLeftColumn ? 'mr-4' : 'ml-4';
   return (
     <Card className="flex min-w-full flex-grow flex-col border border-primary">
       <CardHeader
@@ -63,34 +69,28 @@ const ManagerProfileCard: React.FC<IManagerProfileProps> = ({
           >
             <ul className="grid gap-4">
               <li
-                className={`flex items-center justify-between ${!isLeftColumn ? 'flex-row-reverse' : ''}`}
+                className={`flex items-center justify-between ${flexDirection}`}
               >
-                <span
-                  className={`${isLeftColumn ? 'mr-4' : 'ml-4'} text-muted-foreground`}
-                >
+                <span className={`${marginDirection} text-muted-foreground`}>
                   Seasons Played
                 </span>
                 <span>{seasonsPlayed}</span>
               </li>
               <li
-                className={`flex items-center justify-between ${!isLeftColumn ? 'flex-row-reverse' : ''}`}
+                className={`flex items-center justify-between ${flexDirection}`}
               >
-                <span
-                  className={`${isLeftColumn ? 'mr-4' : 'ml-4'} text-muted-foreground`}
-                >
+                <span className={`${marginDirection} text-muted-foreground`}>
                   Average Rank
                 </span>
-                <span>{totalRankMean}</span>
+                <span>{formattedTotalRankMean}</span>
               </li>
               <li
-                className={`flex items-center justify-between ${!isLeftColumn ? 'flex-row-reverse' : ''}`}
+                className={`flex items-center justify-between ${flexDirection}`}
               >
-                <span
-                  className={`${isLeftColumn ? 'mr-4' : 'ml-4'} text-muted-foreground`}
-                >
+                <span className={`${marginDirection} text-muted-foreground`}>
                   Mean points
                 </span>
-                <span>12,345</span>
+                <span>{formattedTotalPointsMean}</span>
               </li>
             </ul>
           </div>
