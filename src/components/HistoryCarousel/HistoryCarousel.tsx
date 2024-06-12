@@ -3,7 +3,7 @@ import { DotButton } from './CarouselDotButtons';
 import { PrevButton, NextButton } from './CarouselArrowButtons';
 import useEmblaCarousel from 'embla-carousel-react';
 import CarouselCard from '../Cards/CarouselCard';
-import { History } from 'lucide-react';
+import { CalendarDays } from 'lucide-react';
 import ButtonClick from '../Animations/ButtonClick';
 import { usePrevNextButtons } from './usePrevNextButtons';
 import { useDotButton } from './useDotButton';
@@ -43,7 +43,7 @@ const HistoryCarousel: React.FC<IHistoryCarouselProps> = ({ slides }) => {
                       <CarouselCard
                         key={index}
                         title={slide.season_name}
-                        icon={<History className="h-5 w-5 text-primary" />}
+                        icon={<CalendarDays className="h-5 w-5 text-primary" />}
                         totalPoints={slide.total_points}
                         rank={slide.rank}
                       />
@@ -87,7 +87,7 @@ const HistoryCarousel: React.FC<IHistoryCarouselProps> = ({ slides }) => {
             <div>
               <CarouselCard
                 title={slides[0].season_name}
-                icon={<History className="h-6 w-6 text-primary" />}
+                icon={<CalendarDays className="h-6 w-6 text-primary" />}
                 totalPoints={slides[0].total_points}
                 rank={slides[0].rank}
               />

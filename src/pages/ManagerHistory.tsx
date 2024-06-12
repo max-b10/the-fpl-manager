@@ -52,7 +52,7 @@ const ManagerHistory = () => {
   const { generalGameweekData } = useGeneralData();
   const handleSubmit = useNavigationWithId();
   useCheckId();
-
+  const formattedTotalPoints = totalPoints?.toLocaleString();
   return (
     <>
       <Navbar handleSubmit={handleSubmit} />
@@ -85,7 +85,7 @@ const ManagerHistory = () => {
                             </CardDescription>
                           </div>
                           <div>
-                            <CardTitle>{totalPoints}</CardTitle>
+                            <CardTitle>{formattedTotalPoints}</CardTitle>
                             <CardDescription>Total pts</CardDescription>
                           </div>
                         </CardHeader>
