@@ -23,6 +23,15 @@ const BestSeasonCard: React.FC<IBestSeasonProps> = ({
   const flexDirection = isLeftColumn ? '' : 'flex-row-reverse';
   const marginDirection = isLeftColumn ? 'mr-4' : 'ml-4';
 
+  const ListItem = ({ label, value }: { label: string; value: string }) => (
+    <li className={`flex items-center justify-between ${flexDirection}`}>
+      <span className={`${marginDirection} text-muted-foreground`}>
+        {label}
+      </span>
+      <span>{value}</span>
+    </li>
+  );
+
   return (
     <Card className="flex flex-grow flex-col border border-primary">
       <CardHeader
@@ -35,32 +44,11 @@ const BestSeasonCard: React.FC<IBestSeasonProps> = ({
         </div>
       </CardHeader>
       <CardContent className="flex">
-        <div className={`flex min-w-full justify-between`}>
+        <div className="flex min-w-full justify-between">
           <ul className="grid w-full gap-4">
-            <li
-              className={`flex items-center justify-between ${flexDirection}`}
-            >
-              <span className={`${marginDirection} text-muted-foreground`}>
-                Season
-              </span>
-              <span>{bestSeason?.season_name}</span>
-            </li>
-            <li
-              className={`flex items-center justify-between ${flexDirection}`}
-            >
-              <span className={`${marginDirection} text-muted-foreground`}>
-                Points
-              </span>
-              <span>{formattedBestPoints}</span>
-            </li>
-            <li
-              className={`flex items-center justify-between ${flexDirection}`}
-            >
-              <span className={`${marginDirection} text-muted-foreground`}>
-                Rank
-              </span>
-              <span>{formattedBestRank}</span>
-            </li>
+            <ListItem label="Season" value={bestSeason?.season_name || ''} />
+            <ListItem label="Points" value={formattedBestPoints || ''} />
+            <ListItem label="Rank" value={formattedBestRank || ''} />
           </ul>
         </div>
       </CardContent>

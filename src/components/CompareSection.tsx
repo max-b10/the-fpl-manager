@@ -46,7 +46,7 @@ const CompareSection: React.FC<ICompareSectionProps> = ({
         />
       </div>
       <div className="mb-6">
-        {slides && <HistoryCarousel slides={slides} />}
+        <HistoryCarousel slides={slides} />
       </div>
       <div className="grid min-w-full grid-cols-3">
         {isLeftColumn ? (

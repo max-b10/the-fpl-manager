@@ -21,23 +21,27 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({
 }) => {
   const formattedTotalPoints = totalPoints.toLocaleString();
   const formattedRank = rank.toLocaleString();
+
+  const ListItem = ({ label, value }: { label: string; value: string }) => (
+    <li className="flex items-center justify-between">
+      <span className="mr-4 text-muted-foreground">{label}</span>
+      <span>{value}</span>
+    </li>
+  );
+
   return (
-    <Card className="border-primary">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+    <Card className="flex flex-grow flex-col border border-primary">
+      <CardHeader className="mb-4 flex flex-row items-center justify-between space-y-0 rounded-tl-lg rounded-tr-lg bg-muted/50 px-4 py-3">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
         {icon}
       </CardHeader>
 
-      <CardContent className="flex items-center justify-center p-6">
-        <div className="flex flex-col">
-          <div>
-            <span className="text-2xl font-bold">{formattedTotalPoints}</span>
-            <span className="text-xs text-muted-foreground"> pts</span>
-          </div>
-          <div>
-            <span className="text-xs font-bold">{formattedRank}</span>
-            <span className="text-xs text-muted-foreground"> rank</span>
-          </div>
+      <CardContent className="flex">
+        <div className="flex min-w-full justify-between">
+          <ul className="grid w-full gap-4">
+            <ListItem label="Points" value={formattedTotalPoints} />
+            <ListItem label="Rank" value={formattedRank} />
+          </ul>
         </div>
       </CardContent>
     </Card>

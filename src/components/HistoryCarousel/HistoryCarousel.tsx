@@ -1,20 +1,21 @@
 import React from 'react';
-import { DotButton } from './CarouselDotButtons';
-import { PrevButton, NextButton } from './CarouselArrowButtons';
+import { DotButton, useDotButton } from './CarouselDotButtons';
+import {
+  PrevButton,
+  NextButton,
+  usePrevNextButtons,
+} from './CarouselArrowButtons';
 import useEmblaCarousel from 'embla-carousel-react';
 import CarouselCard from '../Cards/CarouselCard';
 import { CalendarDays } from 'lucide-react';
-import ButtonClick from '../Animations/ButtonClick';
-import { usePrevNextButtons } from './usePrevNextButtons';
-import { useDotButton } from './useDotButton';
-import { Card, CardContent } from '../../UI/organisms/Card';
 import { IPast } from '../../types/manager/managerHistory';
+import { Card } from '../../UI/organisms/Card';
 
-interface IHistoryCarouselProps {
+type HistoryCarouselProps = {
   slides: IPast[];
-}
+};
 
-const HistoryCarousel: React.FC<IHistoryCarouselProps> = ({ slides }) => {
+const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
   const options = { loop: false };
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
@@ -27,74 +28,63 @@ const HistoryCarousel: React.FC<IHistoryCarouselProps> = ({ slides }) => {
     onPrevButtonClick,
     onNextButtonClick,
   } = usePrevNextButtons(emblaApi);
+
   return (
     <>
-      <Card className="flex min-w-full flex-grow flex-col border border-primary pt-6">
-        <CardContent>
-          {slides.length > 1 ? (
-            <>
-              <div
-                className="flex items-center justify-center overflow-hidden"
-                ref={emblaRef}
-              >
-                <div className="mb-2 flex justify-center">
-                  {slides.map((slide, index) => (
-                    <div className="flex-none" key={index}>
-                      <CarouselCard
-                        key={index}
-                        title={slide.season_name}
-                        icon={<CalendarDays className="h-5 w-5 text-primary" />}
-                        totalPoints={slide.total_points}
-                        rank={slide.rank}
-                      />
-                    </div>
-                  ))}
+      {slides.length > 1 ? (
+        <Card className="flex min-w-full flex-grow flex-col border border-primary bg-black">
+          <div className="mt-6 overflow-hidden" ref={emblaRef}>
+            <div className="ml-6 flex">
+              {slides.map((slide, index) => (
+                <div className="mx-8 w-80 flex-none pl-4 sm:pl-0" key={index}>
+                  <CarouselCard
+                    title={'Season: ' + slide.season_name}
+                    icon={<CalendarDays className="h-6 w-6 text-primary" />}
+                    totalPoints={slide.total_points}
+                    rank={slide.rank}
+                  />
                 </div>
-              </div>
+              ))}
+            </div>
+          </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex gap-3">
-                  <ButtonClick>
-                    <PrevButton
-                      onClick={onPrevButtonClick}
-                      disabled={prevBtnDisabled}
-                    />
-                  </ButtonClick>
-                  <ButtonClick>
-                    <NextButton
-                      onClick={onNextButtonClick}
-                      disabled={nextBtnDisabled}
-                    />
-                  </ButtonClick>
-                </div>
-                <div className="flex w-full items-center justify-end gap-4">
-                  {scrollSnaps.map((_, index) => (
-                    <ButtonClick key={index}>
-                      <DotButton
-                        onClick={() => onDotButtonClick(index)}
-                        className={`-mx-1 h-2 w-2 items-center justify-center rounded-full ${
-                          index === selectedIndex
-                            ? 'ring-2 ring-primary'
-                            : 'ring-2 ring-muted'
-                        }`}
-                      />
-                    </ButtonClick>
-                  ))}
-                </div>
-              </div>
-            </>
-          ) : (
-            <div>
-              <CarouselCard
-                title={slides[0].season_name}
-                icon={<CalendarDays className="h-6 w-6 text-primary" />}
-                totalPoints={slides[0].total_points}
-                rank={slides[0].rank}
+          <div className="mt-7 flex items-center justify-between">
+            <div className="grid grid-cols-2 gap-3">
+              <PrevButton
+                onClick={onPrevButtonClick}
+                disabled={prevBtnDisabled}
+              />
+              <NextButton
+                onClick={onNextButtonClick}
+                disabled={nextBtnDisabled}
               />
             </div>
-          )}
-        </CardContent>
-      </Card>
+
+            <div className="flex flex-wrap items-center">
+              {scrollSnaps.map((_, index) => (
+                <DotButton
+                  key={index}
+                  onClick={() => onDotButtonClick(index)}
+                  className={` mx-1 inline-flex h-3 w-3 items-center justify-center rounded-full ${
+                    index === selectedIndex
+                      ? 'ring-2 ring-primary'
+                      : 'ring-2 ring-muted'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </Card>
+      ) : (
+        <div className="mx-auto w-full min-w-0 flex-none pl-4 sm:pl-0">
+          <CarouselCard
+            title={'Season: ' + slides[0].season_name}
+            icon={<CalendarDays className="h-6 w-6 text-primary" />}
+            totalPoints={slides[0].total_points}
+            rank={slides[0].rank}
+          />
+        </div>
+      )}
     </>
   );
 };

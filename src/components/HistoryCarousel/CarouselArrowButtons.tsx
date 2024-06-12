@@ -1,4 +1,55 @@
-import React, { PropsWithChildren } from 'react';
+import React, {
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
+import { EmblaCarouselType } from 'embla-carousel';
+
+type UsePrevNextButtonsType = {
+  prevBtnDisabled: boolean;
+  nextBtnDisabled: boolean;
+  onPrevButtonClick: () => void;
+  onNextButtonClick: () => void;
+};
+
+export const usePrevNextButtons = (
+  emblaApi: EmblaCarouselType | undefined
+): UsePrevNextButtonsType => {
+  const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
+  const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
+
+  const onPrevButtonClick = useCallback(() => {
+    if (!emblaApi) return;
+    emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const onNextButtonClick = useCallback(() => {
+    if (!emblaApi) return;
+    emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
+    setPrevBtnDisabled(!emblaApi.canScrollPrev());
+    setNextBtnDisabled(!emblaApi.canScrollNext());
+  }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    onSelect(emblaApi);
+    emblaApi.on('reInit', onSelect);
+    emblaApi.on('select', onSelect);
+  }, [emblaApi, onSelect]);
+
+  return {
+    prevBtnDisabled,
+    nextBtnDisabled,
+    onPrevButtonClick,
+    onNextButtonClick,
+  };
+};
+
 type PropType = PropsWithChildren<
   React.DetailedHTMLProps<
     React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -11,7 +62,7 @@ export const PrevButton: React.FC<PropType> = (props) => {
 
   return (
     <button
-      className="inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-muted text-primary hover:bg-muted disabled:text-gray-400 sm:h-12 sm:w-12"
+      className="inline-flex h-12 w-12 items-center justify-center rounded-full border-2 border-muted text-primary disabled:text-gray-400"
       type="button"
       {...restProps}
     >
@@ -31,7 +82,7 @@ export const NextButton: React.FC<PropType> = (props) => {
 
   return (
     <button
-      className="inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-muted text-primary hover:bg-muted disabled:text-gray-400 sm:h-12 sm:w-12"
+      className="inline-flex h-12 w-12 items-center justify-center rounded-full border-2 border-muted text-primary disabled:text-gray-400"
       type="button"
       {...restProps}
     >
