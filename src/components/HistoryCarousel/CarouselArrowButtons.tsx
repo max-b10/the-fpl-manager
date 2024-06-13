@@ -62,7 +62,7 @@ export const PrevButton: React.FC<PropType> = (props) => {
 
   return (
     <button
-      className="inline-flex h-12 w-12 items-center justify-center rounded-full border-2 border-muted text-primary disabled:text-gray-400"
+      className="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-muted text-primary disabled:text-gray-400"
       type="button"
       {...restProps}
     >
@@ -82,7 +82,7 @@ export const NextButton: React.FC<PropType> = (props) => {
 
   return (
     <button
-      className="inline-flex h-12 w-12 items-center justify-center rounded-full border-2 border-muted text-primary disabled:text-gray-400"
+      className="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-muted text-primary disabled:text-gray-400"
       type="button"
       {...restProps}
     >

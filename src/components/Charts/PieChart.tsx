@@ -1,45 +1,48 @@
 import { FC } from 'react';
-import { PieChart, Pie, Cell, Label } from 'recharts';
+import { PieChart, Pie, Cell, Label, ResponsiveContainer } from 'recharts';
 import { getColour } from '../../helpers/getColour';
+import { calculateLinearPercentileRank } from '../../helpers/calculateRating';
 
 interface IPieChartProps {
-  bestRank: number;
+  totalRankMean: number;
 }
 
 const TOTAL_RANKS = 10000000;
 
-const PieChartComponent: FC<IPieChartProps> = ({ bestRank }) => {
-  const rankProportion = TOTAL_RANKS - bestRank;
+const PieChartComponent: FC<IPieChartProps> = ({ totalRankMean }) => {
+  const rankProportion = TOTAL_RANKS - totalRankMean;
   const data = [
     { name: 'Best Rank', value: rankProportion },
     { name: 'Rest', value: TOTAL_RANKS - rankProportion },
   ];
-  const formattedBestRank = bestRank.toLocaleString();
-
+  console.log(totalRankMean);
+  const mangerRating = calculateLinearPercentileRank(totalRankMean);
   return (
-    <PieChart width={200} height={200}>
-      <Pie
-        cornerRadius={5}
-        stroke={'none'}
-        data={data}
-        startAngle={90}
-        endAngle={-270}
-        innerRadius={60}
-        outerRadius={80}
-        paddingAngle={5}
-        dataKey="value"
-      >
-        {data.map((entry, index) => (
-          <Cell
-            key={`cell-${index}`}
-            fill={index === 0 ? getColour(bestRank) : 'transparent'}
-          />
-        ))}
-        <Label position={'center'} style={{ fill: '#fff' }}>
-          {formattedBestRank}
-        </Label>
-      </Pie>
-    </PieChart>
+    <ResponsiveContainer height={127} width="100%">
+      <PieChart>
+        <Pie
+          cornerRadius={5}
+          stroke={'none'}
+          data={data}
+          startAngle={90}
+          endAngle={-270}
+          innerRadius="80%"
+          outerRadius="100%"
+          paddingAngle={5}
+          dataKey="value"
+        >
+          {data.map((entry, index) => (
+            <Cell
+              key={`cell-${index}`}
+              fill={index === 0 ? getColour(totalRankMean) : 'transparent'}
+            />
+          ))}
+          <Label position={'center'} style={{ fill: '#fff' }}>
+            {mangerRating}
+          </Label>
+        </Pie>
+      </PieChart>
+    </ResponsiveContainer>
   );
 };
 

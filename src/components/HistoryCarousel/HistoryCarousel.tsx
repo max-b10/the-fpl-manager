@@ -9,7 +9,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import CarouselCard from '../Cards/CarouselCard';
 import { CalendarDays } from 'lucide-react';
 import { IPast } from '../../types/manager/managerHistory';
-import { Card } from '../../UI/organisms/Card';
+import { Card, CardHeader, CardTitle } from '../../UI/organisms/Card';
 
 type HistoryCarouselProps = {
   slides: IPast[];
@@ -33,10 +33,17 @@ const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
     <>
       {slides.length > 1 ? (
         <Card className="flex min-w-full flex-grow flex-col border border-primary bg-black">
-          <div className="mt-6 overflow-hidden" ref={emblaRef}>
+          <CardHeader className="mb-4 flex flex-row items-start rounded-tl-lg rounded-tr-lg bg-muted/50 px-4 py-3">
+            <div>
+              <CardTitle className="flex items-center text-lg">
+                Season History
+              </CardTitle>
+            </div>
+          </CardHeader>
+          <div className="mt-2 overflow-hidden" ref={emblaRef}>
             <div className="ml-6 flex">
               {slides.map((slide, index) => (
-                <div className="mx-8 w-80 flex-none pl-4 sm:pl-0" key={index}>
+                <div className="w-full flex-none pr-6 md:pr-7" key={index}>
                   <CarouselCard
                     title={'Season: ' + slide.season_name}
                     icon={<CalendarDays className="h-6 w-6 text-primary" />}
@@ -48,7 +55,7 @@ const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
             </div>
           </div>
 
-          <div className="mt-7 flex items-center justify-between">
+          <div className="mx-6 my-3 flex items-start justify-between">
             <div className="grid grid-cols-2 gap-3">
               <PrevButton
                 onClick={onPrevButtonClick}
@@ -60,18 +67,20 @@ const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
               />
             </div>
 
-            <div className="flex flex-wrap items-center">
-              {scrollSnaps.map((_, index) => (
-                <DotButton
-                  key={index}
-                  onClick={() => onDotButtonClick(index)}
-                  className={` mx-1 inline-flex h-3 w-3 items-center justify-center rounded-full ${
-                    index === selectedIndex
-                      ? 'ring-2 ring-primary'
-                      : 'ring-2 ring-muted'
-                  }`}
-                />
-              ))}
+            <div className="ml-4 flex flex-wrap space-x-2 space-y-2">
+              <div>
+                {scrollSnaps.map((_, index) => (
+                  <DotButton
+                    key={index}
+                    onClick={() => onDotButtonClick(index)}
+                    className={`mx-1 inline-flex h-3 w-3 items-center justify-center rounded-full ${
+                      index === selectedIndex
+                        ? 'ring-2 ring-primary'
+                        : 'ring-2 ring-muted'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </Card>

@@ -3,6 +3,7 @@ import ManagerProfileCard from './Cards/ManagerProfileCard';
 import HistoryCarousel from './HistoryCarousel/HistoryCarousel';
 import BestSeasonCard from './Cards/BestSeasonCard';
 import { IPast } from '../types/manager/managerHistory';
+import { Card, CardHeader, CardTitle } from '../UI/organisms/Card';
 
 interface ICompareSectionProps {
   id?: string;
@@ -42,40 +43,31 @@ const CompareSection: React.FC<ICompareSectionProps> = ({
           totalRankMean={totalRankMean}
           totalPointsMean={totalPointsMean}
           src={src}
-          isLeftColumn={isLeftColumn}
         />
       </div>
       <div className="mb-6">
         <HistoryCarousel slides={slides} />
       </div>
-      <div className="grid min-w-full grid-cols-3">
-        {isLeftColumn ? (
-          <>
-            <div className="col-span-2">
-              <BestSeasonCard
-                bestSeason={bestSeason}
-                bestRank={bestRank}
-                isLeftColumn={isLeftColumn}
-              />
-            </div>
-            <div className="col-span-1 flex items-center justify-center overflow-hidden">
-              <PieChart bestRank={bestRank}></PieChart>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="col-span-1 flex items-center justify-center overflow-hidden">
-              <PieChart bestRank={bestRank}></PieChart>
-            </div>
-            <div className="col-span-2">
-              <BestSeasonCard
-                bestSeason={bestSeason}
-                bestRank={bestRank}
-                isLeftColumn={isLeftColumn}
-              />
-            </div>
-          </>
-        )}
+      <div className="grid min-w-full grid-cols-2 gap-4">
+        <div className="col-span-1">
+          <BestSeasonCard
+            bestSeason={bestSeason}
+            bestRank={bestRank}
+            isLeftColumn={isLeftColumn}
+          />
+        </div>
+        <div className="col-span-1 flex items-center justify-center overflow-hidden">
+          <Card className="flex flex-grow flex-col border border-primary">
+            <CardHeader className="mb-4 flex flex-row items-start rounded-tl-lg rounded-tr-lg bg-muted/50 px-4 py-3">
+              <div>
+                <CardTitle className="flex items-center text-lg">
+                  Manager Rating
+                </CardTitle>
+              </div>
+            </CardHeader>
+            <PieChart totalRankMean={totalRankMean || 0}></PieChart>
+          </Card>
+        </div>
       </div>
     </div>
   );
