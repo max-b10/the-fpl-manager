@@ -65,7 +65,7 @@ const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
               <DotButton
                 key={index}
                 onClick={() => onDotButtonClick(index)}
-                className={`mx-1 inline-flex h-3 w-3 items-center justify-center rounded-full ${
+                className={`mx-1 inline-flex h-2 w-2 items-center justify-center rounded-full ${
                   index === selectedIndex
                     ? 'ring-2 ring-primary'
                     : 'ring-2 ring-muted'

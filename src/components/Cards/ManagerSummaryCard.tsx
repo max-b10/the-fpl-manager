@@ -39,10 +39,8 @@ const ManagerSummaryCard: React.FC<IManagerSummaryProps> = ({
 
   return (
     <Card className="flex min-w-full flex-grow flex-col border border-primary">
-      <CardHeader
-        className={`mb-4 flex flex-row items-start rounded-tl-lg rounded-tr-lg bg-muted/50 px-4 py-3 `}
-      >
-        <div className={`flex w-full justify-between `}>
+      <CardHeader className="mb-4 flex flex-row items-start rounded-tl-lg rounded-tr-lg bg-muted/50 px-4 py-3">
+        <div className="flex w-full justify-between">
           <div>
             <CardTitle className="mb-2 flex items-center text-lg">
               Manager Summary

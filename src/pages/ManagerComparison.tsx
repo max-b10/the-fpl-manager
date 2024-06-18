@@ -64,7 +64,7 @@ const ManagerComparison = () => {
             <MainContainer>
               <div className="grid h-full items-stretch gap-4 md:gap-8 lg:grid-cols-3">
                 <Card className="flex min-h-[70vh] flex-grow flex-col border-primary lg:col-span-2">
-                  <CardHeader className="px-7">
+                  <CardHeader className="mb-4 rounded-tl-lg rounded-tr-lg bg-muted/50 px-7">
                     <CardTitle>Classic Leagues</CardTitle>
                     <CardDescription>Select a league</CardDescription>
                   </CardHeader>
@@ -83,7 +83,7 @@ const ManagerComparison = () => {
                 <Card className="min-h-[70vh]flex-grow flex flex-col border-primary lg:col-span-1">
                   {selectedLeagueId ? (
                     <>
-                      <CardHeader>
+                      <CardHeader className="mb-4 rounded-tl-lg rounded-tr-lg bg-muted/50 ">
                         <CardTitle>{selectedLeague?.league.name}</CardTitle>
                         <CardDescription>
                           Select a player to compare

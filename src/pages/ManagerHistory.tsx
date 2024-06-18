@@ -52,7 +52,6 @@ const ManagerHistory = () => {
   const { generalGameweekData } = useGeneralData();
   const handleSubmit = useNavigationWithId();
   useCheckId();
-  const formattedTotalPoints = totalPoints?.toLocaleString();
   return (
     <>
       <Navbar handleSubmit={handleSubmit} />
@@ -75,7 +74,7 @@ const ManagerHistory = () => {
                   <TabsContent value="current">
                     <FadeIn>
                       <Card className="flex-grow border-primary">
-                        <CardHeader className="flex flex-row justify-between px-7">
+                        <CardHeader className="mb-4 flex rounded-tl-lg rounded-tr-lg bg-muted/50 px-7">
                           <div>
                             <CardTitle className="mb-1">
                               Gameweek History
@@ -83,10 +82,6 @@ const ManagerHistory = () => {
                             <CardDescription>
                               How often do you beat the average?
                             </CardDescription>
-                          </div>
-                          <div>
-                            <CardTitle>{formattedTotalPoints}</CardTitle>
-                            <CardDescription>Total pts</CardDescription>
                           </div>
                         </CardHeader>
                         <CardContent className="h-[calc(100vh-20rem)] overflow-auto">

@@ -54,7 +54,7 @@ const CompareDetails = () => {
       ) : (
         <>
           <MainContainer>
-            <div className="mx-auto flex max-w-6xl flex-col items-center justify-center lg:flex-row lg:space-x-8">
+            <div className="mx-4 flex max-w-6xl flex-col items-center justify-center sm:mx-auto lg:flex-row lg:space-x-8">
               <CompareSection
                 region={regionName || ''}
                 id={id}
