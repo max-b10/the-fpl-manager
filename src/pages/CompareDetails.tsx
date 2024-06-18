@@ -9,6 +9,7 @@ import { useEnemyManagerData } from '../hooks/useEnemyManagerData';
 import { useManagerHistoryData } from '../hooks/useManagerHistoryData';
 import MainContainer from '../components/Layout/MainContainer';
 import CompareSection from '../components/CompareSection';
+import Footer from '../components/Footer';
 
 const CompareDetails = () => {
   const navigate = useNavigate();
@@ -96,6 +97,7 @@ const CompareDetails = () => {
           </MainContainer>
         </>
       )}
+      <Footer />
     </>
   );
 };

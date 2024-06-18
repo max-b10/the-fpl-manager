@@ -11,6 +11,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '../UI/molecules/Tooltip/Tooltip';
+import ManagerSummaryCard from './Cards/ManagerSummaryCard';
 
 interface ICompareSectionProps {
   id?: string;
@@ -37,28 +38,33 @@ const CompareSection: React.FC<ICompareSectionProps> = ({
   slides,
   bestRank,
   bestSeason,
-  region,
   isLeftColumn,
   showUserIcon,
 }) => {
   return (
     <div className="mx-auto mb-6 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl">
-      <div className="mb-6">
-        <ManagerProfileCard
-          region={region}
-          id={id || ''}
-          name={name}
-          seasonsPlayed={seasonsPlayed}
-          totalRankMean={totalRankMean}
-          totalPointsMean={totalPointsMean}
-          src={src}
-          showUserIcon={showUserIcon}
-        />
+      <div className="mb-6 grid min-w-full grid-cols-1 gap-4 sm:grid-cols-2">
+        <div
+          className={`col-span-1 sm:col-span-1 ${isLeftColumn ? 'sm:order-1' : 'sm:order-2'}`}
+        >
+          <ManagerSummaryCard
+            seasonsPlayed={seasonsPlayed}
+            totalRankMean={totalRankMean}
+            totalPointsMean={totalPointsMean}
+            id={id || ''}
+            showUserIcon={showUserIcon}
+          />
+        </div>
+        <div
+          className={`order-first col-span-1 mb-2 sm:col-span-1 ${isLeftColumn ? 'sm:order-2' : 'sm:order-1'}`}
+        >
+          <ManagerProfileCard name={name || ''} src={src} />
+        </div>
       </div>
       <div className="mb-6">
         <HistoryCarousel slides={slides} />
       </div>
-      <div className="grid min-w-full grid-cols-2 gap-4">
+      <div className="mb-2 grid min-w-full grid-cols-2 gap-4">
         {isLeftColumn ? (
           <>
             <div className="col-span-1">
