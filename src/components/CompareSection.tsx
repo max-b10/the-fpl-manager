@@ -42,10 +42,10 @@ const CompareSection: React.FC<ICompareSectionProps> = ({
   showUserIcon,
 }) => {
   return (
-    <div className="mx-auto mb-6 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl">
-      <div className="mb-6 grid min-w-full grid-cols-1 gap-4 sm:grid-cols-2">
+    <div className="lg:max-w-xlg mx-auto mb-6 w-full max-w-sm sm:max-w-md md:max-w-lg xl:max-w-2xl">
+      <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
         <div
-          className={`col-span-1 sm:col-span-1 ${isLeftColumn ? 'sm:order-1' : 'sm:order-2'}`}
+          className={`col-span-1 sm:col-span-2 ${isLeftColumn ? 'sm:order-1' : 'sm:order-2'}`}
         >
           <ManagerSummaryCard
             seasonsPlayed={seasonsPlayed}
@@ -56,7 +56,7 @@ const CompareSection: React.FC<ICompareSectionProps> = ({
           />
         </div>
         <div
-          className={`order-first col-span-1 mb-2 sm:col-span-1 ${isLeftColumn ? 'sm:order-2' : 'sm:order-1'}`}
+          className={`order-first col-span-1 mb-2 h-full sm:col-span-1 ${isLeftColumn ? 'sm:order-2' : 'sm:order-1'}`}
         >
           <ManagerProfileCard name={name || ''} src={src} />
         </div>
@@ -64,68 +64,38 @@ const CompareSection: React.FC<ICompareSectionProps> = ({
       <div className="mb-6">
         <HistoryCarousel slides={slides} />
       </div>
-      <div className="mb-2 grid min-w-full grid-cols-2 gap-4">
-        {isLeftColumn ? (
-          <>
-            <div className="col-span-1">
-              <BestSeasonCard bestSeason={bestSeason} bestRank={bestRank} />
-            </div>
-            <div className="col-span-1 flex items-center justify-center overflow-hidden">
-              <Card className="flex flex-grow flex-col border border-primary">
-                <CardHeader className="mb-2 flex flex-row items-start rounded-tl-lg rounded-tr-lg bg-muted/50 px-4 py-3">
-                  <div className="flex w-full justify-between">
-                    <CardTitle className="flex items-center text-lg">
-                      Manager Rating
-                    </CardTitle>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <Info className="h-6 w-6 text-primary" />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Calculated using average rank</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
-                </CardHeader>
-                <CardContent className="pb-2">
-                  <PieChart totalRankMean={totalRankMean || 0}></PieChart>
-                </CardContent>
-              </Card>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="col-span-1 flex items-center justify-center overflow-hidden">
-              <Card className="flex flex-grow flex-col border border-primary">
-                <CardHeader className="mb-2 flex flex-row items-start rounded-tl-lg rounded-tr-lg bg-muted/50 px-4 py-3">
-                  <div className="flex w-full justify-between">
-                    <CardTitle className="flex items-center text-lg">
-                      Manager Rating
-                    </CardTitle>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <Info className="h-6 w-6 text-primary" />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Calculated using average rank</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
-                </CardHeader>
-                <CardContent className="pb-2">
-                  <PieChart totalRankMean={totalRankMean || 0}></PieChart>
-                </CardContent>
-              </Card>
-            </div>
-            <div className="col-span-1">
-              <BestSeasonCard bestSeason={bestSeason} bestRank={bestRank} />
-            </div>
-          </>
-        )}
+      <div className="mb-2 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div
+          className={`col-span-1 sm:col-span-1 ${isLeftColumn ? 'sm:order-1' : 'sm:order-2'}`}
+        >
+          <BestSeasonCard bestSeason={bestSeason} bestRank={bestRank} />
+        </div>
+        <div
+          className={`order-first col-span-1 mb-2 h-full sm:col-span-1 ${isLeftColumn ? 'sm:order-2' : 'sm:order-1'}`}
+        >
+          <Card className="flex h-full flex-grow flex-col border border-primary">
+            <CardHeader className="mb-2 flex flex-row items-start rounded-tl-lg rounded-tr-lg bg-muted/50 px-4 py-3">
+              <div className="flex w-full justify-between">
+                <CardTitle className="flex items-center text-lg">
+                  Manager Rating
+                </CardTitle>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <Info className="h-6 w-6 text-primary" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Calculated using average rank</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
+            </CardHeader>
+            <CardContent className="pb-2">
+              <PieChart totalRankMean={totalRankMean || 0}></PieChart>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

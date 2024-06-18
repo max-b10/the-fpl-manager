@@ -1,18 +1,18 @@
 import { useSelector } from 'react-redux';
 import { useCheckId } from '../hooks/useCheckId';
 import { RootState } from '../state/store';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useManagerData } from '../hooks/useManagerData';
-import Header from '../components/Headers/Header';
 import { LoaderIcon } from 'lucide-react';
 import { useEnemyManagerData } from '../hooks/useEnemyManagerData';
 import { useManagerHistoryData } from '../hooks/useManagerHistoryData';
 import MainContainer from '../components/Layout/MainContainer';
 import CompareSection from '../components/CompareSection';
 import Footer from '../components/Footer';
+import Navbar from '../components/Navbar/Navbar';
+import { useNavigationWithId } from '../hooks/useNavigationWithId';
 
 const CompareDetails = () => {
-  const navigate = useNavigate();
   const { id } = useParams();
   const fplIdString = useSelector((state: RootState) => state.id.value);
   const fplId = Number(fplIdString);
@@ -39,21 +39,20 @@ const CompareDetails = () => {
     enemyBestRank,
     enemyBestSeason,
   } = useEnemyManagerData(Number(id));
+  const handleSubmit = useNavigationWithId();
+
   useCheckId();
 
   return (
     <>
+      <Navbar handleSubmit={handleSubmit} />
+
       {isLoadingEnemyData || isLoadingEnemyHistory ? (
         <div className="flex min-h-screen items-center justify-center">
           <LoaderIcon className="animate-spin" />
         </div>
       ) : (
         <>
-          <Header
-            headerText={''}
-            showBackIcon={true}
-            onBackClick={() => navigate('/managercomparison')}
-          />
           <MainContainer>
             <div className="mx-auto flex max-w-6xl flex-col items-center justify-center lg:flex-row lg:space-x-8">
               <CompareSection

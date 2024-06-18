@@ -30,7 +30,7 @@ const HistoryCarousel: React.FC<HistoryCarouselProps> = ({ slides }) => {
   } = usePrevNextButtons(emblaApi);
 
   return (
-    <Card className="flex min-w-full flex-grow flex-col border border-primary bg-black">
+    <Card className="flex min-w-full flex-grow flex-col border border-primary">
       <CardHeader className="mb-4 flex flex-row items-start rounded-tl-lg rounded-tr-lg bg-muted/50 px-4 py-3">
         <div>
           <CardTitle className="flex items-center text-lg">

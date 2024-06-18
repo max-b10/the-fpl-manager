@@ -6,7 +6,6 @@ import {
 } from '../../UI/organisms/Card';
 import { CircleUser } from 'lucide-react';
 import { useNavigationWithId } from '../../hooks/useNavigationWithId';
-import { Button } from '../../UI/molecules/Button/Button';
 import {
   Tooltip,
   TooltipContent,
@@ -53,12 +52,10 @@ const ManagerSummaryCard: React.FC<IManagerSummaryProps> = ({
             {showUserIcon && (
               <Tooltip>
                 <TooltipTrigger>
-                  <Button
+                  <CircleUser
                     onClick={handleClick}
-                    className="m-0 flex items-start justify-center rounded-full bg-transparent p-0 text-primary hover:cursor-pointer hover:bg-transparent"
-                  >
-                    <CircleUser className="h-6 w-6 "></CircleUser>
-                  </Button>
+                    className="h-6 w-6 text-primary "
+                  ></CircleUser>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>View Manager</p>
@@ -68,32 +65,21 @@ const ManagerSummaryCard: React.FC<IManagerSummaryProps> = ({
           </TooltipProvider>
         </div>
       </CardHeader>
-      <CardContent className="px-3">
-        <div className="flex min-w-full justify-between">
-          <div className="mr-2 flex flex-grow">
-            <ul className="jus grid gap-4">
-              <li className="flex items-center justify-between">
-                <span className="mr-4 text-muted-foreground md:mr-6">
-                  Seasons played
-                </span>
-                <span>{seasonsPlayed}</span>
-              </li>
-              <li className="flex items-center justify-between">
-                <span className="mr-4 text-muted-foreground md:mr-6">
-                  Average rank
-                </span>
-                <span>{formattedTotalRankMean}</span>
-              </li>
-
-              <li className="flex items-center justify-between">
-                <span className="mr-4 text-muted-foreground md:mr-6">
-                  Mean points
-                </span>
-                <span>{formattedTotalPointsMean}</span>
-              </li>
-            </ul>
-          </div>
-        </div>
+      <CardContent>
+        <ul className="grid w-full gap-4">
+          <li className="flex items-center justify-between">
+            <span className="text-muted-foreground">Seasons played</span>
+            <span>{seasonsPlayed}</span>
+          </li>
+          <li className="flex items-center justify-between">
+            <span className="text-muted-foreground">Average rank</span>
+            <span>{formattedTotalRankMean}</span>
+          </li>
+          <li className="flex items-center justify-between">
+            <span className="text-muted-foreground">Mean points</span>
+            <span>{formattedTotalPointsMean}</span>
+          </li>
+        </ul>
       </CardContent>
     </Card>
   );
