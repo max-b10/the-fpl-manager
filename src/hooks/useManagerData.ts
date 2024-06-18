@@ -6,7 +6,7 @@ import { fetcher } from '../lib/fetcher';
 import {
   calculateMeanPoints,
   calculateMeanRank,
-} from '../helpers/calculateMean';
+} from '../helpers/calculateMean/calculateMean';
 import teamMapping from '../constants/teamMapping';
 import { ISquad } from '../types/squad/squadPicks';
 

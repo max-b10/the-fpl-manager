@@ -79,7 +79,7 @@ const Dashboard = () => {
         <>
           <FadeIn>
             <MainContainer>
-              <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+              <div className="grid gap-4 p-4 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4">
                 <DashboardCard
                   data-cy="dashboard-card-current-gameweek"
                   title="Manager"
@@ -109,7 +109,7 @@ const Dashboard = () => {
                   footer={`${previousGameWeek?.rank.toLocaleString()} rank`}
                 />
               </div>
-              <div className="flex flex-grow flex-col overflow-auto">
+              <div className="flex flex-grow flex-col overflow-auto px-4">
                 <Card className="flex-grow border-primary">
                   <CardHeader className="px-7">
                     <CardTitle data-cy="table-title">Current Squad</CardTitle>

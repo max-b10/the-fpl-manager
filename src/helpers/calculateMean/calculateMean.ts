@@ -1,4 +1,4 @@
-import { IPast } from '../types/manager/managerHistory';
+import { IPast } from '../../types/manager/managerHistory';
 
 export const calculateMeanPoints = (
   arr: IPast[] | undefined

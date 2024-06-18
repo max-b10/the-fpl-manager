@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { PieChart, Pie, Cell, Label, ResponsiveContainer } from 'recharts';
-import { getColour } from '../../helpers/getColour';
-import { calculateLinearPercentileRank } from '../../helpers/calculateRating';
+import { getColour } from '../../helpers/getColour/getColour';
+import { calculateLinearPercentileRank } from '../../helpers/calculateRating/calculateRating';
 
 interface IPieChartProps {
   totalRankMean: number;
@@ -31,7 +31,7 @@ const PieChartComponent: FC<IPieChartProps> = ({ totalRankMean }) => {
           paddingAngle={5}
           dataKey="value"
         >
-          {data.map((entry, index) => (
+          {data.map((_, index) => (
             <Cell
               key={`cell-${index}`}
               fill={index === 0 ? getColour(totalRankMean) : 'transparent'}

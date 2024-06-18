@@ -7,7 +7,7 @@ import teamMapping from '../constants/teamMapping';
 import {
   calculateMeanRank,
   calculateMeanPoints,
-} from '../helpers/calculateMean';
+} from '../helpers/calculateMean/calculateMean';
 
 export const useEnemyManagerData = (enemyId: number) => {
   const { data: enemyData, isValidating: isLoadingEnemyData } =

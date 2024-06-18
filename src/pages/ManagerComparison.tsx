@@ -86,7 +86,7 @@ const ManagerComparison = () => {
                       <CardHeader className="mb-4 rounded-tl-lg rounded-tr-lg bg-muted/50 ">
                         <CardTitle>{selectedLeague?.league.name}</CardTitle>
                         <CardDescription>
-                          Select a player to compare
+                          Select a manager to compare
                         </CardDescription>
                       </CardHeader>
                       <CardContent className="max-h-[50vh] overflow-auto">

@@ -8,11 +8,9 @@ export function calculateLinearPercentileRank(
     );
   }
 
-  // Calculate percentile using a simple linear conversion
+  // Calculate percentile
   const percentile = 1 - meanRank / totalPlayers;
-
   const percentileScore = parseFloat((percentile * 100).toFixed(1));
 
-  //   console.log(percentileScore);
   return percentileScore;
 }
