@@ -55,7 +55,7 @@ const ManagerHistory = () => {
   return (
     <>
       <Navbar handleSubmit={handleSubmit} />
-      <div className="min-h-screen flex-grow overflow-auto">
+      <div className="min-h-screen flex-grow overflow-auto px-4">
         {isLoadingManagerData || isLoadingManagerHistory ? (
           <div className="flex min-h-screen items-center justify-center">
             <LoaderIcon className="animate-spin" />
@@ -63,14 +63,14 @@ const ManagerHistory = () => {
         ) : (
           <FadeIn>
             <Tabs defaultValue="current" className="w-full">
-              <TabsList className="ml-6 mt-3 bg-card p-2">
+              <TabsList className="mt-3 bg-card p-2 md:ml-7">
                 <TabsTrigger className="mr-2" value="current">
                   Current
                 </TabsTrigger>
                 <TabsTrigger value="past">Past</TabsTrigger>
               </TabsList>
               <MainContainer>
-                <div className="w-full">
+                <div className="mt-2 w-full sm:mt-0">
                   <TabsContent value="current">
                     <FadeIn>
                       <Card className="flex-grow border-primary">
