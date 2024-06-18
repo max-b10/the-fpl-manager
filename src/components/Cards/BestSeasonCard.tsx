@@ -9,7 +9,6 @@ import { IPast } from '../../types/manager/managerHistory';
 interface IBestSeasonProps {
   bestRank?: number;
   bestSeason?: IPast;
-  isLeftColumn?: boolean;
 }
 
 const BestSeasonCard: React.FC<IBestSeasonProps> = ({

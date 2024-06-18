@@ -69,6 +69,7 @@ const CompareDetails = () => {
                   bestSeason || { season_name: '', total_points: 0, rank: 0 }
                 }
                 isLeftColumn={true}
+                showUserIcon={false}
               />
 
               <CompareSection
@@ -89,6 +90,7 @@ const CompareDetails = () => {
                   }
                 }
                 isLeftColumn={false}
+                showUserIcon={true}
               />
             </div>
           </MainContainer>
