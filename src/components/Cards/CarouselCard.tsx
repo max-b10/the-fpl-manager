@@ -31,7 +31,7 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({
 
   return (
     <Card className="flex flex-grow flex-col border border-primary">
-      <CardHeader className="mb-4 flex flex-row items-center justify-between space-y-0 rounded-tl-lg rounded-tr-lg bg-muted/50 px-4 py-3">
+      <CardHeader className="mb-4 flex flex-row items-center justify-between space-y-0 rounded-tl-lg rounded-tr-lg bg-muted/50 px-6 py-3">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
         {icon}
       </CardHeader>

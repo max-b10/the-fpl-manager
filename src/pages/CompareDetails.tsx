@@ -15,6 +15,7 @@ const CompareDetails = () => {
   const { id } = useParams();
   const fplIdString = useSelector((state: RootState) => state.id.value);
   const fplId = Number(fplIdString);
+
   const {
     playerName,
     totalRankMean,
@@ -38,6 +39,7 @@ const CompareDetails = () => {
     enemyBestSeason,
   } = useEnemyManagerData(Number(id));
   useCheckId();
+
   return (
     <>
       {isLoadingEnemyData || isLoadingEnemyHistory ? (

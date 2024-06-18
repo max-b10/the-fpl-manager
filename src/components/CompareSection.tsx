@@ -3,7 +3,8 @@ import ManagerProfileCard from './Cards/ManagerProfileCard';
 import HistoryCarousel from './HistoryCarousel/HistoryCarousel';
 import BestSeasonCard from './Cards/BestSeasonCard';
 import { IPast } from '../types/manager/managerHistory';
-import { Card, CardHeader, CardTitle } from '../UI/organisms/Card';
+import { Card, CardContent, CardHeader, CardTitle } from '../UI/organisms/Card';
+import { Info } from 'lucide-react';
 
 interface ICompareSectionProps {
   id?: string;
@@ -37,7 +38,7 @@ const CompareSection: React.FC<ICompareSectionProps> = ({
       <div className="mb-6">
         <ManagerProfileCard
           region={region}
-          id={id}
+          id={id || ''}
           name={name}
           seasonsPlayed={seasonsPlayed}
           totalRankMean={totalRankMean}
@@ -58,14 +59,17 @@ const CompareSection: React.FC<ICompareSectionProps> = ({
         </div>
         <div className="col-span-1 flex items-center justify-center overflow-hidden">
           <Card className="flex flex-grow flex-col border border-primary">
-            <CardHeader className="mb-4 flex flex-row items-start rounded-tl-lg rounded-tr-lg bg-muted/50 px-4 py-3">
-              <div>
+            <CardHeader className="mb-2 flex flex-row items-start rounded-tl-lg rounded-tr-lg bg-muted/50 px-4 py-3">
+              <div className="flex w-full justify-between">
                 <CardTitle className="flex items-center text-lg">
                   Manager Rating
                 </CardTitle>
+                <Info className="h-6 w-6 text-primary" />
               </div>
             </CardHeader>
-            <PieChart totalRankMean={totalRankMean || 0}></PieChart>
+            <CardContent className="pb-2">
+              <PieChart totalRankMean={totalRankMean || 0}></PieChart>
+            </CardContent>
           </Card>
         </div>
       </div>

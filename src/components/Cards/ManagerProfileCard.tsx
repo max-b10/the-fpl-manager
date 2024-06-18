@@ -6,7 +6,9 @@ import {
   CardTitle,
 } from '../../UI/organisms/Card';
 import { Avatar, AvatarImage } from '../../UI/molecules/Avatar/Avatar';
-import { User } from 'lucide-react';
+import { CircleUser } from 'lucide-react';
+import { useNavigationWithId } from '../../hooks/useNavigationWithId';
+import { Button } from '../../UI/molecules/Button/Button';
 
 interface IManagerProfileProps {
   name?: string;
@@ -14,7 +16,7 @@ interface IManagerProfileProps {
   seasonsPlayed?: number;
   totalRankMean?: number;
   totalPointsMean?: number;
-  id?: string;
+  id: string;
   src?: string;
 }
 
@@ -25,7 +27,14 @@ const ManagerProfileCard: React.FC<IManagerProfileProps> = ({
   totalRankMean,
   totalPointsMean,
   src,
+  id,
 }) => {
+  const navigateWithId = useNavigationWithId();
+
+  const handleClick = () => {
+    const data = { id };
+    navigateWithId(data);
+  };
   const formattedTotalRankMean = totalRankMean?.toLocaleString();
   const formattedTotalPointsMean = totalPointsMean?.toLocaleString();
 
@@ -39,9 +48,13 @@ const ManagerProfileCard: React.FC<IManagerProfileProps> = ({
             <CardTitle className="mb-2 flex items-center">{name}</CardTitle>
             <CardDescription>{region}</CardDescription>
           </div>
-          <div className="my-auto flex h-10 w-10 items-center justify-center rounded-full border border-primary text-primary">
-            <User></User>
-          </div>
+
+          <Button
+            onClick={handleClick}
+            className="m-0 flex items-start justify-center rounded-full bg-transparent p-0 text-primary hover:cursor-pointer hover:bg-transparent"
+          >
+            <CircleUser className="h-6 w-6 "></CircleUser>
+          </Button>
         </div>
       </CardHeader>
       <CardContent className="px-3">
@@ -53,7 +66,7 @@ const ManagerProfileCard: React.FC<IManagerProfileProps> = ({
               </Avatar>
             </div>
           </div>
-          <div className="flex flex-grow justify-end">
+          <div className="mr-2 flex flex-grow justify-end">
             <ul className="jus grid gap-4">
               <li className="flex items-center justify-between">
                 <span className="mr-4 text-muted-foreground md:mr-6">

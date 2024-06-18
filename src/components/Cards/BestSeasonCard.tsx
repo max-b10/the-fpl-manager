@@ -13,30 +13,22 @@ interface IBestSeasonProps {
 }
 
 const BestSeasonCard: React.FC<IBestSeasonProps> = ({
-  isLeftColumn,
   bestSeason,
   bestRank,
 }) => {
   const formattedBestRank = bestRank?.toLocaleString();
   const formattedBestPoints = bestSeason?.total_points.toLocaleString();
 
-  const flexDirection = isLeftColumn ? '' : 'flex-row-reverse';
-  const marginDirection = isLeftColumn ? 'mr-4' : 'ml-4';
-
   const ListItem = ({ label, value }: { label: string; value: string }) => (
-    <li className={`flex items-center justify-between ${flexDirection}`}>
-      <span className={`${marginDirection} text-muted-foreground`}>
-        {label}
-      </span>
+    <li className="flex items-center justify-between">
+      <span className="text-muted-foreground">{label}</span>
       <span>{value}</span>
     </li>
   );
 
   return (
     <Card className="flex flex-grow flex-col border border-primary">
-      <CardHeader
-        className={`mb-4 flex flex-row items-start rounded-tl-lg rounded-tr-lg bg-muted/50 px-4 py-3 ${!isLeftColumn ? 'justify-end' : ''}`}
-      >
+      <CardHeader className="mb-4 flex flex-row items-start rounded-tl-lg rounded-tr-lg bg-muted/50 px-4 py-3">
         <div>
           <CardTitle className="flex items-center text-lg">
             Best Season

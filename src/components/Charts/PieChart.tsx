@@ -15,8 +15,8 @@ const PieChartComponent: FC<IPieChartProps> = ({ totalRankMean }) => {
     { name: 'Best Rank', value: rankProportion },
     { name: 'Rest', value: TOTAL_RANKS - rankProportion },
   ];
-  console.log(totalRankMean);
-  const mangerRating = calculateLinearPercentileRank(totalRankMean);
+  const managerRating = calculateLinearPercentileRank(totalRankMean);
+  const managerRatingString = `${managerRating}%`;
   return (
     <ResponsiveContainer height={127} width="100%">
       <PieChart>
@@ -38,7 +38,7 @@ const PieChartComponent: FC<IPieChartProps> = ({ totalRankMean }) => {
             />
           ))}
           <Label position={'center'} style={{ fill: '#fff' }}>
-            {mangerRating}
+            {managerRatingString}
           </Label>
         </Pie>
       </PieChart>
