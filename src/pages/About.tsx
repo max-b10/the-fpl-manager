@@ -14,7 +14,7 @@ const About = () => {
       <Navbar showIdForm={false} handleSubmit={handleSubmit} />
       <FadeIn>
         <MainContainer>
-          <div className="max-w-2/3 grid-auto-rows-1fr mx-auto grid w-4/5 flex-grow grid-cols-1 gap-4 sm:max-w-screen-lg sm:grid-cols-3">
+          <div className="max-w-2/3 grid-auto-rows-1fr mx-auto mt-4 grid w-4/5 flex-grow grid-cols-1 gap-4 sm:max-w-screen-lg sm:grid-cols-3 md:mt-0">
             {stack.map((tech, index) => {
               const Icon = tech.icon;
               return (

@@ -21,7 +21,6 @@ import { MembersTable } from '../components/Table/ManagerCompare/MembersTable/Me
 import { leagueColumns } from '../components/Table/ManagerCompare/LeaguesTable/leagueColumns';
 import { memberColumns } from '../components/Table/ManagerCompare/MembersTable/memberColumns';
 import { useNavigationWithId } from '../hooks/useNavigationWithId';
-import Header from '../components/Headers/Header';
 import FadeIn from '../components/Animations/FadeIn';
 import Footer from '../components/Footer';
 import MainContainer from '../components/Layout/MainContainer';
@@ -56,11 +55,6 @@ const ManagerComparison = () => {
       ) : (
         <>
           <FadeIn>
-            <Header
-              headerText="Compare manager history"
-              subText="Pick a league and compare with managers"
-            />
-
             <MainContainer>
               <div className="mt-4 grid h-full items-stretch gap-4 px-4 md:mt-0 md:gap-8 md:px-0 lg:grid-cols-3">
                 <Card className="flex min-h-[70vh] flex-grow flex-col border-primary lg:col-span-2">

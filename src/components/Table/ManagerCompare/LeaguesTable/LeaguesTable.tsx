@@ -35,7 +35,7 @@ export function LeaguesTable<TData extends { league: ILeague }, TValue>({
   return (
     <div className="rounded-md border">
       <Table>
-        <TableHeader>
+        <TableHeader className="bg-muted/50">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow hoverEffect={false} key={headerGroup.id}>
               {headerGroup.headers.map((header, index) => {

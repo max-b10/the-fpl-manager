@@ -111,7 +111,7 @@ const Dashboard = () => {
               </div>
               <div className="flex flex-grow flex-col overflow-auto px-4">
                 <Card className="flex-grow border-primary">
-                  <CardHeader className="px-7">
+                  <CardHeader className="mb-4 rounded-tl-lg rounded-tr-lg bg-muted/50 px-7">
                     <CardTitle data-cy="table-title">Current Squad</CardTitle>
                   </CardHeader>
                   <CardContent className="h-[calc(100vh-23rem)] overflow-auto">

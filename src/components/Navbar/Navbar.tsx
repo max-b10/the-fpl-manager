@@ -5,6 +5,7 @@ import { Menu } from 'lucide-react';
 import { IFormData } from '../../types/FormData';
 import IdForm from '../Forms/IdForm';
 import { useState } from 'react';
+import { Separator } from '../../UI/molecules/Separator/Separator';
 interface NavbarProps {
   handleSubmit: (data: IFormData) => void;
   showIdForm?: boolean;
@@ -78,18 +79,20 @@ const Navbar: React.FC<NavbarProps> = ({ handleSubmit, showIdForm = true }) => {
                 <SheetContent side="left">
                   <nav className="grid gap-6 text-lg font-medium">
                     {navigation.map((item) => (
-                      <Link
-                        key={item.name}
-                        to={item.href}
-                        className={
-                          item.current
-                            ? 'rounded-md px-3 py-2 text-sm font-medium text-foreground'
-                            : 'rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground'
-                        }
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </Link>
+                      <div className="grid gap-2" key={item.name}>
+                        <Link
+                          to={item.href}
+                          className={
+                            item.current
+                              ? 'rounded-md px-3 py-2 text-sm font-medium text-foreground'
+                              : 'rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground'
+                          }
+                          aria-current={item.current ? 'page' : undefined}
+                        >
+                          {item.name}
+                        </Link>
+                        <Separator />
+                      </div>
                     ))}
                   </nav>
                 </SheetContent>
