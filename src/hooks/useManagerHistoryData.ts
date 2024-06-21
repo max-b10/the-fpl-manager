@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { IManagerHistory } from '../types/manager/managerHistory';
-import { API_ENDPOINTS, BASE_URL } from '../../api/endpoints';
+import { API_ENDPOINTS, BASE_URL } from '../../server/endpoints';
 import { fetcher } from '../lib/fetcher';
 
 export const useManagerHistoryData = (fplId: number) => {

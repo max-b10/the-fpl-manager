@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import { IManagerData } from '../types/manager/managerData';
 import { IManagerHistory } from '../types/manager/managerHistory';
-import { API_ENDPOINTS, BASE_URL } from '../../api/endpoints';
+import { API_ENDPOINTS, BASE_URL } from '../../server/endpoints';
 import { fetcher } from '../lib/fetcher';
 import {
   calculateMeanPoints,

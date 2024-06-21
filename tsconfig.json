@@ -8,7 +8,6 @@
     "types": ["@testing-library/jest-dom/", "jest", "node"],
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
@@ -20,6 +19,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["cypress", "src"],
+  "include": ["cypress", "src", "api"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

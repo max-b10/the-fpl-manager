@@ -14,7 +14,7 @@ import {
 import useSWR from 'swr';
 import { ILeague, ILeagueData } from '../types/league/leagueData';
 import { fetcher } from '../lib/fetcher';
-import { API_ENDPOINTS } from '../../api/endpoints';
+import { API_ENDPOINTS } from '../../server/endpoints';
 import { useState } from 'react';
 import { LeaguesTable } from '../components/Table/ManagerCompare/LeaguesTable/LeaguesTable';
 import { MembersTable } from '../components/Table/ManagerCompare/MembersTable/MembersTable';

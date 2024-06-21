@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import { IManagerHistory } from '../types/manager/managerHistory';
 import { fetcher } from '../lib/fetcher';
-import { API_ENDPOINTS, BASE_URL } from '../../api/endpoints';
+import { API_ENDPOINTS, BASE_URL } from '../../server/endpoints';
 import { IManagerData } from '../types/manager/managerData';
 import teamMapping from '../constants/teamMapping';
 import {
